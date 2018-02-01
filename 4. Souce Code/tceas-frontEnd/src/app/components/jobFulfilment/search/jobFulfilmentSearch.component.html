@@ -1,0 +1,77 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Job Fulfilment Search </h3>
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li>Job Fulfilment</li>
+        </ul>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <div class="search-job-fulfilment">
+        <table class="table table-bordered table-custom">
+            <thead>
+                <tr>
+                    <th>RO Number</th>
+                    <th>RO Date</th>
+                    <th>Allocation Status</th>
+                    <th>Registration No.</th>
+                    <th>Model Variant</th>
+                    <th>Jobs</th>
+                    <th>Modified By</th>
+                    <th>Modified Date time</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of jobFulfilmentSearchResultModel.rows">
+                    <td><a [routerLink]="['/jobFulfilment/Update', item.id]">{{item.roNumber}}</a></td>
+                    <td>{{item.roDate | date: appConfig.config.formatDateTime}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.registrationNo}}</td>
+                    <td>{{item.modelVariant}}</td>
+                    <td>{{item.jobs}}</td>
+                    <td>{{item.modifiedBy}}</td>
+                    <td>{{item.modifiedDateTime}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

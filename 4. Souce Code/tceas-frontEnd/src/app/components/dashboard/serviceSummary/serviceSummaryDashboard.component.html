@@ -1,0 +1,199 @@
+<div class="panel panel-default panel-service-summary-dashboard">
+	<div class="panel-heading"><h5 class="panel-title">Service Summary Dashboard</h5></div>
+	<div class="panel-body">
+		<div class="service-summary-dashboard">
+			<table class="table dashboard-table-bordered table-custom">
+				<thead>
+					<tr>
+						<th>Service Advisor</th>
+						<th>Appointment</th>
+						<th>Checked_in/WIP</th>
+						<th>Work carried out</th>
+						<th>Invoiced</th>
+						<th>Delivered</th>
+						<th>Totalxx</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a>Nguyen Canh Vinh</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>1</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>7</a></td>
+					</tr>
+					<tr>
+						<td><a>Nguyen Bich Dan</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>1</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>7</a></td>
+					</tr>
+					<tr>
+						<td><a>Bui Bang Anh</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>1</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>7</a></td>
+					</tr>
+					<tr>
+						<td><a>Nguyen Hoang Tung</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>1</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>7</a></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>Total</td>
+						<td><a>4</a></td>
+						<td><a>4</a></td>
+						<td><a>4</a></td>
+						<td><a>4</a></td>
+						<td><a>4</a></td>
+						<td><a>20</a></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<div class="service-summary-dashboard-detail hide">
+			<table class="table dashboard-table-bordered table-custom">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Status</th>
+						<th>Appointment Date/Time</th>
+						<th>Arrival Date/Time</th>
+						<th>Registration Number</th>
+						<th>Customer Name</th>
+						<th>Service Advisor</th>
+						<th>Appointment No.</th>
+						<th>Repair Order No.</th>
+						<th>Invoice No.</th>
+						<th>Delivered Date/Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Appointment</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Canh Vinh</td>
+						<td><a [routerLink]="['/appointment/Update', 1]">AP0001</a></td>
+						<td><a [routerLink]="['/repairOrder/Update', 1]">RO0001</a></td>
+						<td><a [routerLink]="['/invoice/Update', 1]">INV001</a></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Checked-in/WIP</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Canh Vinh</td>
+						<td><a [routerLink]="['/appointment/Update', 1]">AP0001</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Delivered</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Canh Vinh</td>
+						<td><a [routerLink]="['/appointment/Update', 1]">AP0002</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="form-group pull-right">
+				<button type="button" class="btn btn-default" (click)="closeServiceSummaryDashboardDetail()">
+					<span>Close</span>                  
+				</button>
+			</div>
+		</div>
+		<div class="service-summary-dashboard-detail02 hide">
+			<table class="table dashboard-table-bordered table-custom">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Status</th>
+						<th>Appointment Date/Time</th>
+						<th>Arrival Date/Time</th>
+						<th>Registration Number</th>
+						<th>Customer Name</th>
+						<th>Service Advisor</th>
+						<th>Appointment No.</th>
+						<th>Repair Order No.</th>
+						<th>Invoice No.</th>
+						<th>Delivered Date/Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Appointment</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Canh Vinh</td>
+						<td><a [routerLink]="['/appointment/Update', 1]">AP0001</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Appointment</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Bich Dan</td>
+						<td><a [routerLink]="['/appointment/Update', 1]">AP0001</a></td>
+						<td><a [routerLink]="['/repairOrder/Update', 1]">RO0001</a></td>
+						<td><a [routerLink]="['/invoice/AddUpdate', 1]">INV001</a></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Appointment</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Bich Dan</td>
+						<td><a [routerLink]="['/appointment/Update', 1]">AP0002</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="form-group pull-right">
+				<button type="button" class="btn btn-default" (click)="closeServiceSummaryDashboardDetail()">
+					<span>Close</span>                  
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

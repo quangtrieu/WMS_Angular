@@ -1,0 +1,7 @@
+.panel .table-bordered > thead > tr:first-child > th, .panel .table-bordered > tbody > tr:first-child > td {
+    border-bottom: 1px solid #ddd;
+}
+
+.fulfill-error {
+    color: red !important;
+}

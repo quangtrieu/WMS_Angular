@@ -1,0 +1,12 @@
+.auto-width{
+    width: auto;
+}
+.panel .table-bordered > tbody > tr:first-child > td,
+.panel .table-bordered > thead > tr:first-child > th {
+    border-bottom: 1px solid #ddd;
+}
+
+.fc-first div {
+    min-height: 50px !important;;
+    height: 50px !important;
+}

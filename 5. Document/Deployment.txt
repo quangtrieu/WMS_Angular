@@ -1,0 +1,6 @@
+Step 1: 
+	-> Sử dụng git để get source mới nhất từ server, thông tin source được lưu ở desktop
+Step 2:
+	-> sử dụng lệnh npm run build:prod để build 
+Step 3: 
+	-> coppy đè thư mục dist vào folder C:\inetpub\wwwroot\TCEAS

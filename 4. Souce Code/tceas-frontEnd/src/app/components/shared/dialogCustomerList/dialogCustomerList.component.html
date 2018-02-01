@@ -1,0 +1,117 @@
+<div id="dialogCustomerList-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="onCloseDialog()">×</button>
+                <h4 class="modal-title">Customer - Search</h4>
+            </div>
+            <button type="button" class="btn btn-sm btn-success mg-button pull-right" style="margin: 15px 15px 15px 5px" (click)="onCustomerSelected()"><span data-icon="&#xe2aa;"></span> Select</button>
+            <button type="button" class="btn btn-sm btn-info mg-button pull-right" style="margin-top: 15px" (click)="onAddCustomer()"><span data-icon="&#xe104;"></span> Add</button>
+           
+            <div class="panel panel-default">
+                <div class="panel-body" style="margin-top: 10px">
+                    <div class="datatable">
+        <div class="dataTables_wrapper no-footer">
+            <div class="datatable-scroll">
+                 <p-dataTable [value]="customerList" scrollHeight="420px" [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]"
+                    [paginator]="true" [responsive]="true" [stacked]="stacked" resizableColumns="true" columnResizeMode="expand"
+                    [totalRecords]="pager.totalRecords" (onLazyLoad)="loadCustomerLazy($event)" scrollable="true" #dt>
+                    <p-column header="{{ 'TBL_HEADER_NO' | translate }}" [style]="{'width': '40px'}">
+                        <ng-template let-rowIndex="rowIndex" pTemplate="rowexpansion">
+                            {{rowIndex + 1}}
+                        </ng-template>
+                    </p-column>
+                    <p-column field="code" header="{{ 'LBL_CODE' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true">
+                        <ng-template let-row="rowData" pTemplate type="body">
+                            <a (click)="onClickCustomerSelected(row.id, row.name, row.idNumber, row.contact)">{{row.code}}</a>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="name" header="{{ 'LBL_NAME' | translate }}" [filter]="true" filterPlaceholder="Search"
+                        [sortable]="true"></p-column>
+                    <p-column field="idNumber" header="{{ 'LBL_NAME' | translate }}" [filter]="true" filterPlaceholder="Search"
+                        [sortable]="true"></p-column>
+                    
+                    <p-column field="contact" header="{{ 'LBL_MOBILE' | translate }}" [filter]="true" filterPlaceholder="Search"
+                        [sortable]="true"></p-column>
+                </p-dataTable>
+                <div style="position: relative;">
+                    <span class="paging-entries">
+                        {{ 'PAGING_SHOWING' | translate }} {{ 1 + (pager.pageSize * (pager.currentPage - 1)) }} {{ 'PAGING_TO' | translate
+                        }} {{ pager.pageSize * pager.currentPage }} {{ 'PAGING_OF' | translate }} {{ pager.totalRecords
+                        }} {{ 'PAGING_ENTRIES' | translate }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div> 
+                     <!-- <div class="datatable">
+                        <div class="dataTables_wrapper no-footer">
+                            <div class="datatable-scroll">
+                                <form class="form-horizontal" role="form" action="#" (keydown)="keydownSearch($event)">
+                                    <table id="tbCustomer" class="table table-bordered dataTable no-footer" role="grid" aria-describedby="DataTables_Table_1_info">
+                                        <thead>
+                                            <tr>
+                                                <th class="{{ sortedColumn.columnName == 'code' ? sortedColumn.classActive: 'sorting' }}" (click)="onSortColumn('code', sortedColumn.isAsc)">Customer Code</th>
+                                                <th class="{{ sortedColumn.columnName == 'name' ? sortedColumn.classActive: 'sorting' }}" (click)="onSortColumn('name', sortedColumn.isAsc)">Customer Name</th>
+                                                <th class="{{ sortedColumn.columnName == 'idNumber' ? sortedColumn.classActive: 'sorting' }}" (click)="onSortColumn('idNumber', sortedColumn.isAsc)">ID No.</th>
+                                                <th class="{{ sortedColumn.columnName == 'customerType' ? sortedColumn.classActive: 'sorting' }}" (click)="onSortColumn('customerType', sortedColumn.isAsc)">Mobile No.</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="form-control" placeholder="Filter" name="code" [(ngModel)]="customer.code" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" placeholder="Filter" name="name" [(ngModel)]="customer.name" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" placeholder="Filter" name="idNumber" [(ngModel)]="customer.idNumber" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" placeholder="Filter" name="mobile" [(ngModel)]="customer.mobile" />
+                                                </td>
+                                            </tr>
+                                            <tr *ngFor="let item of customerList" (dblclick)="onCustomerSelected()" (click)="onSelectedRow(item.id, item.name, item.idNumber, item.mobile)" [class]="customerIdSelected == item.id ? 'success' : ''">
+                                                <td> {{ item.code }} </td>
+                                                <td> {{ item.name }} </td>
+                                                <td> {{ item.idNumber }} </td>
+                                                <td> {{ item.mobile }} </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                            <div class="datatable-footer">
+                                <div class="dataTables_info" role="status" aria-live="polite">Showing {{ pager.currentPage }} to {{ pager.pageSize }} of {{ pager.totalPages }} entries</div>
+                                <div class="dataTables_paginate paging_full_numbers">
+                                    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                                        <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                            <a (click)="setPage(1)">First</a>
+                                        </li>
+                                        <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                            <a (click)="setPage(pager.currentPage - 1)">
+                                                <
+                                            </a>
+                                        </li>
+                                        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                            <a (click)="setPage(page)">{{page}}</a>
+                                        </li>
+                                        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                            <a (click)="setPage(pager.currentPage + 1)">></a>
+                                        </li>
+                                        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                            <a (click)="setPage(pager.totalPages)">Last</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<dialogCustomer-add ></dialogCustomer-add>

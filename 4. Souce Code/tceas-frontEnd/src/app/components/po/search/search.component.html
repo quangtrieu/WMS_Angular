@@ -1,0 +1,44 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Purchase Order - Search</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li>Purchase Order</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+        </div>
+        <button type="submit" class="btn btn-sm btn-info pull-right mg-button"(click)="frmPO.ngSubmit.emit()">Upload</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <form #frmPO="ngForm" (ngSubmit)="upload()" class="form-horizontal" role="form">
+    <import-common [import]="import"></import-common>
+    <div class="datatable">
+        <div class="dataTables_wrapper no-footer">
+            <input id="filePath" name="filePath" type="file" accept="image/*"/>
+        </div>
+    </div>
+    </form>
+</div>
+
+<modal #modalDelete>
+    <modal-header>
+        <h4 class="modal-title">Confirm delete.</h4>
+    </modal-header>
+    <modal-body style="border: none!important">
+        <input type="hidden" id="hdCustomerId" />
+        <h4 class="modal-title">Are you sure to delete.</h4>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onDismiss()">NO</button>
+        <button type="button" class="btn btn-primary" (click)="deleteCustomer()">YES</button>
+    </modal-footer>
+</modal>

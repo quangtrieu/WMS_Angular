@@ -1,0 +1,453 @@
+<p-growl [(value)]="msgs"></p-growl>
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!appointment.isUpdate">{{'APPOINTMENT_TITLE' | translate}} - {{'LBL_ADD' | translate}}</h3>
+            <h3 *ngIf="appointment.isUpdate">{{'APPOINTMENT_TITLE' | translate}} - {{'LBL_UPDATE' | translate}}</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li class="active">
+                <a routerLink="/appointment/Search" routerLinkActive="active">Appointment</a>
+            </li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-info pull-right mg-button" (click)="formAppointment.ngSubmit.emit()">{{'BUTTON_SAVE' | translate}}</button>
+        <a type="button" class="btn btn-sm btn-default pull-right mg-button" routerLink="/appointment/Search">{{'BUTTON_BACK' | translate}}</a>
+        <a *ngIf="appointment.isUpdate" type="button" class="btn btn-sm btn-default pull-right mg-button" routerLink="/repairOrder/ConvertToRO/{{ appointment.id }}">{{'BTN_CONVERT_TO_RO' | translate}}</a>
+        <button *ngIf="appointment.isUpdate" type="button" class="btn btn-sm btn-default pull-right mg-button" (click)="cancel()">{{'BUTTON_CANCEL' | translate}}</button>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <form #formAppointment="ngForm" (ngSubmit)="addUpdate(formAppointment)" class="form-horizontal" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-body scroll-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" *ngIf="appointment.isUpdate">
+                            <label class="col-sm-4 control-label">{{'LBL_APPOINTMENT_NO' | translate}}:</label>
+                            <div class="col-sm-8">
+                                <input name="appointmentNo" type="text" class="form-control" disabled="disabled" [(ngModel)]="appointment.appointmentNo">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Registration No.:</label>
+                            <div class="col-sm-8">
+                                <input name="registrationNo" type="text" class="form-control" (keyup.enter)="findVehicleByRegNo($event)" [(ngModel)]="appointment.registrationNo"
+                                    required #registrationNo="ngModel">
+                                <label class="error" *ngIf="registrationNo.errors?.required && (registrationNo.dirty || registrationNo.touched || formAppointment._submitted)">
+                                    Registration No. is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> Vehicle:</label>
+                            <div class="col-sm-8">
+                                <input name="vehicleModel" type="text" class="form-control" [(ngModel)]="appointment.vehicleModel" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Chassis No.:</label>
+                            <div class="col-sm-8">
+                                <input name="chassisNo" type="text" class="form-control" [(ngModel)]="appointment.chassisNo" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Engine No.:</label>
+                            <div class="col-sm-8">
+                                <input name="engineNo" type="text" class="form-control" [(ngModel)]="appointment.engineNo" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{'LBL_PREVIOUS_MILEAGE' | translate}}:</label>
+                            <div class="col-sm-8">
+                                <input name="engineNo" type="text" class="form-control" [(ngModel)]="appointment.engineNo" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{'LBL_CURRENT_MILEAGE' | translate}}:</label>
+                            <div class="col-sm-8">
+                                <input name="engineNo" type="text" class="form-control" [(ngModel)]="appointment.engineNo" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Status:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled="disabled" value="NEW">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Workshop:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" readonly value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Appointment Date Time *:</label>
+                            <div class="col-sm-3">
+                                <input name="timeSlotDate" class="form-control" value="mm/dd/yy" [(ngModel)]="appointment.timeSlotDetail.timeSlotDate" #timeSlotDate="ngModel"
+                                    disabled>
+                            </div>
+                            <div class="col-sm-3">
+                                <input name="timeSlotTime" class="form-control" [(ngModel)]="appointment.timeSlotDetail.timeSlotTime" #timeSlotTime="ngModel"
+                                    disabled>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-default" (click)="openAddTimeSlotV2AppoimentModal()">
+                                    <span>Time Slot</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Customer:</label>
+                            <div class="col-sm-8">
+                                <input name="customerName" type="text" class="form-control" [(ngModel)]="appointment.customerName" required #customerName="ngModel"
+                                    disabled>
+                                <label class="error" *ngIf="customerName.errors?.required && (customerName.dirty || customerName.touched || formAppointment._submitted)">
+                                    Customer. is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">ID No.:</label>
+                            <div class="col-sm-8">
+                                <input name="IdNo" id="IdNo" type="text" class="form-control" [(ngModel)]="appointment.idNo" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Mobile No.:</label>
+                            <div class="col-sm-8">
+                                <input name="mobilePhoneNo" type="text" class="form-control" [(ngModel)]="appointment.mobilePhoneNo" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Preferred SA:</label>
+                            <div class="col-sm-8">
+                                <select name="serviceAdvisorId2" class="form-control" [(ngModel)]="appointment.serviceAdvisorId" #serviceAdvisorId2="ngModel">
+                                    <option *ngFor="let item of serviceAdvisors" [ngValue]="item.id">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Remarks:</label>
+                    <div class="col-sm-10">
+                        <textarea name="remarks" rows="5" cols="5" class="text-box-margin form-control" [(ngModel)]="appointment.remarks"></textarea>
+                    </div>
+                </div>
+                <div class="tabbable page-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="tables_dynamic.html#inside" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i> Appointment Details</a>
+                        </li>
+                        <li>
+                            <a href="tables_dynamic.html#advanced" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i>Service History</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Appointment Details -->
+                        <div class="tab-pane active fade in" id="inside">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <!-- Job (Labour) -->
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Package Type: </label>
+                                            <div class="col-sm-8">
+                                                <p-dropdown [options]="packageTypeObjects" [style]="{'width':'100%'}" #packageTypeId [(ngModel)]="appointment.packageTypeId"
+                                                    name="packageTypeId" (onChange)="onChangePackageType($event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Package: </label>
+                                            <div class="col-sm-8">
+                                                <p-dropdown [options]="servicePackageObjects" [style]="{'width':'100%'}" [(ngModel)]="appointment.servicePackageId" name="servicePackageId"
+                                                    (onChange)="onChangeServicePackage($event.value)" #servicePackageId styleClass="ui-column-filter ui-dropdow-custom">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Job Group: </label>
+                                            <div class="col-sm-8">
+                                                <p-dropdown [options]="jobGroupObjects" [style]="{'width':'100%'}" [(ngModel)]="appointment.jobGroupId" name="jobGroupId"
+                                                    (onChange)="onChangeJobGroup($event.value)" #jobGroupId styleClass="ui-column-filter ui-dropdow-custom">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Job:</label>
+                                            <div class="col-sm-8">
+                                                <p-dropdown [options]="jobObjects" [style]="{'width':'100%'}" [(ngModel)]="appointment.jobId" name="jobId" (onChange)="onChangeJob($event.value)"
+                                                    #jobId styleClass="ui-column-filter ui-dropdow-custom">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Part:</label>
+                                            <div class="col-sm-8">
+                                                <p-dropdown [options]="partObjects" [style]="{'width':'100%'}" [(ngModel)]="appointment.partId" name="jobId" (onChange)="onChangePart($event.value)"
+                                                    #partId styleClass="ui-column-filter ui-dropdow-custom">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Qty:</label>
+                                            <div class="col-sm-8">
+                                                <p-spinner size="30" name="quantity" [(ngModel)]="appointment.quantity" [min]="0" [max]="999999"></p-spinner>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row form-group pull-right">
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-sm btn-info mg-button" (click)="onClickAdd()">
+                                                    <span data-icon="&#xe104;"></span> Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Job (Labour) -->
+                                    <jobLabour-addUpdate></jobLabour-addUpdate>
+                                    <div class="datatable mg-bottom-15px">
+                                        <table class="table table-bordered dataTable no-footer" id="table-servicePackage" role="grid">
+                                            <thead>
+                                                <tr>
+                                                    <th class="collumn-checkbox">
+                                                        <div class="">
+                                                            <span class="checked">
+                                                                <input type="checkbox" class="styled">
+                                                            </span>
+                                                        </div>
+                                                    </th>
+                                                    <th>Package code</th>
+                                                    <th>Job Code</th>
+                                                    <th>Job description</th>
+                                                    <th>Job type</th>
+                                                    <th>Payment type</th>
+                                                    <th>Source</th>
+                                                    <th>labourCharge</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let item of listRowItem, let i = index">
+                                                <tr>
+                                                    <td>
+                                                        <div class="">
+                                                            <span class="checked">
+                                                                <input type="checkbox" name="checkRow" class="styled" />
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a>{{ item.packageCode }}</a>
+                                                    </td>
+                                                    <td>{{ item.job.code }}</td>
+                                                    <td>{{ item.job.description }} </td>
+                                                    <td>
+                                                        <p-dropdown [options]="item.listJobType" [style]="{'width':'100%'}" [(ngModel)]="item.job.pdComeBackJobId" name="pdComeBackJobId_{{ i }}"
+                                                            (onChange)="onChangeJobType(item.job,$event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                        </p-dropdown>
+                                                    </td>
+                                                    <td>
+                                                        <p-dropdown [options]="item.listPaymentType" [style]="{'width':'100%'}" [(ngModel)]="item.job.pdPaymentTypeId" name="pdPaymentTypeId_{{ i }}"
+                                                            (onChange)="onChangePaymentType(item.job,$event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                        </p-dropdown>
+                                                    </td>
+                                                    <td>
+                                                        <p-dropdown [options]="item.listJobSource" [style]="{'width':'100%'}" [(ngModel)]="item.job.pdJobSourceId" name="pdJobSourceId_{{ i }}"
+                                                            (onChange)="onChangeSource(item.job,$event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                        </p-dropdown>
+                                                    </td>
+                                                    <td>{{ item.job.labourCharge }}</td>
+                                                    <td>
+                                                        <a class="font-18px" href="javascript:void(0)" (click)="removeItemPackage(item)">
+                                                            <span data-icon="&#xe0d7;"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- Part -->
+                                    <div class="datatable mg-bottom-15px">
+                                        <table class="table table-bordered dataTable no-footer" id="table-servicePackage" role="grid">
+                                            <thead>
+                                                <tr>
+                                                    <th class="collumn-checkbox">
+                                                        <div class="">
+                                                            <span class="checked">
+                                                                <input type="checkbox" class="styled">
+                                                            </span>
+                                                        </div>
+                                                    </th>
+                                                    <th>Job</th>
+                                                    <th>Part</th>
+                                                    <th>Part source</th>
+                                                    <th>Payment type</th>
+                                                    <th style="width: 12%">Qty</th>
+                                                    <th>Amount</th>
+                                                    <!--<th>Discount</th>
+                                                    <th>Goodwill</th>-->
+                                                    <th>SubTotal</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let item of listJobPart, let i = index">
+                                                <tr>
+                                                    <td>
+                                                        <div class="">
+                                                            <span class="checked">
+                                                                <input type="checkbox" name="checkRow" class="styled" />
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a>{{ item.code }}</a>
+                                                    </td>
+                                                    <td>{{ item.part.code }}</td>
+                                                    <td>
+                                                        <p-dropdown [options]="item.part.listPartType" [style]="{'width':'100%'}" [(ngModel)]="item.part.pdPartSourceId" name="part_pdPartTypeId_{{ i }}"
+                                                            (onChange)="onChangeSource(item.part,$event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                        </p-dropdown>
+                                                    </td>
+                                                    <td>
+                                                        <p-dropdown [options]="item.part.listPaymentType" [style]="{'width':'100%'}" [(ngModel)]="item.part.pdPaymentTypeId" name="pdPaymentTypeId_{{ i }}"
+                                                            (onChange)="onChangePaymentType(item.part,$event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                        </p-dropdown>
+                                                    </td>
+                                                    <td>
+                                                        <p-spinner size="30" name="quantity_{{ i }}" [(ngModel)]="item.part.quantity" [min]="0" [max]="999999" (ngModelChange)="onChangeQuantityPart(item.part.id, $event)"></p-spinner>
+                                                    </td>
+                                                    <td>{{ item.part.unitPrice }}</td>
+                                                    <td>{{ item.part.quantity * item.part.unitPrice }}</td>
+                                                    <td>
+                                                        <a class="font-18px" href="javascript:void(0)" (click)="removeItemJob(item)">
+                                                            <span data-icon="&#xe0d7;"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                    <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+                                    <!-- End Part -->
+                                    <part-addUpdate></part-addUpdate>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Appointment Details-->
+                        <!-- Service History -->
+                        <div class="tab-pane fade" id="advanced">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <service-history #serviceHistory></service-history>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/Service History -->
+                    </div>
+                </div>
+                <div class="col-md-6 pull-right">
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Total Labour Charge: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">{{ appointment.totalLabourCharge }}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <!--  <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Labour Discount: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div> -->
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Total Part: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">{{ appointment.totalPartAmt }}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Total: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">{{ appointment.totalPartAmt + appointment.totalLabourCharge }}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <!-- <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Part Discount: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Additional Discount:</label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Total Before Tax:</label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Tax:</label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label text-right">Total After Tax: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label text-right">Rounding Adjustment: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label text-right">Total Amount Payable: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </form>
+    <newvp-addUpdate (bindNewVehicleProfile)="bindNewVehicleProfile($event)"></newvp-addUpdate>
+    <appointment-addTimeSlotV2 (timeSlotUpdatedEvent)="timeSlotUpdatedEvent($event)" [selectedTimeSlotDetail]="selectedTimeSlotDetail"></appointment-addTimeSlotV2>
+</div>

@@ -1,0 +1,131 @@
+<div id="add-update-job-part-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <!--<h4 *ngIf="jobGroup.id==null" class="modal-title">Job Group - Add</h4>
+                <h4 *ngIf="jobGroup.id>0" class="modal-title">Job Group - Update</h4>-->
+                <h4 class="modal-title">Job Part - Add</h4>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" action="#" #formJobPart="ngForm" (ngSubmit)="addUpdate(objList)">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Vehicle Make*:</label>
+                                    <div class="col-sm-7">
+                                        <select class="form-control" id="vehicleMakeId" name="vehicleMakeId" [(ngModel)]="objList.vehicleMake" (ngModelChange)="change($event)"
+                                            [disabled]="check">
+                                    <option *ngFor="let item of vehicleMakeList" [ngValue]="item.id" >{{item.description}}</option>
+                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Vehicle Model*:</label>
+                                    <div class="col-sm-7">
+                                        <select class="form-control" id="vehicleModelId" name="vehicleModelId" [(ngModel)]="objList.vehicleModel" (ngModelChange)="changeModel($event)"
+                                            [disabled]="check">
+                                    <option *ngFor="let item of vehicleModelList" [ngValue]="item.id">{{item.description}}</option>
+                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Model Variant*:</label>
+                                    <div class="col-sm-7">
+                                        <select class="form-control" id="vehicleVariant" name="vehicleVariant" [(ngModel)]="objList.vehicleVariant" [disabled]="check">
+                                    <option *ngFor="let item of vehicleVariantList" [ngValue]="item.id">{{item.description}}</option>
+                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Job*:</label>
+                                    <div class="col-sm-7">
+                                        <select class="form-control" id="jobId" name="jobId" [(ngModel)]="objList.jobId" [disabled]="check">
+                                    <option *ngFor="let item of jobList" [ngValue]="item.id">{{item.description}}</option>
+                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Part*:</label>
+                                    <div class="col-sm-7">
+                                        <select name="select" class="form-control" name="partId" [(ngModel)]="objList.partId">
+                                    <option *ngFor="let item of partList" [ngValue]="item.id">{{item.description}}</option>
+                                </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Part Quantity*:</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="qty" [(ngModel)]="objList.qty">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-actions text-right">
+                        <button type="submit" class="btn btn-primary" (click)="formJobPart.ngSubmit.emit()">Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
+                    </div>
+
+                    <form class="form-horizontal" role="form" action="#" #formTableJobPart="ngForm" (ngSubmit)="addUpdateTable(tableArray)">
+                        <div class="datatable">
+                            <table class="table table-bordered table-custom table-top">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                        </th>
+                                        <th>Job (Code -Description)</th>
+                                        <th>Part (Code -Description)</th>
+                                        <th>Part Quantity</th>
+                                        <th>Vehicle Make</th>
+                                        <th>Vehicle Mode</th>
+                                        <th>Model Variant</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of tableArray; let i = index">
+                                        <td>
+                                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                        </td>
+                                        <td>
+                                            {{item.jobDesc}}
+                                        </td>
+                                        <td>
+                                            {{item.partDesc}}
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="qty{{i}}" [(ngModel)]="item.qty">
+                                        </td>
+                                        <td>{{item.vehicleMake}}</td>
+                                        <td>{{item.vehicleModel}}</td>
+                                        <td>{{item.vehicleVariant}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                    <div class="form-actions text-right">
+                        <button type="submit" class="btn btn-primary" (click)="formTableJobPart.ngSubmit.emit()">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

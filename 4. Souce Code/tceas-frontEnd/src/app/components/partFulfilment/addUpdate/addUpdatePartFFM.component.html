@@ -1,0 +1,154 @@
+<p-growl [(value)]="msgs"></p-growl>
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Part Fulfilment - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li class="active">Part Fulfilment</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-primary pull-right mg-button" routerLink="/partFulfilment/Search">Back</button>
+        <button type="submit" class="btn btn-sm btn-default pull-right mg-button">Print</button>
+        <button type="submit" class="btn btn-sm btn-default pull-right mg-button" (click)="submitFulfillment()" [attr.disabled]="!isFulfillment?'':null">Confirm Fulfillment</button>
+        <button type="submit" class="btn btn-sm btn-default pull-right mg-button" (click)="submitPicking()" [attr.disabled]="!isPicking?'':null">Confirm Picking</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form class="form-horizontal scroll-data" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right">RO No.:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="roNo" name="roNo" [(ngModel)]="roPart.master.code" #roNo="ngModel" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right">Registration No:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="registrationNo" name="registrationNo" [(ngModel)]="roPart.master.VehicleCustomer.registrationNo"
+                                    #registrationNo="ngModel" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right">Collected By:</label>
+                            <div class="col-sm-8">
+                                <select id="technicalFulfillment" name="technicalFulfillment" class="form-control" [(ngModel)]="roPart.master.collectionBy">
+                                    <option *ngFor="let itemTechnical of roPart.master.JobAssignedTechnicians" [ngValue]="itemTechnical.Employee.id">{{ itemTechnical.Employee.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+                <div class="datatable-addUpdatePartFulfillment">
+                    <table class="table table-bordered table-top">
+                        <thead>
+                            <tr>
+                                <th>Part</th>
+                                <th>Request Qty</th>
+                                <th>Substitute Part</th>
+                                <th>UOM</th>
+                                <th>Bin Code</th>
+                                <th>Available Qty</th>
+                                <th>Fulfilled Qty</th>
+                                <th>Outstanding Qty</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of roPart.part; let i = index">
+                                <td>{{ item.PartMaster?.code }}</td>
+                                <td>{{ item.requestQty }}</td>
+                                <td>
+                                    <select id="item.PartMaster?.code" name="partSubstitute" class="form-control" [(ngModel)]="item.partSubstituteId" #partSubstitute="ngModel"
+                                        (change)="bindBin(i)">
+                                        <option *ngFor="let itemSubstitute of item.PartSubstitutes" [ngValue]="itemSubstitute.id">{{ itemSubstitute.code }}</option>
+                                    </select>
+                                </td>
+                                <td>{{ item.PartMaster?.PDUnitOfMeasure?.code }}</td>
+                                <td>
+                                    <select id="bin_{{i}}" name="bin_{{i}}" class="form-control" [(ngModel)]="item.binId" (change)="bindQty(i)" [attr.disabled]="!isPicking?null:''">
+                                        <option *ngFor="let itemBin of item.Stocks" [ngValue]="itemBin.binId">{{ itemBin.code }}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <span id="avaiableQty_{{i}}">{{item.avaiableQty}}</span>
+                                </td>
+                                <td style="text-align:center">
+                                    <input type="text" id="fulfilledQty{{i}}" style="width:50px; text-align:right" [ngClass]="{'fulfill-error': !item.isValid}"
+                                        name="fullfillQty_{{i}}" [(ngModel)]="item.fullfillQty" (input)="checkFulfill(i)" [attr.disabled]="item.hasChild?'':null"
+                                    />
+                                </td>
+                                <td>
+                                    <span id="outstandingQty">{{ item.outStandingQty }}</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-right-icon btn-info" (click)="addOrDeletePart(i, false)" [attr.disabled]="item.isMaxChild?'':null"
+                                        *ngIf="!item.isExtend">
+                                        <span data-icon="&#xe104;"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-right-icon btn-danger" (click)="addOrDeletePart(i, true)" *ngIf="item.isExtend">
+                                        <span data-icon="&#xe158;"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
+                <div *ngIf="roPart.history.length > 0">
+                    <h4>Fulfillment History</h4>
+                    <div class="datatable-addUpdateVehicleProfile">
+                        <table class="table table-bordered table-top">
+                            <thead>
+                                <tr>
+                                    <th>Fulfilment No.</th>
+                                    <th>Part</th>
+                                    <th>Request Qty</th>
+                                    <th>UOM</th>
+                                    <th>Substitute Part</th>
+                                    <th>Bin Code</th>
+                                    <th>Fulfilled Qty</th>
+                                    <th>Outstanding Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of roPart.history">
+                                    <td>{{ item.code }}</td>
+                                    <td>{{ item.PartMaster?.code }}</td>
+                                    <td>{{ item.requestQty }}</td>
+                                    <td>{{ item.PartMaster?.PDUnitOfMeasure?.code }}</td>
+                                    <td>{{ item.subPart }}</td>
+                                    <td>{{ item.binCode }}</td>
+                                    <td>{{ item.fulfillmentQty }}</td>
+                                    <td>{{ item.requestQty - item.fulfillmentQty }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--end form-->
+</div>

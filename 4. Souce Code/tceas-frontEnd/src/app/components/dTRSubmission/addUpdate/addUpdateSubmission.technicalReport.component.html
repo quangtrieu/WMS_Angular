@@ -1,0 +1,916 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>{{'TR_TITLE_SUB'|translate}} - {{'LBL_ADD'|translate}}</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">{{'LBL_HOME'|translate}}</a>
+            </li>
+            <li class="active"> {{'TR_TITLE_SUB'|translate}} </li>
+        </ul>
+
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons">
+                <i class="icon-menu2"></i>
+            </a>
+        </div>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button btn-success">Print</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button btn-default">Back</button>
+        <button type="submit" class="btn btn-sm btn-default pull-right mg-button btn-info">Submit</button>
+        <button type="submit" class="btn btn-sm btn-default pull-right mg-button btn-primary">Save</button>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <form class="form-horizontal scroll-data" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4>Technical Report (DTR) Header</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Add new -->
+                        <div [hidden]="technicalReport.isUpdate">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Repair Order No.*:</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">
+                                                <span data-icon="&#xe0c2;"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Vehicle Registration No.:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Vehicle Make:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Vehicle Model:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Model Variant:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Add new -->
+
+                        <!-- Update -->
+                        <div [hidden]="!technicalReport.isUpdate">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Technical Report (DTR) No.:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Technical Report (DTR) Date: </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="date" name="date">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Status:</label>
+                                <div class="col-sm-8">
+                                    <select name="select" class="form-control" (change)="toggle()">
+                                        <option value="individual">NEW</option>
+                                        <option value="corporate">APPROVED</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Vehicle Registration No.:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Vehicle Make:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Vehicle Model:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Model Variant:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Update -->
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Purpose: </label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control" (change)="toggle()">
+                                    <option value="individual">Warranty</option>
+                                    <option value="corporate">Technical Issue</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-4 control-label">Vehicle met accident before?</label>
+                            <div class="col-sm-7">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled"> Yes
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled"> No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Accident description:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-4 control-label">Any Modification</label>
+                            <div class="col-sm-7">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled"> Yes
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled"> No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Modification description</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Repair Order Date.:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Registration Date:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">VIN Number:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Chassis Number:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Engine Number:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Current Milleage (km):</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Customer Details</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Customer:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Customer phone no.:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Purpose of vehicle usage:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Subject: </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <p>Problem Description:</p>
+                                <p>
+                                    (Actual Customer word in complaint)</p>
+                            </label>
+                            <div class="col-sm-10">
+                                <textarea rows="5" cols="5" class="elastic form-control" placeholder="Elastic textarea" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 102px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabbable page-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="tables_dynamic.html#inside" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i> Usage information/Problem Condition</a>
+                        </li>
+                        <li>
+                            <a href="tables_dynamic.html#outside" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i>Troubleshoot/Rectification</a>
+                        </li>
+                        <li>
+                            <a href="tables_dynamic.html#advanced" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i>Attachment</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <!-- First tab content -->
+                        <div class="tab-pane active fade in" id="inside">
+                            <!-- Warranty Claim Header -->
+                            <form class="form-horizontal" role="form" action="#">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Loading Condition (person)</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Loading Condition (luggage)</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Problem started (km)</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Problem started (date)</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Daily Milleage (km/day)</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Vehicle Speed (km/h)</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Engine Speed (rpm)</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Shifting position (position)</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Weather</label>
+                                                    <div class="col-sm-8">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Fine
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Rain
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Cloudy
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> No relation
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label">Audio Unit Usage</label>
+                                                    <div class="col-sm-6">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Yes
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> No
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Volume:</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Acceleration</label>
+                                                    <div class="col-sm-7">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> During acceleration
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> During braking
+                                                        </label>
+                                                        <label class="checkbox-inline checkbx-no-margin">
+                                                            <input type="checkbox" class="styled"> During deceleration
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Cruising
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Time</label>
+                                                    <div class="col-sm-9">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Morning
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Evening
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Daytime
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Night
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">A/C Usage</label>
+                                                    <div class="col-sm-8">
+                                                        <label class="checkbox-inline  col-sm-5">
+                                                            <input type="checkbox" class="styled"> Auto
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-5">
+                                                            <input type="checkbox" class="styled"> Manual
+                                                        </label>
+                                                        <label class="checkbox-inline checkbx-margin-no-margin col-sm-5">
+                                                            <input type="checkbox" class="styled"> Fresh
+                                                        </label>
+                                                        <label class="checkbox-inline  col-sm-3">
+                                                            <input type="checkbox" class="styled"> Low
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Face
+                                                        </label>
+                                                        <label class="checkbox-inline checkbx-no-margin col-sm-5">
+                                                            <input type="checkbox" class="styled"> Recirculatioin
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-3">
+                                                            <input type="checkbox" class="styled"> Mid
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-3">
+                                                            <input type="checkbox" class="styled"> Foot
+                                                        </label>
+                                                        <label class="checkbox-inline checkbx-no-margin col-sm-5">
+
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-3">
+                                                            <input type="checkbox" class="styled"> High
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-3">
+                                                            <input type="checkbox" class="styled"> Defrost
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Road Condition</label>
+                                                    <div class="col-sm-9">
+                                                        <label class="checkbox-inline col-sm-3">
+                                                            <input type="checkbox" class="styled"> Highway
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-3">
+                                                            <input type="checkbox" class="styled"> Flat Road
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-4">
+                                                            <input type="checkbox" class="styled"> During Turning
+                                                        </label>
+                                                        <label class="checkbox-inline checkbx-no-margin col-sm-3">
+                                                            <input type="checkbox" class="styled"> City Road
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-3">
+                                                            <input type="checkbox" class="styled"> Uphill
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-4">
+                                                            <input type="checkbox" class="styled"> Parking Area
+                                                        </label>
+                                                        <label class="checkbox-inline checkbx-no-margin col-sm-3">
+                                                            <input type="checkbox" class="styled"> Bumpy Road
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-3">
+                                                            <input type="checkbox" class="styled"> Downhill
+                                                        </label>
+                                                        <label class="checkbox-inline col-sm-4">
+                                                            <input type="checkbox" class="styled"> Other:
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Frequency</label>
+                                                    <div class="col-sm-3">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Permanent
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Intermittent
+                                                        </label>
+                                                    </div>
+                                                    <label class="col-sm-1 control-label">Other:</label>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <h4 class="title-margin">Problem Confirmation</h4>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">Symptoms:</label>
+                                                    <div class="col-sm-11">
+                                                        <textarea rows="5" cols="5" class="elastic form-control" placeholder="Elastic textarea" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 102px;"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">Test drive with customer:</label>
+                                                    <div class="col-sm-8">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Yes
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> No
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">Can duplicate problem:</label>
+                                                    <div class="col-sm-8">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Yes
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> No
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="title-margin">Vehicle Comparison</h4>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Customer's Vehicle: </label>
+                                                    <div class="col-sm-9">
+                                                        <select name="select" class="form-control">
+                                                            <option value="opt1">5- Excellent</option>
+                                                            <option value="opt2">4-Good; in normal condition</option>
+                                                            <option value="opt3">3.5-Symptom hardly noticeable; most of people will not complain</option>
+                                                            <option value="opt4">3-Symptom noticeable;some of the people may complain</option>
+                                                            <option value="opt5">2.5-Abnormal;majority will complain</option>
+                                                            <option value="opt6">2-Bad</option>
+                                                            <option value="opt7">1-Terrible</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Comparison's Vehicle:</label>
+                                                    <div class="col-sm-9">
+                                                        <select name="select" class="form-control">
+                                                            <option value="opt1">5- Excellent</option>
+                                                            <option value="opt2">4-Good; in normal condition</option>
+                                                            <option value="opt3">3.5-Symptom hardly noticeable; most of people will not complain</option>
+                                                            <option value="opt4">3-Symptom noticeable;some of the people may complain</option>
+                                                            <option value="opt5">2.5-Abnormal;majority will complain</option>
+                                                            <option value="opt6">2-Bad</option>
+                                                            <option value="opt7">1-Terrible</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End Warranty Claim Header -->
+                        </div>
+                        <!-- /first tab content -->
+
+                        <!-- Second tab content -->
+                        <div class="tab-pane fade" id="outside">
+                            <form class="form-horizontal" role="form" action="#">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <!-- Details -->
+                                        <h4 class="table-margin">Details</h4>
+                                        <div class="row">
+                                            <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+                                                <span data-icon="&#xe158;"></span> Delete</button>
+                                            <button type="button" class="btn btn-sm btn-info pull-right mg-button" data-toggle="modal">
+                                                <span data-icon="&#xe104;"></span> Add</button>
+                                        </div>
+                                        <div class="datatable-addUpdateSubmission">
+                                            <table class="table table-bordered table-custom table-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="collumn-checkbox">
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </th>
+                                                        <th>Troubleshoot/Rectification</th>
+                                                        <th>Result</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- End Details-->
+
+                                        <!-- Part Requirments -->
+                                        <h4 class="table-margin">Part Requirments</h4>
+                                        <div class="row">
+                                            <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+                                                <span data-icon="&#xe158;"></span> Delete</button>
+                                            <button type="button" class="btn btn-sm btn-info pull-right mg-button" data-toggle="modal">
+                                                <span data-icon="&#xe104;"></span> Add</button>
+                                        </div>
+                                        <div class="datatable-addUpdateSubmission-part">
+                                            <table class="table table-bordered table-custom table-top" id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="collumn-checkbox">
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </th>
+                                                        <th>Part Code</th>
+                                                        <th>Part Description</th>
+                                                        <th>Quantity</th>
+                                                        <th>Unite Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- End Part Requirments -->
+
+                                        <!-- Warranty Claimable: -->
+                                        <h4 class="table-margin">Warranty Claimable:</h4>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="form-group">
+                                                    <div class="col-sm-9">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Yes
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Approved by:</label>
+                                                    <div class="col-sm-9">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> WCO
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> HOW/AHOW
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> Warranty Department
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">Reason to get approval from Warranty Department</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="form-group">
+                                                    <div class="col-sm-9">
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled"> No
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label">Reasons</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Warranty Claimable: -->
+                                        <!-- Problem resolved? -->
+                                        <h4 class="table-margin">Problem resolved?</h4>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-9">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" class="styled"> Yes
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" class="styled"> No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Problem resolved? -->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /second tab content -->
+
+                        <!-- Third tab content -->
+                        <div class="tab-pane fade" id="advanced">
+                            <form class="form-horizontal" role="form" action="#">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+                                                <span data-icon="&#xe158;"></span> Delete</button>
+                                            <button type="button" class="btn btn-sm btn-info pull-right mg-button" data-toggle="modal">
+                                                <span data-icon="&#xe104;"></span> Add</button>
+                                        </div>
+                                        <div class="datatable-addUpdateSubmission-attachment col-md-8">
+                                            <table class="table table-bordered table-custom table-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="collumn-checkbox" style="width: 12px">
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </th>
+                                                        <th style="width: 20px">No.</th>
+                                                        <th>File name</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>1</td>
+                                                        <td>DMS</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>2</td>
+                                                        <td>TCEAS</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>3</td>
+                                                        <td>PMM</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /third tab content -->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>

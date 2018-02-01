@@ -1,0 +1,59 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Goods Receiving - Add</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active">GRN</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-primary pull-right mg-button" [disabled]="!formGRN.form.valid" (click)="formGRN.ngSubmit.emit()">Save</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button" routerLink="/goodsReceiving/Search">Back</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form #formGRN="ngForm" id="addGRN" class="form-horizontal" role="form" action="#" (ngSubmit)="formGRN.form.valid && addUpdate(grn)" >
+        <input type="hidden" name="id" [(ngModel)]="grn.id" #id="ngModel" />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Part<span class="red">*</span>: </label>
+                    <div class="col-sm-4 full-select">
+                        <p-autoComplete id = "grn-partCode" name="part" [suggestions]="parts" [(ngModel)]="grn.Part" field="display" (completeMethod)="filterPart(false)"
+                          [forceSelection]="true" [autoHighlight] ="true" [dropdown]="true" emptyMessage="No results found" required #partId="ngModel" >
+                        </p-autoComplete> 
+                         <label  id="mgsErrVehicleModel-partCode" class="error" *ngIf="partId.errors && partId.errors.required && (partId.dirty || partId.touched || formGRN._submitted)">
+                            Part is required!
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Bin<span class="red">*</span>: </label>
+                    <div class="col-sm-4 full-select">
+                        <p-autoComplete id = "grn-binCode" name="bin" [suggestions]="bins" [(ngModel)]="grn.Bin" field="display" (completeMethod)="filterBin(false)"
+                          [forceSelection]="true" [autoHighlight] ="true" [dropdown]="true" emptyMessage="No results found" required #binId="ngModel" >
+                        </p-autoComplete> 
+                         <label  id="mgsErrVehicleModel-binCode" class="error" *ngIf="binId.errors && binId.errors.required && (binId.dirty || binId.touched || formGRN._submitted)">
+                            Bin is required!
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Quantity<span class="red">*</span>: </label>
+                    <div class="col-sm-4">
+                        <p-spinner size="30" name="quantity" [(ngModel)]="grn.qty" [min]="0" [max]="999999" [maxlength] = "6" required #quantity="ngModel"></p-spinner>
+                        <label  id="mgsErrVehicleModel-qtyCode" class="error" *ngIf="quantity.errors && quantity.errors.required && (quantity.dirty || quantity.touched || formGRN._submitted)">
+                            Quantity is required!
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,490 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!customer.id">Purchase Order - Add</h3>
+            <h3 *ngIf="customer.id">Purchase Order - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active">Customer</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-info pull-right mg-button" [disabled]="!frmCustomer.form.valid" (click)="frmCustomer.ngSubmit.emit()">Save</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button" routerLink="/customer/Search">Back</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form #frmCustomer="ngForm" (ngSubmit)="addUpdate(customer)" class="form-horizontal" role="form">
+        <input type="hidden" name="id" [(ngModel)]="customer.id" #id="ngModel" />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="tabbable page-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="tables_dynamic.html#general" data-toggle="tab"><i class="icon-checkbox-partial"></i>General Info</a></li>
+                        <li><a href="tables_dynamic.html#other" data-toggle="tab"><i class="icon-checkbox-partial"></i>Other</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- First tab content -->
+                        <div class="tab-pane active fade in" id="general">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Customer Type*: </label>
+                                                <div class="col-sm-8">
+                                                    <select name="customerType" class="form-control" (change)="toggle()" required [(ngModel)]="customer.customerType" #customerType="ngModel"
+                                                            id="customerType">
+                                                        <option value="0">Individual</option>
+                                                        <option value="1">Corporate</option>
+                                                    </select>
+                                                    <label class="error" *ngIf="customerType.errors && customerType.errors.required && (customerType.dirty || customerType.touched || frmCustomer._submitted)">
+                                                        Customer type is required
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Customer Code:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="code" id="code" [(ngModel)]="customer.code" required #code="ngModel" readonly>
+                                                    <label class="error" *ngIf="code.errors && code.errors.required && (code.dirty || code.touched || frmCustomer._submitted)">
+                                                        Customer code is required
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="!type">
+                                                <label class="col-sm-4 control-label">Salutation:</label>
+                                                <div class="col-sm-8">
+                                                    <select id="salutation" name="salutation" class="form-control" [(ngModel)]="customer.pdSalutationId" #salutation="ngModel">
+                                                        <option *ngFor="let item of pdData.salutation" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select>
+                                                    <!-- <select name="salutation" class="form-control" id="salutation" [(ngModel)]="customer.salutation" #salutation="ngModel">
+                                                        <option value="1">MR</option>
+                                                        <option value="0">MS</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Customer Name*: </label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="name" id="name" [(ngModel)]="customer.name" required #name="ngModel">
+                                                    <label class="error" *ngIf="name.errors && name.errors.required && (name.dirty || name.touched || frmCustomer._submitted)">
+                                                        Customer name is required
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">ID Type: </label>
+                                                <div class="col-sm-8">
+                                                    <select id="idType" name="idType" class="form-control" [(ngModel)]="customer.pdIdTypeId" #idType="ngModel">
+                                                        <option *ngFor="let item of pdData.idType" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select>
+                                                    <!-- <label class="error" *ngIf="vehicleMakeId.errors && vehicleMakeId.errors.required && (vehicleMakeId.dirty || vehicleMakeId.touched || frmVehicle._submitted)">
+                                                        Vehicle Make is required
+                                                    </label>
+                                                    <select class="form-control" name="idType" id="idType" [(ngModel)]="customer.idType" #idType="ngModel">
+                                                        <option value="1">NIC-INDIVIDUAL IDENTIFICATION</option>
+                                                        <option value="2">CRN-COMPANY REGISTRATION</option>
+                                                        <option value="3">PP-PASSPORT</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">ID No.: </label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="idNumber" id="idNumber" [(ngModel)]="customer.idNumber" #idNumber="ngModel">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div *ngIf="customer.id" class="form-group">
+                                                <label class="col-sm-4 control-label">Active : </label>
+                                                <div class="col-sm-8">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="status" id="status" class="styled" [(ngModel)]="customer.status" [value]="true">
+                                                        Yes
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="status" id="status" class="styled" [(ngModel)]="customer.status" [value]="false">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="type">
+                                                <label class="col-sm-4 control-label">GST ID No:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="gstIdNo" id="gstIdNo">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="type">
+                                                <label class="col-sm-4 control-label">Is exclude from Tax: </label>
+                                                <div class="col-sm-8">
+                                                    <select name="excludeTax" class="form-control" id="excludeTax">
+                                                        <option value="1">YES</option>
+                                                        <option value="0">NO</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Race:</label>
+                                                <div class="col-sm-8">
+                                                    <select id="race" name="race" class="form-control" [(ngModel)]="customer.pdRaceId" #race="ngModel">
+                                                        <option *ngFor="let item of pdData.race" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select>
+                                                    <!-- <select name="race" class="form-control" id="race" [(ngModel)]="customer.race" #race="ngModel">
+                                                        <option value="1">Chinese</option>
+                                                        <option value="0">Malay</option>
+                                                        <option value="0">Indian</option>
+                                                        <option value="0">Other</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="!type">
+                                                <label class="col-sm-4 control-label">Occupation: </label>
+                                                <div class="col-sm-8">
+                                                    <select id="occupation" name="occupation" class="form-control" [(ngModel)]="customer.pdOccupationId" #race="ngModel">
+                                                        <option *ngFor="let item of pdData.occupation" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select>
+                                                    <!-- <select class="form-control" name="occupation" id="occupation" [(ngModel)]="customer.occupation" #occupation="ngModel">
+                                                        <option value="1">MANAGEMENT-TECHNICAL</option>
+                                                        <option value="2">EXECUTIVE-TECHNICAL</option>
+                                                        <option value="3">PROFESSIONAL-TECHNICAL</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="!type">
+                                                <label class="col-sm-4 control-label">Employment Status: </label>
+                                                <div class="col-sm-8">
+                                                    <select id="employmentStatus" name="employmentStatus" class="form-control" [(ngModel)]="customer.pdEmploymentStatusId" #employmentStatus="ngModel">
+                                                        <option *ngFor="let item of pdData.employeeStatus" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select>
+                                                    <!-- <select class="form-control" name="employmentStatus" id="employmentStatus" [(ngModel)]="customer.employmentStatus" #employmentStatus="ngModel">
+                                                        <option value="1">FULL-TIME</option>
+                                                        <option value="2">PART-TIME</option>
+                                                        <option value="3">RETIRED</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Nationality: </label>
+                                                <div class="col-sm-8">
+                                                    <select id="nationality" name="nationality" class="form-control" [(ngModel)]="customer.pdCountryId" #nationality="ngModel">
+                                                        <option *ngFor="let item of pdData.country" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select>
+                                                    <!-- <select name="nationality" class="form-control" id="nationality" [(ngModel)]="customer.nationality" #nationality="ngModel">
+                                                        <option value="1">MY</option>
+                                                        <option value="0">VN</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group" [hidden]="!type">
+                                                <label class="col-sm-4 control-label">Mobile No.:</label>
+                                                <div class="col-sm-3">
+                                                    <select name="countryCodeMobile" class="form-control" id="countryCodeMobile" [(ngModel)]="customer.countryCodeMobile" #countryCodeMobile="ngModel">
+                                                        <option value="1">+60</option>
+                                                        <option value="0">+84</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="contact" [(ngModel)]="customer.contact" #contact="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Office Tel No.: </label>
+                                                <div class="col-sm-3">
+                                                    <select name="countryCodeOffice" class="form-control" id="countryCodeOffice" [(ngModel)]="customer.countryCodeOffice" #countryCodeOffice="ngModel">
+                                                        <option value="1">+60</option>
+                                                        <option value="0">+84</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="officeTel" [(ngModel)]="customer.officeTel" #officeTel="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Extension:</label>
+                                                <div class="col-sm-3">
+                                                    &nbsp;
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="extension" [(ngModel)]="customer.extension" #extension="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">House Tel No.:</label>
+                                                <div class="col-sm-3">
+                                                    <select name="countryCodeHouse" class="form-control" id="countryCodeHouse" [(ngModel)]="customer.countryCodeHouse" #countryCodeHouse="ngModel">
+                                                        <option value="1">+60</option>
+                                                        <option value="0">+84</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="houseTel" [(ngModel)]="customer.houseTel" #houseTel="ngModel">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Email:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="email" [(ngModel)]="customer.email" #email="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Contact Person:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="contactPerson" id="contactPerson" [(ngModel)]="customer.contactPerson" #contactPerson="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Contact Person No.:</label>
+                                                <div class="col-sm-3">
+                                                    <select name="contactPersonNo" class="form-control" id="contactPersonNo" [(ngModel)]="customer.contactPersonNo" #contactPersonNo="ngModel">
+                                                        <option value="1">+60</option>
+                                                        <option value="0">+84</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="fax" [(ngModel)]="customer.fax" #fax="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Fax No.:</label>
+                                                <div class="col-sm-3">
+                                                    <select name="countryCodeFax" class="form-control" id="countryCodeFax" [(ngModel)]="customer.countryCodeFax" #countryCodeFax="ngModel">
+                                                        <option value="1">+60</option>
+                                                        <option value="0">+84</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="fax" [(ngModel)]="customer.fax" #fax="ngModel">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <h5>Mailing Address</h5>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Country</label>
+                                                <div class="col-sm-8">
+                                                    <select name="addressCountry" class="form-control" id="addressCountry" [(ngModel)]="customer.addressCountry" #addressCountry="ngModel">
+                                                        <option value="1">MY</option>
+                                                        <option value="2">VN</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">State/Province:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="addressState" class="form-control" id="addressState" [(ngModel)]="customer.addressState" #addressState="ngModel">
+                                                        <option value="1">KL</option>
+                                                        <option value="2">HN</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">City/Town/District:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="addressCity" [(ngModel)]="customer.addressCity" #addressCity="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Postal Code:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="addressPostalCode" [(ngModel)]="customer.addressPostalCode" #addressCity="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Address:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="address" [(ngModel)]="customer.address" #address="ngModel">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <h5>Billing Address</h5>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Country</label>
+                                                <div class="col-sm-8">
+                                                    <select name="addressBillingCountry" class="form-control" id="addressBillingCountry" [(ngModel)]="customer.addressBillingCountry"
+                                                            #addressBillingCountry="ngModel">
+                                                        <option value="1">MY</option>
+                                                        <option value="2">VN</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">State/Province:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="addressBillingState" class="form-control" id="addressBillingState" [(ngModel)]="customer.addressBillingState"
+                                                            #addressBillingState="ngModel">
+                                                        <option value="1">KL</option>
+                                                        <option value="2">HN</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">City/Town/District:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="addressBillingCity" [(ngModel)]="customer.addressBillingCity" #addressBillingCity="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Postal Code:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="addressBillingPostalCode" [(ngModel)]="customer.addressBillingPostalCode" #addressBillingPostalCode="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Address:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="addressBilling" [(ngModel)]="customer.addressBilling" #addressBilling="ngModel">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End First tab content -->
+                        <!-- Second tab content -->
+                        <div class="tab-pane fade" id="other">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">First Language Preference </label>
+                                                <div class="col-sm-8">
+                                                    <select name="firstLanguage" class="form-control" id="firstLanguage" [(ngModel)]="customer.firstLanguage" #firstLanguage="ngModel">
+                                                        <option value="1">B.MALAYSIA</option>
+                                                        <option value="2">ENGLISH</option>
+                                                        <option value="3">MANDARIN</option>
+                                                        <option value="4">TAMIL</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Second Language Preference:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="secondLanguage" class="form-control" id="secondLanguage" [(ngModel)]="customer.secondLanguage" #secondLanguage="ngModel">
+                                                        <option value="1">B.MALAYSIA</option>
+                                                        <option value="2">ENGLISH</option>
+                                                        <option value="3">MANDARIN</option>
+                                                        <option value="4">TAMIL</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Receive Vehicle Collection SMS: </label>
+                                                <div class="col-sm-8">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rVerhicleCollectionSMS" id="rVerhicleCollectionSMS" class="styled"
+                                                               [(ngModel)]="customer.rVerhicleCollectionSMS" [value]="true">
+                                                        Yes
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rVerhicleCollectionSMS" class="styled"
+                                                               [(ngModel)]="customer.rVerhicleCollectionSMS" [value]="false">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Receive Vehicle Reminder SMS:</label>
+                                                <div class="col-sm-8">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rVerhicleReminderSMS" id="rVerhicleReminderSMS" class="styled"
+                                                               [(ngModel)]="customer.rVerhicleReminderSMS" [value]="true">
+                                                        Yes
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rVerhicleReminderSMS" class="styled"
+                                                               [(ngModel)]="customer.rVerhicleReminderSMS" [value]="false">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Receive Campain SMS</label>
+                                                <div class="col-sm-8">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rCampainSMS" id="rCampainSMS" class="styled"
+                                                               [(ngModel)]="customer.rCampainSMS" [value]="true">
+                                                        Yes
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rCampainSMS" class="styled"
+                                                               [(ngModel)]="customer.rCampainSMS" [value]="false">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Receive Product/Service/Promotion Information:</label>
+                                                <div class="col-sm-8">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rProductInformation" id="rProductInformation" class="styled"
+                                                               [(ngModel)]="customer.rProductInformation" [value]="true">
+                                                        Yes
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rProductInformation" class="styled"
+                                                               [(ngModel)]="customer.rProductInformation" [value]="false">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">1st preferred channel of communication:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="firstContactPreference" class="form-control" id="firstContactPreference" [(ngModel)]="customer.firstContactPreference"
+                                                            #firstContactPreference="ngModel">
+                                                        <option value="1">EMAIL</option>
+                                                        <option value="2">SMS</option>
+                                                        <option value="3">PHONE CALL</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">2nd preferred channel of communication:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="secondContactPreference" class="form-control" id="secondContactPreference" [(ngModel)]="customer.secondContactPreference"
+                                                            #secondContactPreference="ngModel">
+                                                        <option value="1">EMAIL</option>
+                                                        <option value="2">SMS</option>
+                                                        <option value="3">PHONE CALL</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

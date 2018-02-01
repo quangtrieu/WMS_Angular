@@ -1,0 +1,44 @@
+<div id="appointmentBoard-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Appointment Board</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="table-appointment-board overflow" *ngIf="appointmentBoard.length">
+                            <table class="table table-bordered table-custom">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center bay-collumn crossed">
+                                            <label class="pull-left">SA</label>
+                                            <label class="pull-right">Time</label>
+                                        </th>
+                                        <th class="text-center {{ (item.isBreakTime) ? 'bay-collumn-h1': ''}}"  *ngFor="let item of timeSlot">
+                                            {{ item.startTime }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let itemAppointment of appointmentBoard">
+                                        <td class="text-center bay-collumn">
+                                            {{itemAppointment.name}}
+                                        </td>
+                                        <td class="text-center {{ (item.isBreakTime) ? 'bay-collumn-h1': ''}}" *ngFor="let item of itemAppointment.timeSlot">
+                                            {{item.registrationNo}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

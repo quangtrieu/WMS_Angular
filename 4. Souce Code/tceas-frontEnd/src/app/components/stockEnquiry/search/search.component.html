@@ -1,0 +1,101 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Stock Enquiry</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active">Stock Enquiry</li>
+        </ul>
+
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form #frmCustomer="ngForm" (ngSubmit)="addUpdate(customer)" class="form-horizontal" role="form">
+        <input type="hidden" name="id" [(ngModel)]="customer.id" #id="ngModel" />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Part: </label>
+                        <div class="col-sm-8">
+                            <select name="customerType" class="form-control" (change)="toggle()" required [(ngModel)]="customer.customerType" #customerType="ngModel"
+                                id="customerType">
+                                            <option value="0">E001</option>
+                                            <option value="1">E002</option>
+                                        </select>
+                            <label class="error" *ngIf="customerType.errors && customerType.errors.required && (customerType.dirty || customerType.touched || frmCustomer._submitted)">
+                                            Part is required
+                                        </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-sm btn-info mg-button" [disabled]="!frmCustomer.form.valid" (click)="frmCustomer.ngSubmit.emit()">Search</button>
+                </div>
+                <table class="table table-bordered dataTable no-footer" role="grid" aria-describedby="DataTables_Table_1_info">
+                    <thead>
+                        <tr>
+                            <th class="collumn-checkbox">
+                                <div class=""><span class="checked"><input type="checkbox" class="styled" (click)="onCheckAll()" id="chkAll"></span></div>
+                            </th>
+                            <th class="{{ sortedColumn.columnName == 'registrationNo' ? sortedColumn.classActive: 'sorting' }}" (click)="onSortColumn('registrationNo', sortedColumn.isAsc)">Part</th>
+                            <th class="{{ sortedColumn.columnName == 'customerName' ? sortedColumn.classActive: 'sorting' }}" (click)="onSortColumn('customerName', sortedColumn.isAsc)">On Hand Qty</th>
+                            <th class="{{ sortedColumn.columnName == 'vehicleMake' ? sortedColumn.classActive: 'sorting' }}" (click)="onSortColumn('vehicleMake', sortedColumn.isAsc)">Reserved Qty</th>
+                            <th class="{{ sortedColumn.columnName == 'vehicleModel' ? sortedColumn.classActive: 'sorting' }}" (click)="onSortColumn('vehicleModel', sortedColumn.isAsc)">Available Qty</th>
+                            <th class="{{ sortedColumn.columnName == 'modelVariant' ? sortedColumn.classActive: 'sorting' }}" (click)="onSortColumn('modelVariant', sortedColumn.isAsc)">Workshop</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Filter" id="txtRegistrationNo" name="registrationNo" [(ngModel)]="vehicle.registrationNo"
+                                />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Filter" id="txtCustomerName" name="customerName" [(ngModel)]="vehicle.customerName"
+                                />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Filter" id="txtVehicleMake" name="vehicleMake" [(ngModel)]="vehicle.vehicleMake"
+                                />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Filter" id="txtVehicleModel" name="vehicleModel" [(ngModel)]="vehicle.vehicleModel"
+                                />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Filter" id="txtvehicleVariant" name="vehicleVariant" [(ngModel)]="vehicle.vehicleVariant"
+                                />
+                            </td>
+
+                        </tr>
+                        <tr *ngFor="let item of vehicleList">
+                            <td>
+                                <div class="">
+                                    <span class="checked">
+                                        <input type="checkbox" name="checkRow" class="styled chk" (click)="onRowChecked()" value="{{ item.id }}">
+                                    </span>
+                                </div>
+                            </td>
+                            <td><a routerLink="/vehicle/Update/{{ item.id }}"> {{ item.registrationNo }} </a></td>
+                            <td> {{ item.customerName }}</td>
+                            <td> {{ item.vehicleMake }}</td>
+                            <td> {{ item.vehicleModel }}</td>
+                            <td> {{ item.modelVariant }}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>

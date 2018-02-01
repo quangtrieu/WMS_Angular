@@ -1,0 +1,12 @@
+.panel .table-bordered > thead > tr:first-child > th, .panel .table-responsive > .table-bordered > thead > tr:first-child > th, 
+.panel .table-bordered > tbody > tr:first-child > td, .panel .table-responsive > .table-bordered > tbody > tr:first-child > td {
+    border-bottom: 1px solid #ddd;
+}
+
+.input-margin {
+    padding-right: 0px;
+}
+
+.button-margin {
+    margin-top: 4px;
+}

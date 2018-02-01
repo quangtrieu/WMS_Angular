@@ -1,0 +1,49 @@
+
+<div id="service-package-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+        
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4  class="modal-title">Service Package import</h4>
+                </div>
+            <form class="form-horizontal" role="form" action="#" (submit)="addUpdate()">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Download Template: </label>
+                            <div class="col-sm-4">
+                                <button (click)="onClickDownload()" type="button" class="btn btn-right-icon btn-danger"><span data-icon="&#xe26a;"></span> Download</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Styled file input: </label>
+                            <div class="col-sm-7">
+                                <div class="uploader"><input type="file" id="filePath" name="filePath" class="styled" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" ><span class="filename" style="user-select: none;" >No file selected</span>
+                                    <span
+                                        class="action" style="user-select: none;">Upload File
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                    <button (click)="onClickUpload()" type="button" class="btn btn-sm btn-info pull-right mg-button"><span data-icon="&#xe259;"></span> Upload</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="col-sm-3 control-label">Total package uploaded: </label>
+                                <div class="col-sm-3">
+                                    <input type="text" value={{obj.indexsuccess}} readonly>
+                                </div>
+                            </div>
+                        <div class="form-group">
+                                <label class="col-sm-3 control-label">Total fail package: </label>
+                                <div class="col-sm-3">
+                                    <input type="text" value={{obj.indexerror}} readonly>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

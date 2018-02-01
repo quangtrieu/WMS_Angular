@@ -1,0 +1,508 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!customer.id">Customer - Add</h3>
+            <h3 *ngIf="customer.id">Customer - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li class="active">Customer</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-primary pull-right mg-button" [disabled]="!frmCustomer.form.valid" (click)="frmCustomer.ngSubmit.emit()">{{'BUTTON_SAVE' | translate}}</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button" routerLink="/customer/Search">Back</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form #frmCustomer="ngForm" (ngSubmit)="addUpdate(customer)" class="form-horizontal scroll-data" role="form">
+        <input type="hidden" name="id" [(ngModel)]="customer.id" #id="ngModel" />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="tabbable page-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="tables_dynamic.html#general" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i>General Info</a>
+                        </li>
+                        <li>
+                            <a href="tables_dynamic.html#other" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i>Other</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- First tab content -->
+                        <div class="tab-pane active fade in" id="general">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Customer Code:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="code" id="code" [(ngModel)]="customer.code" required #code="ngModel">
+                                                    <label class="error" *ngIf="code.errors && code.errors.required && (code.dirty || code.touched || frmCustomer._submitted)">
+                                                        Customer code is required
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Customer Name
+                                                    <span class="red">*</span>: </label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="name" id="name" [(ngModel)]="customer.name" required #name="ngModel" maxlength="50">
+                                                    <label class="error" *ngIf="name.errors && name.errors.required && (name.dirty || name.touched || frmCustomer._submitted)">
+                                                        Customer name is required
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Customer Type
+                                                    <span class="red">*</span>: </label>
+                                                <div class="col-sm-8">
+                                                    <!-- <select name="customerType" class="form-control" (change)="toggle()" required [(ngModel)]="customer.customerType" #customerType="ngModel"
+                                                        id="customerType">
+                                                        <option value="0">Individual</option>
+                                                        <option value="1">Corporate</option>
+                                                    </select> -->
+                                                    <p-dropdown [options]="customerTypeObjects" [style]="{'width': '100%'}" #customerType [(ngModel)]="customer.customerType"
+                                                        name="customerType" styleClass="ui-column-filter ui-dropdow-custom" placeholder="----- SELECT -----">
+                                                    </p-dropdown>
+                                                    <label class="error" *ngIf="customerType.errors && customerType.errors.required && (customerType.dirty || customerType.touched || frmCustomer._submitted)">
+                                                        Customer type is required
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">ID Type
+                                                    <span class="red">*</span>: </label>
+                                                <div class="col-sm-8">
+                                                    <!-- <select id="idType" name="idType" class="form-control" [(ngModel)]="customer.pdIdTypeId" #idType="ngModel">
+                                                        <option *ngFor="let item of pdData.idType" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select> -->
+                                                    <p-dropdown [options]="pdIdType" [style]="{'width': '100%'}" #pdIdTypeId [(ngModel)]="customer.pdIdTypeId" name="pdIdTypeId"
+                                                        styleClass="ui-column-filter ui-dropdow-custom" placeholder="----- SELECT -----">
+                                                    </p-dropdown>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">ID No.
+                                                    <span class="red">*</span>: </label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="idNumber" id="idNumber" [(ngModel)]="customer.idNumber" #idNumber="ngModel">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div *ngIf="customer.id" class="form-group">
+                                                <label class="col-sm-4 control-label">Active : </label>
+                                                <div class="col-sm-8">
+                                                    <p-radioButton name="status" value="1" label="Yes" [(ngModel)]="customer.status" id="genderStatus"></p-radioButton>
+                                                    <p-radioButton name="status" value="0" label="No" [(ngModel)]="customer.status" id="genderStatus"></p-radioButton>
+                                                    <!-- <label class="radio-inline">
+                                                        <input type="radio" name="status" id="status" class="styled" [(ngModel)]="customer.status" [value]="true">
+                                                        Yes
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="status" id="status" class="styled" [(ngModel)]="customer.status" [value]="false">
+                                                        No
+                                                    </label> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="!type">
+                                                <label class="col-sm-4 control-label">Gender: </label>
+                                                <div class="col-sm-8">
+                                                    <p-radioButton name="gender" value="1" label="MALE" [(ngModel)]="customer.gender" id="genderMale"></p-radioButton>
+                                                    <p-radioButton name="gender" value="0" label="FEMALE" [(ngModel)]="customer.gender" id="genderFemale"></p-radioButton>
+                                                    <!-- <label class="radio-inline">
+                                                        <input type="radio" name="gender" class="styled" [(ngModel)]="customer.gender" [value]="1">
+                                                            MALE
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="gender" class="styled" [(ngModel)]="customer.gender" [value]="0">
+                                                            FEMALE
+                                                    </label> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="type">
+                                                <label class="col-sm-4 control-label">GST ID No:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="gstIdNo" id="gstIdNo">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="type">
+                                                <label class="col-sm-4 control-label">Is exclude from Tax: </label>
+                                                <div class="col-sm-8">
+                                                    <select name="excludeTax" class="form-control" id="excludeTax">
+                                                        <option value="1">YES</option>
+                                                        <option value="0">NO</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="!type">
+                                                <label class="col-sm-4 control-label">Salutation:</label>
+                                                <div class="col-sm-8">
+                                                    <!-- <select id="salutation" name="salutation" class="form-control" [(ngModel)]="customer.pdSalutationId" #salutation="ngModel">
+                                                        <option *ngFor="let item of pdData.salutation" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select> -->
+                                                    <p-dropdown [options]="pdSalutationList" [style]="{'width': '100%'}" #pdSalutationId [(ngModel)]="customer.pdSalutationId"
+                                                        name="pdSalutationId" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Race:</label>
+                                                <div class="col-sm-8">
+                                                    <!-- <select id="race" name="race" class="form-control" [(ngModel)]="customer.pdRaceId" #race="ngModel">
+                                                        <option *ngFor="let item of pdData.race" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select> -->
+                                                    <p-dropdown [options]="pdRaceList" [style]="{'width': '100%'}" #pdRaceId [(ngModel)]="customer.pdRaceId" name="pdRaceId"
+                                                        styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="!type">
+                                                <label class="col-sm-4 control-label">Occupation: </label>
+                                                <div class="col-sm-8">
+                                                    <!-- <select id="occupation" name="occupation" class="form-control" [(ngModel)]="customer.pdOccupationId" #race="ngModel">
+                                                        <option *ngFor="let item of pdData.occupation" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select> -->
+                                                    <p-dropdown [options]="pdOccupationList" [style]="{'width': '100%'}" #pdOccupationId [(ngModel)]="customer.pdOccupationId"
+                                                        name="pdOccupationId" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                    <!-- <select class="form-control" name="occupation" id="occupation" [(ngModel)]="customer.occupation" #occupation="ngModel">
+                                                        <option value="1">MANAGEMENT-TECHNICAL</option>
+                                                        <option value="2">EXECUTIVE-TECHNICAL</option>
+                                                        <option value="3">PROFESSIONAL-TECHNICAL</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group" [hidden]="!type">
+                                                <label class="col-sm-4 control-label">Employment Status: </label>
+                                                <div class="col-sm-8">
+                                                    <!-- <select id="employmentStatus" name="employmentStatus" class="form-control" [(ngModel)]="customer.pdEmploymentStatusId" #employmentStatus="ngModel">
+                                                        <option *ngFor="let item of pdData.employeeStatus" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select> -->
+                                                    <p-dropdown [options]="pdEmploymentStatusList" [style]="{'width': '100%'}" #pdEmploymentStatusId [(ngModel)]="customer.pdEmploymentStatusId"
+                                                        name="pdEmploymentStatusId" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Nationality: </label>
+                                                <div class="col-sm-8">
+                                                    <!-- <select id="nationality" name="nationality" class="form-control" [(ngModel)]="customer.pdCountryId" #nationality="ngModel">
+                                                        <option *ngFor="let item of pdData.country" [ngValue]="item.id">{{item.description}}</option>
+                                                    </select> -->
+                                                    <p-dropdown [options]="pdCountryList" [style]="{'width': '100%'}" #pdCountryId [(ngModel)]="customer.pdCountryId" name="pdCountryId"
+                                                        styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group" [hidden]="!type">
+                                                <label class="col-sm-4 control-label">Mobile No.:</label>
+                                                <div class="col-sm-3">
+                                                    <p-dropdown [options]="countryMobileObjects" [style]="{'width': '100%'}" #countryCodeMobile [(ngModel)]="customer.countryCodeMobile"
+                                                        name="countryCodeMobile" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                    <!-- <select name="countryCodeMobile" class="form-control" id="countryCodeMobile" [(ngModel)]="customer.countryCodeMobile" #countryCodeMobile="ngModel">
+                                                        <option value="1">+60</option>
+                                                        <option value="0">+84</option>
+                                                    </select> -->
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="contact" [(ngModel)]="customer.contact" #contact="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Office Tel No.: </label>
+                                                <div class="col-sm-3">
+                                                    <p-dropdown [options]="countryMobileObjects" [style]="{'width': '100%'}" #countryCodeOffice [(ngModel)]="customer.countryCodeOffice"
+                                                        name="countryCodeOffice" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                    <!-- <select name="countryCodeOffice" class="form-control" id="countryCodeOffice" [(ngModel)]="customer.countryCodeOffice" #countryCodeOffice="ngModel">
+                                                        <option value="1">+60</option>
+                                                        <option value="0">+84</option>
+                                                    </select> -->
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="officeTelNo" [(ngModel)]="customer.officeTelNo" #officeTelNo="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Extension:</label>
+                                                <div class="col-sm-3">
+                                                    &nbsp;
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="extension" [(ngModel)]="customer.extension" #extension="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">House Tel No.:</label>
+                                                <div class="col-sm-3">
+                                                    <p-dropdown [options]="countryMobileObjects" [style]="{'width': '100%'}" #countryCodeHouse [(ngModel)]="customer.countryCodeHouse"
+                                                        name="countryCodeHouse" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                    <!-- <select name="countryCodeHouse" class="form-control" id="countryCodeHouse" [(ngModel)]="customer.countryCodeHouse" #countryCodeHouse="ngModel">
+                                                        <option value="1">+60</option>
+                                                        <option value="0">+84</option>
+                                                    </select> -->
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="houseTelNo" [(ngModel)]="customer.houseTelNo" #houseTelNo="ngModel">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Email:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="email" [(ngModel)]="customer.email" #email="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Contact Person:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="contactPerson" id="contactPerson" [(ngModel)]="customer.contactPerson" #contactPerson="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Contact Person No.:</label>
+                                                <div class="col-sm-3">
+                                                    <select name="contactPersonNo" class="form-control" id="contactPersonNo" [(ngModel)]="customer.contactPersonNo" #contactPersonNo="ngModel">
+                                                        <option value="1">+60</option>
+                                                        <option value="0">+84</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="fax" [(ngModel)]="customer.fax" #fax="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Fax No.:</label>
+                                                <div class="col-sm-3">
+                                                    <select name="countryCodeFax" class="form-control" id="countryCodeFax" [(ngModel)]="customer.countryCodeFax" #countryCodeFax="ngModel">
+                                                        <option value="1">+60</option>
+                                                        <option value="0">+84</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" name="faxNumber" [(ngModel)]="customer.faxNumber" #faxNumber="ngModel">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <h5>Mailing Address</h5>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Country</label>
+                                                <div class="col-sm-8">
+                                                    <p-dropdown [options]="addressCountryObject" [style]="{'width': '100%'}" #addressCountry [(ngModel)]="customer.addressCountry"
+                                                        name="addressCountry" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                    <!-- <select name="addressCountry" class="form-control" id="addressCountry" [(ngModel)]="customer.addressCountry" #addressCountry="ngModel">
+                                                        <option value="1">MY</option>
+                                                        <option value="2">VN</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">State/Province:</label>
+                                                <div class="col-sm-8">
+                                                    <p-dropdown [options]="addressStateObject" [style]="{'width': '100%'}" #addressState [(ngModel)]="customer.addressState"
+                                                        name="addressState" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                    <!-- <select name="addressState" class="form-control" id="addressState" [(ngModel)]="customer.addressState" #addressState="ngModel">
+                                                        <option value="1">KL</option>
+                                                        <option value="2">HN</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">City/Town/District:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="addressCity" [(ngModel)]="customer.addressCity" #addressCity="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Postal Code:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="addressPostalCode" [(ngModel)]="customer.addressPostalCode" #addressPostalCode="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Address:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="address" [(ngModel)]="customer.address" #address="ngModel">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <h5>Billing Address</h5>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Country</label>
+                                                <div class="col-sm-8">
+                                                    <p-dropdown [options]="addressCountryObject" [style]="{'width': '100%'}" #addressBillingCountry [(ngModel)]="customer.addressBillingCountry"
+                                                        name="addressBillingCountry" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                    <!-- <select name="addressBillingCountry" class="form-control" id="addressBillingCountry" [(ngModel)]="customer.addressBillingCountry"
+                                                        #addressBillingCountry="ngModel">
+                                                        <option value="1">MY</option>
+                                                        <option value="2">VN</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">State/Province:</label>
+                                                <div class="col-sm-8">
+                                                    <p-dropdown [options]="addressStateObject" [style]="{'width': '100%'}" #addressBillingState [(ngModel)]="customer.addressBillingState"
+                                                        name="addressBillingState" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                    <!-- <select name="addressBillingState" class="form-control" id="addressBillingState" [(ngModel)]="customer.addressBillingState"
+                                                        #addressBillingState="ngModel">
+                                                        <option value="1">KL</option>
+                                                        <option value="2">HN</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">City/Town/District:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="addressBillingCity" [(ngModel)]="customer.addressBillingCity" #addressBillingCity="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Postal Code:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="addressBillingPostalCode" [(ngModel)]="customer.addressBillingPostalCode" #addressBillingPostalCode="ngModel">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Address:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="addressBilling" [(ngModel)]="customer.addressBilling" #addressBilling="ngModel">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End First tab content -->
+                        <!-- Second tab content -->
+                        <div class="tab-pane fade" id="other">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">First Language Preference </label>
+                                                <div class="col-sm-8">
+                                                    <!-- <select name="firstLanguage" class="form-control" id="firstLanguage" [(ngModel)]="customer.firstLanguage" #firstLanguage="ngModel">
+                                                        <option value="1">B.MALAYSIA</option>
+                                                        <option value="2">ENGLISH</option>
+                                                        <option value="3">MANDARIN</option>
+                                                        <option value="4">TAMIL</option>
+                                                    </select> -->
+                                                    <p-dropdown [options]="firstLanguageObject" [style]="{'width': '100%'}" #firstlanguageId [(ngModel)]="customer.firstlanguageId"
+                                                        name="firstlanguageId" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Second Language Preference:</label>
+                                                <div class="col-sm-8">
+                                                    <!-- <select name="secondLanguage" class="form-control" id="secondLanguage" [(ngModel)]="customer.secondLanguage" #secondLanguage="ngModel">
+                                                        <option value="1">B.MALAYSIA</option>
+                                                        <option value="2">ENGLISH</option>
+                                                        <option value="3">MANDARIN</option>
+                                                        <option value="4">TAMIL</option>
+                                                    </select> -->
+                                                    <p-dropdown [options]="secondLanguageObject" [style]="{'width': '100%'}" #secondLanguageId [(ngModel)]="customer.secondLanguageId"
+                                                        name="secondLanguageId" styleClass="ui-column-filter ui-dropdow-custom">
+                                                    </p-dropdown>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Receive Vehicle Collection SMS: </label>
+                                                <div class="col-sm-8">
+
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Receive Vehicle Reminder SMS:</label>
+                                                <div class="col-sm-8">
+
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Receive Campain SMS</label>
+                                                <div class="col-sm-8">
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Receive Product/Service/Promotion Information:</label>
+                                                <div class="col-sm-8">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">1st preferred channel of communication:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="firstContactPreference" class="form-control" id="firstContactPreference" [(ngModel)]="customer.firstContactPreference"
+                                                        #firstContactPreference="ngModel">
+                                                        <option value="1">EMAIL</option>
+                                                        <option value="2">SMS</option>
+                                                        <option value="3">PHONE CALL</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">2nd preferred channel of communication:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="secondContactPreference" class="form-control" id="secondContactPreference" [(ngModel)]="customer.secondContactPreference"
+                                                        #secondContactPreference="ngModel">
+                                                        <option value="1">EMAIL</option>
+                                                        <option value="2">SMS</option>
+                                                        <option value="3">PHONE CALL</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

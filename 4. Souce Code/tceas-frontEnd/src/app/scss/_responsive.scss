@@ -1,0 +1,69 @@
+
+/**********
+iPad 3
+**********/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+    .paging-per-page{
+        right: 128px;
+    }
+    .col-sm-8 {
+        .ui-autocomplete-input{
+            width: 92% !important;
+        }
+    }
+        
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+    .paging-per-page{
+        right: 130px;
+    }
+}
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) and (max-width: 1566px){
+    .paging-per-page{
+        right: 407px;
+    }
+    .col-sm-8 {
+        .ui-autocomplete-input{
+            width: 89% ;
+        }
+    }
+}
+@media only screen  and (min-width : 1566px) and (max-width: 1824px){
+    .paging-per-page{
+        right: 407px;
+    }
+    .col-sm-8 {
+        .ui-autocomplete-input{
+            width: 91% ;
+        }
+    }
+}
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px)  {
+    .paging-per-page{
+        right: 530px;
+    }
+    .col-sm-8 {
+        .ui-autocomplete-input{
+            width: 92% !important;
+        }
+    }
+}
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .paging-per-page{
+        top: 0px !important;
+        right: 0px !important;
+    }
+    .paging-entries{
+        top: 0px !important;
+    }
+    .col-sm-8 {
+        .ui-autocomplete-input{
+            width: 88% !important;
+        }
+    }
+}

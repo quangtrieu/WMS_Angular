@@ -1,0 +1,37 @@
+<div>
+	<!-- Page header -->
+	<div class="page-header">
+		<div class="page-title">
+			<h3>Dashboard</h3>
+		</div>
+	</div>
+	<!-- /page header -->
+	<!-- Breadcrumbs line -->
+	<div class="breadcrumb-line">
+		<ul class="breadcrumb">
+			<li>
+				<a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+			</li>
+		</ul>
+		<button type="button" class="btn btn-sm btn-default pull-right mg-button" (click)="openAppoimentBoardModal()">Appoiment Board</button>
+
+	</div>
+	<!-- /breadcrumbs line -->
+</div>
+<!--Receiveing Dashboard-->
+<receiveing-dashboard></receiveing-dashboard>
+<!--/Receiveing Dashboard-->
+
+<!--Service Summary Dashboard-->
+<!-- <serviceSummary-Dashboard></serviceSummary-Dashboard> -->
+<!--/Service Summary Dashboard-->
+
+<!--DTR Status Dashboard-->
+<!-- <dTRStatus-dashboard></dTRStatus-dashboard> -->
+<!--/DTR Status Dashboard-->
+
+<!--Warranty Claim Status Dashboard-->
+<!-- <warrantyClaimStatus-dashboard></warrantyClaimStatus-dashboard> -->
+<!--/Warranty Claim Status Dashboard-->
+
+<appointment-board></appointment-board>

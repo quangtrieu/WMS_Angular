@@ -1,0 +1,20 @@
+.panel .table-bordered > tbody > tr:first-child > td,
+.panel .table-bordered > thead > tr:first-child > th {
+    border-bottom: 1px solid #ddd;
+}
+
+.bay-collumn{
+    width: 100px;
+}
+
+.bay-collumn-h1{
+    background-color: gray;
+}
+
+table th.crossed {
+   background-image: linear-gradient(to top right,  transparent calc(50% - 1px), gray, transparent calc(50% + 1px)); 
+}
+
+.overflow {
+    overflow-x: scroll;
+}

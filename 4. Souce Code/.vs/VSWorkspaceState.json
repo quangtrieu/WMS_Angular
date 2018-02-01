@@ -1,0 +1,20 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\tceas-frontEnd",
+    "\\tceas-frontEnd\\src",
+    "\\tceas-frontEnd\\src\\app",
+    "\\tceas-frontEnd\\src\\app\\components",
+    "\\tceas-frontEnd\\src\\app\\components\\appointment",
+    "\\tceas-frontEnd\\src\\app\\components\\appointment\\addUpdate",
+    "\\tceas-frontEnd\\src\\app\\components\\appointment\\models",
+    "\\tceas-frontEnd\\src\\app\\components\\appointment\\search",
+    "\\tceas-frontEnd\\src\\app\\components\\workShop",
+    "\\tceas-frontEnd\\src\\app\\components\\workshopPersonnel",
+    "\\tceas-frontEnd\\src\\app\\components\\workshopPersonnel\\addUpdate",
+    "\\tceas-frontEnd\\src\\app\\components\\workshopPersonnel\\models",
+    "\\tceas-frontEnd\\src\\app\\components\\workshopPersonnel\\search"
+  ],
+  "SelectedNode": "\\tceas-frontEnd\\src\\app\\components\\workshopPersonnel\\models\\workshopPersonnel.model.ts",
+  "PreviewInSolutionExplorer": false
+}

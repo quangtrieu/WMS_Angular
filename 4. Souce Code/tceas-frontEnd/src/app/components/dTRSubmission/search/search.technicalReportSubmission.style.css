@@ -1,0 +1,8 @@
+.table-custom {
+    table-layout: fixed;
+    width: 2300px;
+}
+
+.collumn-checkbox {
+    width: 10px;
+}

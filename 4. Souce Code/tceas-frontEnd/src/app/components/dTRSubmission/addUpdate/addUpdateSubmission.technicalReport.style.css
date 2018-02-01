@@ -1,0 +1,7 @@
+.checkbx-margin-no-margin {
+    margin-left: 0px;
+}
+
+.panel .table-bordered > thead > tr:first-child > th, .panel .table-bordered > tbody > tr:first-child > td {
+    border-bottom: 1px solid #ddd;
+}

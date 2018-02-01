@@ -1,0 +1,67 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Customer - Search</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li>Customer</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons">
+                <i class="icon-menu2"></i>
+            </a>
+        </div>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+            <span data-icon="&#xe24c;"></span> {{'BUTTON_EXPORT' | translate}}</button>
+        <button (click)="onClickImportBtn(2)" data-toggle="modal" href="#import-modal" type="button" class="btn btn-sm btn-default pull-right mg-button">
+            <span data-icon="&#xe259;"></span> {{'BUTTON_IMPORT' | translate}}</button>
+        <button type="button" class="btn btn-sm btn-info pull-right mg-button" routerLink="/customer/Add">
+            <span data-icon="&#xe104;"></span> {{'BUTTON_ADD' | translate}}</button>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <import-common [import]="import"></import-common>
+    <p-dataTable [value]="customerList" scrollHeight="400px" [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [paginator]="true"
+        [responsive]="true" [stacked]="stacked" resizableColumns="true" columnResizeMode="expand" [totalRecords]="pager.totalRecords"
+        (onLazyLoad)="loadCustomerLazy($event)" scrollable="true" #dt>
+        <p-column header="{{ 'TBL_HEADER_NO' | translate }}" [style]="{'width': '40px'}">
+            <ng-template let-rowIndex="rowIndex" pTemplate="rowexpansion">
+                {{rowIndex + 1}}
+            </ng-template>
+        </p-column>
+        <p-column field="code" header="{{'LBL_CODE' | translate}}" [filter]="true" filterPlaceholder="Search" [sortable]="true">
+            <ng-template let-row="rowData" pTemplate type="body">
+                <a routerLink="/customer/Update/{{ row.id }}">{{row.code}}</a>
+            </ng-template>
+        </p-column>
+        <p-column field="name" header="{{'LBL_NAME' | translate}}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="idNumber" header="{{'LBL_ID_NO' | translate}}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="contact" header="{{'LBL_MOBILE_NO' | translate}}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="status" filterMatchMode="equals">
+            <ng-template pTemplate="filter" let-col pTemplate="header">
+                {{'LBL_ACTIVE' | translate}}
+                <p-dropdown [options]="statusObjects" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                    styleClass="ui-column-filter"></p-dropdown>
+            </ng-template>
+            <ng-template let-customer="rowData" pTemplate="body">
+                <span>{{ customer.status ? 'YES': 'NO' }}</span>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+    <div style="position: relative;">
+        <span class="paging-entries">
+            {{ 'PAGING_SHOWING' | translate }} {{ 1 + (pager.pageSize * (pager.currentPage - 1)) }} {{ 'PAGING_TO' | translate }} {{
+            pager.pageSize * pager.currentPage }} {{ 'PAGING_OF' | translate }} {{ pager.totalRecords }} {{ 'PAGING_ENTRIES'
+            | translate }}
+        </span>
+    </div>
+</div>

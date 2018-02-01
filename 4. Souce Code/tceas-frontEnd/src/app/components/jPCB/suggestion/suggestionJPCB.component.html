@@ -1,0 +1,57 @@
+<div id="suggestion-jpcb-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Bay Suggestion</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" action="#">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Bay*: </label>
+                                        <div class="col-sm-8">
+                                            <select name="select" class="form-control" [(ngModel)]="repairOrderBay.bayId" required #bayId="ngModel">
+                                                <option *ngFor="let item of bays" [ngValue]="item.id">{{item.code}}</option>
+                                             </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Start Date Time*: </label>
+                                        <div class="col-sm-8">
+                                            <input type="datetime-local" class="form-control" name="expectedStartDate" [(ngModel)]="repairOrderBay.expectedStartDate" required
+                                                #expectedStartDate="ngModel" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">End Date Time*: </label>
+                                        <div class="col-sm-8">
+                                            <input type="datetime-local" class="form-control" name="expectedEndDate" [(ngModel)]="repairOrderBay.expectedEndDate" required #expectedEndDate="ngModel"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <jPCB-table-view></jPCB-table-view>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal" (click)="confirmBay()">Confirm</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

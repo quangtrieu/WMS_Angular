@@ -1,0 +1,14 @@
+ <modal #confirmDeleteModal>
+        <modal-header>
+            <h4 class="modal-title"></h4>
+        </modal-header>
+        <modal-body style="border: none!important">
+            <div class="modal-body with-padding">
+                <p></p>
+            </div>
+        </modal-body>
+        <modal-footer>
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="confirmDeleteModal.dismiss()">NO</button>
+            <button type="button" class="btn btn-primary" (click)="confirmDelete()">YES</button>
+        </modal-footer>
+    </modal>

@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "",
+    "password": "",
+    "database": "tceas_log",
+    "host": "localhost",
+    "port" : "27017"
+  },
+  "production": {
+    "username": "",
+    "password": "",
+    "database": "tceas_log",
+    "host": "localhost",
+    "port" : "27017"
+  }
+}

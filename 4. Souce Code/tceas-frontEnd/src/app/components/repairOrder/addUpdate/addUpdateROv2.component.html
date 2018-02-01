@@ -1,0 +1,1024 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!repairOrder.isUpdate">Add New Repair Order<small>Management all information's Job group</small></h3>
+            <h3 *ngIf="repairOrder.isUpdate">Update Repair Order<small>Management all information's Job group</small></h3>
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <<div class="row">
+            <div class="col-md-3">
+                <ul class="breadcrumb">
+                    <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+                    <li class="active">Repair Order</li>
+                    <li *ngIf="repairOrder.isUpdate" class="active">Update RO</li>
+                    <li *ngIf="!repairOrder.isUpdate" class="active">Add New RO</li>
+                </ul>
+            </div>
+            <div class="col-md-5">
+                <ul id="breadcrumbs-two" style="margin-top: 4px;">
+                    <li><a class="progress-active">Repair Order Create</a></li>
+                    <li><a>Part Fulfilment</a></li>
+                    <li><a>Resource Allocation</a></li>
+                    <li><a>Invoice</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-sm btn-default pull-right mg-button btn-default">Cancel</button>
+                <button type="button" class="btn btn-sm btn-default pull-right mg-button btn-default">Back</button>
+                <button type="button" class="btn btn-sm btn-default pull-right mg-button btn-success">Print</button>
+                <button *ngIf="repairOrder.isUpdate" type="button" class="btn btn-sm btn-default pull-right mg-button btn-warning">Finalize</button>
+                <button type="submit" class="btn btn-sm btn-default pull-right mg-button btn-primary">Save</button>
+                <button *ngIf="!repairOrder.isUpdate" type="button" class="btn btn-sm btn-default pull-right mg-button btn-warning">Save as draft</button>
+            </div>
+        </div>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <form class="form-horizontal" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <!-- Repair Order Header -->
+                <h5>Repair Order Header</h5>
+                <!-- Add new Repair Order Header -->
+                <div [hidden]="repairOrder.isUpdate">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Appointment No.:</label>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-btn">
+								<button class="btn btn-default" type="button"><span data-icon="&#xe0c2;"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Registration No.*: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" (keyup.enter)="openModal()">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Customer.*: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Make: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Model: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Model Variant: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <!--<div class="form-group">
+                                            <label class="col-sm-3 control-label">Date Time in </label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" type="date" name="date">
+                                            </div>
+                                        </div>-->
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Date Time in </label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="datetime-local" name="datetime-local">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Expected Delivery Date Time: </label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="datetime-local" name="datetime-local">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Customer waiting?</label>
+                                <div class="col-sm-7">
+                                    <label class="checkbox-inline">
+										                    <input type="checkbox" class="styled">
+										                        Yes
+									                    </label>
+                                    <label class="checkbox-inline">
+										                    <input type="checkbox" class="styled">
+										                        No
+									                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Mobile phone No:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">VIN Number</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Chassis Number: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Previous Milleage (km): </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Current Milleage (km):</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Add new Repair Order Header -->
+
+                <!-- Add Update Repair Order Header -->
+                <div [hidden]="!repairOrder.isUpdate">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Repair Order No: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Status: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Appointment No.:</label>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-btn">
+								<button class="btn btn-default" type="button"><span data-icon="&#xe0c2;"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Registration No.*:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Customer.*: </label>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-btn">
+								<button class="btn btn-default" type="button"><span data-icon="&#xe0c2;"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Model:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">VIN Number:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Current Milleage*(km):</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Expected Delivery Date Time: </label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="date" name="date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Repair Order Date:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Aging days:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Appointment Date: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Mobile phone No.:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Make:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Model Variant:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Chassis No.:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Previous Milleage (km):</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <!--<a class="col-sm-4 control-label" data-toggle="modal" href="#serviceHistory-modal">Service History</a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Add Update Repair Order Header -->
+
+                <!-- End Repair Order Header -->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Customer Request/Remarks:</label>
+                    <textarea rows="5" cols="5" class="text-box-margin form-control"></textarea>
+                </div>
+
+                <serviceHistory-addUpdate></serviceHistory-addUpdate>
+                <dialogNewvp-addUpdate></dialogNewvp-addUpdate>
+                <newvp-addUpdate></newvp-addUpdate>
+
+                <div class="tabbable page-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="tables_dynamic.html#inside" data-toggle="tab"><i class="icon-checkbox-partial"></i>Repair Order Details</a></li>
+                        <li><a href="tables_dynamic.html#outside" data-toggle="tab"><i class="icon-checkbox-partial"></i>Warranty</a></li>
+                        <li><a href="tables_dynamic.html#advanced" data-toggle="tab"><i class="icon-checkbox-partial"></i>Service History</a></li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <!-- First tab content -->
+                        <div class="tab-pane active fade in" id="inside">
+                            <form class="form-horizontal" role="form" action="#">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <!-- Entitlement -->
+                                        <h5>Entitlement :</h5>
+                                        <button type="button" class="btn btn-sm btn-success pull-right mg-button"><span data-icon="&#xe2aa;"></span> Select</button>
+                                        <div class="datatable-addUpdateRO">
+                                            <table class="table table-bordered table-custom table-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="collumn-checkbox">
+                                                            <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                                        </th>
+                                                        <th>Package Code</th>
+                                                        <th>Package Description</th>
+                                                        <th>Package type</th>
+                                                        <th>Effective from</th>
+                                                        <th>Effective to</th>
+                                                        <th>Total Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <thead>
+                                                    <tr>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" placeholder="Filter">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" placeholder="Filter">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" placeholder="Filter">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" placeholder="Filter">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" placeholder="Filter">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" placeholder="Filter">
+                                                        </td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                        </td>
+                                                        <td>16_PMS_100K</td>
+                                                        <td>PMS_40K DESC</td>
+                                                        <td>PMS</td>
+                                                        <td>30/06/2017</td>
+                                                        <td>08/07/2017</td>
+                                                        <td>9000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                        </td>
+                                                        <td>16_PMS_10K</td>
+                                                        <td>PERIODICAL MAINTENANCE</td>
+                                                        <td>PMS</td>
+                                                        <td>03/06/2017</td>
+                                                        <td>30/06/2017</td>
+                                                        <td>12000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                        </td>
+                                                        <td>16_PMS_20K</td>
+                                                        <td>PERIODICAL MAINTENANCE</td>
+                                                        <td>PMS</td>
+                                                        <td>03/06/2017</td>
+                                                        <td>02/07/2017</td>
+                                                        <td>3000</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <!-- End Entitlement -->
+
+                                        <!-- Job (Labour) -->
+                                        <h5 class="table-margin">Job (Labour)</h5>
+                                        <div class="row">
+                                            <button type="button" class="btn btn-sm btn-default mg-button pull-right"><span data-icon="&#xe158;"></span> Delete</button>
+                                            <button type="button" class="btn btn-sm btn-info mg-button pull-right" data-toggle="modal" href="#jobLaBour-modal"><span data-icon="&#xe104;"></span> Add</button>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Job Group: </label>
+                                                    <div class="col-sm-9">
+                                                        <select name="select" class="form-control" (change)="toggle()">
+                                    <option value="individual">Row</option>
+                                    <option value="corporate">Row</option>
+                                </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Section: </label>
+                                                    <div class="col-sm-9">
+                                                        <select name="select" class="form-control">
+                                    <option value="individual">Row</option>
+                                    <option value="corporate">Row</option>
+                                </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Job Code:</label>
+                                                    <div class="col-sm-9">
+                                                        <select name="select" class="form-control">
+                                    <option value="individual">Row</option>
+                                    <option value="corporate">Row</option>
+                                </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="datatable-addUpdateRO">
+                                            <table class="table table-bordered table-custom table-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="collumn-checkbox">
+                                                            <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                                        </th>
+                                                        <th>Package Code</th>
+                                                        <th>Job Code</th>
+                                                        <th>Job Description</th>
+                                                        <th>Type</th>
+                                                        <th>Work Place</th>
+                                                        <th>Status</th>
+                                                        <th>Flat Rate</th>
+                                                        <th>Labour Charge</th>
+                                                        <th>Discount %</th>
+                                                        <th>Discount Amt</th>
+                                                        <th>Sub-Total</th>
+                                                        <th>Goodwill %</th>
+                                                        <th>Goodwill Amt</th>
+                                                        <th>Net Amt</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                        </td>
+                                                        <td>16_PMS_10K</td>
+                                                        <td>JC00010K</td>
+                                                        <td>ENGINE MECHANICAL</td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                    <option value="opt1">Customer Cash</option>
+                                                    <option value="opt2">Warranty</option>
+                                                    <option value="opt2">Internal Goodwill</option>
+                                                </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                    <option value="opt1">In-house</option>
+                                                    <option value="opt2">Sublet</option>
+                                                </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                    <option value="opt1">New</option>
+                                                    <option value="opt2">WIP</option>
+                                                    <option value="opt1">On-hold</option>
+                                                    <option value="opt2">Done</option>
+                                                </select>
+                                                        </td>
+                                                        <td>10</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                        </td>
+                                                        <td>16_PMS_20K</td>
+                                                        <td>JC00020K</td>
+                                                        <td>ENGINE MECHANICAL</td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                    <option value="opt1">Customer Cash</option>
+                                                    <option value="opt2">Warranty</option>
+                                                    <option value="opt2">Internal Goodwill</option>
+                                                </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                    <option value="opt1">In-house</option>
+                                                    <option value="opt2">Sublet</option>
+                                                </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                    <option value="opt1">New</option>
+                                                    <option value="opt2">WIP</option>
+                                                    <option value="opt1">On-hold</option>
+                                                    <option value="opt2">Done</option>
+                                                </select>
+                                                        </td>
+                                                        <td>15</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                        </td>
+                                                        <td>16_PMS_40K</td>
+                                                        <td>JC00040K</td>
+                                                        <td>ENGINE MECHANICAL</td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                    <option value="opt1">Customer Cash</option>
+                                                    <option value="opt2">Warranty</option>
+                                                    <option value="opt2">Internal Goodwill</option>
+                                                </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                    <option value="opt1">In-house</option>
+                                                    <option value="opt2">Sublet</option>
+                                                </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                    <option value="opt1">New</option>
+                                                    <option value="opt2">WIP</option>
+                                                    <option value="opt1">On-hold</option>
+                                                    <option value="opt2">Done</option>
+                                                </select>
+                                                        </td>
+                                                        <td>20</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- End Job (Labour) -->
+                                        <jobLabour-addUpdate></jobLabour-addUpdate>
+
+                                        <!-- Part -->
+                                        <h5 class="table-margin">Part</h5>
+                                        <div class="row">
+                                            <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe158;"></span> Delete</button>
+                                            <button type="button" class="btn btn-sm btn-info pull-right mg-button" data-toggle="modal" href="#part-modal"><span data-icon="&#xe104;"></span> Add</button>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Part Group: </label>
+                                                    <div class="col-sm-9">
+                                                        <select name="select" class="form-control">
+                                    <option value="individual">Row</option>
+                                    <option value="corporate">Corporate</option>
+                                </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Part Code: </label>
+                                                    <div class="col-sm-9">
+                                                        <select name="select" class="form-control">
+                                    <option value="individual">Row</option>
+                                    <option value="corporate">Corporate</option>
+                                </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="datatable-addUpdateRO">
+                                            <table class="table table-bordered table-custom table-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="collumn-checkbox">
+                                                            <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                                        </th>
+                                                        <th>Package Code</th>
+                                                        <th>Job Code</th>
+                                                        <th>Job Description</th>
+                                                        <th>UOM</th>
+                                                        <th>Request Qty</th>
+                                                        <th>Unit Price</th>
+                                                        <th>Type</th>
+                                                        <th>Part Source</th>
+                                                        <th>Discount %</th>
+                                                        <th>Discount Amt</th>
+                                                        <th>Available Qty</th>
+                                                        <th>Fullfill Qty</th>
+                                                        <th>Back Order</th>
+                                                        <th>Sub-Total</th>
+                                                        <th>Goodwill %</th>
+                                                        <th>Goodwill Amt</th>
+                                                        <th>Net Amt</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                        </td>
+                                                        <td>16_PMS_10K</td>
+                                                        <td>JC00010K</td>
+                                                        <td>ENGINE MECHANICAL</td>
+                                                        <td>10</td>
+                                                        <td>1</td>
+                                                        <td>10000</td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                <option value="opt1">Customer Cash</option>
+                                                <option value="opt2">Warranty</option>
+                                                <option value="opt2">Internal Goodwill</option>
+                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                <option value="opt1">Customer</option>
+                                                <option value="opt2">SPC</option>
+                                                <option value="opt2">Sublet</option>
+                                            </select>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                        </td>
+                                                        <td>16_PMS_20K</td>
+                                                        <td>JC00020K</td>
+                                                        <td>ENGINE MECHANICAL</td>
+                                                        <td>20</td>
+                                                        <td>1</td>
+                                                        <td>20000</td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                <option value="opt1">Customer Cash</option>
+                                                <option value="opt2">Warranty</option>
+                                                <option value="opt2">Internal Goodwill</option>
+                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                <option value="opt1">Customer</option>
+                                                <option value="opt2">SPC</option>
+                                                <option value="opt2">Sublet</option>
+                                            </select>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                        </td>
+                                                        <td>16_PMS_40K</td>
+                                                        <td>JC00040K</td>
+                                                        <td>ENGINE MECHANICAL</td>
+                                                        <td>24</td>
+                                                        <td>1</td>
+                                                        <td>40000</td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                <option value="opt1">Customer Cash</option>
+                                                <option value="opt2">Warranty</option>
+                                                <option value="opt2">Internal Goodwill</option>
+                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                <option value="opt1">Customer</option>
+                                                <option value="opt2">SPC</option>
+                                                <option value="opt2">Sublet</option>
+                                            </select>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- End Part -->
+                                        <part-addUpdate></part-addUpdate>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- End First tab content -->
+
+                        <!-- Second tab content -->
+                        <div class="tab-pane fade" id="outside">
+                            <form class="form-horizontal" role="form" action="#">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <!--Warranty-->
+                                        <div class="datatable-addUpdateROautowidth">
+                                            <table class="table table-bordered table-custom-no table-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Item code (Job/Part)</th>
+                                                        <th>Description</th>
+                                                        <th>Type</th>
+                                                        <th>Qty</th>
+                                                        <th>Supplier</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                <option value="opt1">Job</option>
+                                                <option value="opt2">Part</option>
+                                            </select>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                <option value="opt1">Job</option>
+                                                <option value="opt2">Part</option>
+                                            </select>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>
+                                                            <select name="select" class="form-control">
+                                                <option value="opt1">Job</option>
+                                                <option value="opt2">Part</option>
+                                            </select>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group  pull-right">
+                                                    <label class="col-sm-5 control-label">Total Claim Amt</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button type="button" routerLink="/trSubmission/Search" class="btn btn-info">Create DTR</button>
+                                            </div>
+                                        </div>
+                                        <h5>Previous Claim Part</h5>
+                                        <div class="datatable-addUpdateROautowidth">
+                                            <table class="table table-bordered table-custom-no table-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Part Code</th>
+                                                        <th>Part Description</th>
+                                                        <th>Qty</th>
+                                                        <th>Warranty Claim No</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!--End Warranty-->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- End Second tab content -->
+
+                        <!-- Third tab content -->
+                        <div class="tab-pane fade" id="advanced">
+
+                            <form class="form-horizontal" role="form" action="#">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        
+                                        <div class="datatable-addUpdateROautowidth">
+                                            <table class="table table-bordered table-custom-no table-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>RO No</th>
+                                                        <th>RO date</th>
+                                                        <th>Invoice No</th>
+                                                        <th>Invoice date</th>
+                                                        <th>Invoice Amount</th>
+                                                        <th>Workshop</th>
+                                                        <th>Job</th>
+                                                        <th>Part</th>
+                                                        <th>Milleage*(km):</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>RO00001</td>
+                                                        <td>1/1/2017</td>
+                                                        <td>INV00001</td>
+                                                        <td>1/1/2017</td>
+                                                        <td>WS00001</td>
+                                                        <td>10000</td>
+                                                        <td>1/1/2017</td>
+                                                        <td>WS00001</td>
+                                                        <td>10000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>RO00001</td>
+                                                        <td>1/1/2017</td>
+                                                        <td>INV00001</td>
+                                                        <td>1/1/2017</td>
+                                                        <td>1/1/2017</td>
+                                                        <td>WS00001</td>
+                                                        <td>10000</td>
+                                                        <td>WS00001</td>
+                                                        <td>10000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>RO00001</td>
+                                                        <td>1/1/2017</td>
+                                                        <td>INV00001</td>
+                                                        <td>1/1/2017</td>
+                                                        <td>1/1/2017</td>
+                                                        <td>WS00001</td>
+                                                        <td>10000</td>
+                                                        <td>WS00001</td>
+                                                        <td>10000</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Summary -->
+                <h5 class="table-margin">Summary:</h5>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Total Labour Charge: </label>
+                            <div class="col-sm-5">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Labour Discount: </label>
+                            <div class="col-sm-5">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Total Part Amt: </label>
+                            <div class="col-sm-5">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Part Discount: </label>
+                            <div class="col-sm-5">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Additional Discount:</label>
+                            <div class="col-sm-5">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Total Goodwill Amt</label>
+                            <div class="col-sm-5">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Total Before Tax Amt:</label>
+                            <div class="col-sm-5">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Sales Tax amt </label>
+                            <div class="col-sm-5">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">Total After Tax Amt: </label>
+                            <div class="col-sm-5">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 summary-margin">
+                    </div>
+                </div>
+                <!-- End Summary -->
+                <div class="form-actions text-right panel-heading footer-margin">
+                    <button *ngIf="repairOrder.isUpdate" type="button" class="btn btn-warning">Save as draft</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button *ngIf="!repairOrder.isUpdate" type="button" class="btn btn-warning">Finalize</button>
+                    <button type="button" class="btn btn-success">Print</button>
+                    <button type="button" class="btn btn-default">Back</button>
+                    <button type="submit" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

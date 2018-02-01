@@ -1,0 +1,783 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!repairOrder.isUpdate">Repair Order - Add</h3>
+            <h3 *ngIf="repairOrder.isUpdate">Repair Order - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <div class="row">
+            <div class="col-md-2 title-padding-right">
+                <ul class="breadcrumb">
+                    <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+                    <li class="active">Repair Order</li>
+                </ul>
+            </div>
+            <div class="col-md-6 title-padding-left">
+                <ul id="breadcrumbs-two" style="margin-top: 4px;">
+                    <li><a class="progress-active">RO Created</a></li>
+                    <li><a>Resource Allocated</a></li>
+                    <li><a>Part Fulfilled</a></li>
+                    <li><a>Invoiced</a></li>
+                    <li><a>Delivered</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-actions text-right panel-heading">
+                    <button *ngIf="!repairOrder.isUpdate" type="button" class="btn btn-warning">Save as draft</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button *ngIf="repairOrder.isUpdate" type="button" routerLink="/invoice/Update/1" class="btn btn-warning">Finalize</button>
+                    <button *ngIf="repairOrder.isUpdate" type="button" class="btn btn-success">Print</button>
+                    <button type="button" class="btn btn-default">Back</button>
+                    <button type="submit" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /breadcrumbs line -->
+    <form class="form-horizontal scroll-data" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <!-- Add new Repair Order Header -->
+                <div [hidden]="repairOrder.isUpdate">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Appointment No.:</label>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><span data-icon="&#xe0c2;"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Registration No.*: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="vehicleRegistrationNo" [(ngModel)]="dummyData?.repairOrder.vehicle.vehicleRegistrationNo"
+                                           (keyup.enter)="openModal()">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Make: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="vehicleMake" [(ngModel)]="dummyData?.repairOrder.vehicle.vehicleMake">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Model: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="verhicleModel" [(ngModel)]="dummyData?.repairOrder.vehicle.verhicleModel">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Model Variant: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="modelVariant" [(ngModel)]="dummyData?.repairOrder.vehicle.modelVariant">
+                                </div>
+                            </div>
+
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Date Time in </label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="datetime-local" name="datetime-local" [(ngModel)]="dummyData?.repairOrder.dateTimeIn">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Expected Delivery Date Time: </label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="datetime-local" name="datetime-local">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Customer: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="customerName" [(ngModel)]="dummyData?.repairOrder.customer.customerName">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Mobile No.:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="mobilePhone" [(ngModel)]="dummyData?.repairOrder.customer.mobilePhone">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">VIN No.</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="vinNo" [(ngModel)]="dummyData?.repairOrder.vehicle.vinNo">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Chassis No.: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="chassisNo" [(ngModel)]="dummyData?.repairOrder.vehicle.chassisNo">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Previous Milleage (km): </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Current Milleage (km):</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Express Service?</label>
+                                <div class="col-sm-7">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" class="styled">
+                                        Yes
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" class="styled">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Customer waiting?</label>
+                                <div class="col-sm-7">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" class="styled">
+                                        Yes
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" class="styled">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Add new Repair Order Header -->
+                <!-- Add Update Repair Order Header -->
+                <div [hidden]="!repairOrder.isUpdate">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Repair Order No: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="repairOrderNo" [(ngModel)]="dummyData?.repairOrder.repairOrderNo">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Status: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="repairOrderStatus" [(ngModel)]="dummyData?.repairOrder.status">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Appointment No.:</label>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="appointmentNo" [(ngModel)]="dummyData?.repairOrder.appointmentNo">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><span data-icon="&#xe0c2;"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Registration No.*:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="vehicleRegistrationNo" [(ngModel)]="dummyData?.repairOrder.vehicle.vehicleRegistrationNo">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Customer.*: </label>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="customerName" [(ngModel)]="dummyData?.repairOrder.customer.customerName">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><span data-icon="&#xe0c2;"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Model:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="verhicleModel" [(ngModel)]="dummyData?.repairOrder.vehicle.verhicleModel">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">VIN Number:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="vinNo" [(ngModel)]="dummyData?.repairOrder.vehicle.vinNo">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Current Milleage*(km):</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Expected Delivery Date Time: </label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="datetime-local" name="datetime-local" name="expectedDeliveryDateTime" [(ngModel)]="dummyData?.repairOrder.expectedDeliveryDateTime">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Repair Order Date:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" type="datetime-local" name="datetime-local" [(ngModel)]="dummyData?.repairOrder.dateTimeIn">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Aging days:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Appointment Date: </label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Mobile phone No.:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="mobilePhone" [(ngModel)]="dummyData?.repairOrder.customer.mobilePhone">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Make:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="vehicleMake" [(ngModel)]="dummyData?.repairOrder.vehicle.vehicleMake">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Model Variant:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="modelVariant" [(ngModel)]="dummyData?.repairOrder.vehicle.modelVariant">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Chassis No.:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="chassisNo" [(ngModel)]="dummyData?.repairOrder.vehicle.chassisNo">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Previous Milleage (km):</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <!--<a class="col-sm-4 control-label" data-toggle="modal" href="#serviceHistory-modal">Service History</a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Add Update Repair Order Header -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Customer Request/Remarks:</label>
+                            <textarea rows="5" class="col-sm-10"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <serviceHistory-addUpdate></serviceHistory-addUpdate>
+                <dialogNewvp-addUpdate></dialogNewvp-addUpdate>
+                <newvp-addUpdate></newvp-addUpdate>
+
+                <div class="tabbable page-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="tables_dynamic.html#inside" data-toggle="tab"><i class="icon-checkbox-partial"></i> Repair Order Details</a></li>
+                        <li><a href="tables_dynamic.html#outside" data-toggle="tab"><i class="icon-checkbox-partial"></i>Warranty</a></li>
+                        <li><a href="tables_dynamic.html#advanced" data-toggle="tab"><i class="icon-checkbox-partial"></i>Service History</a></li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <!-- First tab content -->
+                        <div class="tab-pane active fade in" id="inside">
+                            <form class="form-horizontal" role="form" action="#">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <!-- Part -->
+                                        <h5>Products & Services</h5>
+                                        <div class="datatable">
+                                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper no-footer">
+                                                <div class="datatable-header">
+                                                    <div class="row">
+                                                        <div class="dataTables_length" id="DataTables_Table_1_length">
+                                                            <label>
+                                                                <button type="button" class="btn btn-sm btn-info pull-right mg-button pull-left" data-toggle="modal" href="#part-modal"><span data-icon="&#xe104;"></span> Add</button>
+                                                                <button type="button" class="btn btn-sm btn-default pull-right mg-button pull-left"><span data-icon="&#xe158;"></span> Delete</button>
+                                                                <span>Show:</span>
+                                                                <div class="select2-container" id="s2id_autogen3">
+                                                                    <a href="javascript:void(0)" class="select2-choice" tabindex="-1">
+                                                                        <span class="select2-chosen" id="select2-chosen-4">10</span>
+                                                                        <abbr class="select2-search-choice-close"></abbr>
+                                                                        <span class="select2-arrow" role="presentation">
+                                                                            <b role="presentation"></b>
+                                                                        </span>
+                                                                    </a>
+                                                                    <label for="s2id_autogen4" class="select2-offscreen"></label>
+                                                                    <input class="select2-focusser select2-offscreen" type="text" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-4"
+                                                                           id="s2id_autogen4">
+                                                                    <div class="select2-drop select2-display-none">
+                                                                        <div class="select2-search select2-search-hidden select2-offscreen">
+                                                                            <label for="s2id_autogen4_search" class="select2-offscreen"></label>
+                                                                            <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox"
+                                                                                   aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-4"
+                                                                                   id="s2id_autogen4_search" placeholder="">
+                                                                        </div>
+                                                                        <ul class="select2-results" role="listbox" id="select2-results-4"></ul>
+                                                                    </div>
+                                                                </div><select name="DataTables_Table_1_length" aria-controls="DataTables_Table_1"
+                                                                              class="select2-offscreen" tabindex="-1" title="">
+                                                                    <option value="10">10</option>
+                                                                    <option value="25">25</option>
+                                                                    <option value="50">50</option>
+                                                                    <option value="100">100</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="datatable-scroll">
+                                                    <table class="table table-bordered dataTable no-footer" id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="collumn-checkbox">
+                                                                    <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                                                </th>
+                                                                <th>Products & Services Code</th>
+                                                                <th>Description</th>
+                                                                <th>Type</th>
+                                                                <th>Qty</th>
+                                                                <th>Unit Price</th>
+                                                                <th>Discount Amt</th>
+                                                                <th>Payment Type</th>
+                                                                <th>Net Amount</th>
+                                                                <th>Request Warranty</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                                </td>
+                                                                <td><a (click)="onClick()">PMS10K</a></td>
+                                                                <td>PMS 10K</td>
+                                                                <td>Product</td>
+                                                                <td>1</td>
+                                                                <td>1000</td>
+                                                                <td></td>
+                                                                <td>Customer Cash</td>
+                                                                <td>1000</td>
+                                                                <td>
+                                                                    <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr [hidden]="type">
+                                                                <td style="visibility:hidden;"></td>
+                                                                <td style="visibility:hidden;"></td>
+                                                                <td>Item Code</td>
+                                                                <td colspan="2">Description</td>
+                                                                <td>Type</td>
+                                                                <td>Qty</td>
+                                                                <td>Unit Price</td>
+                                                                <td>Discount Amt</td>
+                                                                <td>Net Amt</td>
+                                                            </tr>
+                                                            <tr [hidden]="type">
+                                                                <td style="visibility:hidden;"></td>
+                                                                <td style="visibility:hidden;"></td>
+                                                                <td>L0001</td>
+                                                                <td colspan="2">Labour 01</td>
+                                                                <td>Labour</td>
+                                                                <td>1</td>
+                                                                <td>800</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr [hidden]="type">
+                                                                <td style="visibility:hidden;"></td>
+                                                                <td style="visibility:hidden;"></td>
+                                                                <td>L0001</td>
+                                                                <td colspan="2">Labour 01</td>
+                                                                <td>Labour</td>
+                                                                <td>1</td>
+                                                                <td>800</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                                                </td>
+                                                                <td><a>PMS10K</a></td>
+                                                                <td>PMS 10K</td>
+                                                                <td>Product</td>
+                                                                <td>1</td>
+                                                                <td>1000</td>
+                                                                <td></td>
+                                                                <td>Customer Cash</td>
+                                                                <td>1000</td>
+                                                                <td>
+                                                                    <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="datatable-footer">
+                                                    <div class="dataTables_info" id="DataTables_Table_1_info" role="status" aria-live="polite">Showing 1 to 10 of 12 entries</div>
+                                                    <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+                                                        <a class="paginate_button first disabled" aria-controls="DataTables_Table_1"
+                                                           data-dt-idx="0" tabindex="0" id="DataTables_Table_1_first">First</a>
+                                                        <a class="paginate_button previous disabled" aria-controls="DataTables_Table_1" data-dt-idx="1" tabindex="0" id="DataTables_Table_1_previous">&lt;</a><span><a class="paginate_button current" aria-controls="DataTables_Table_1" data-dt-idx="2" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_1" data-dt-idx="3" tabindex="0">2</a></span>
+                                                        <a class="paginate_button next" aria-controls="DataTables_Table_1" data-dt-idx="4" tabindex="0" id="DataTables_Table_1_next">&gt;</a>
+                                                        <a class="paginate_button last" aria-controls="DataTables_Table_1" data-dt-idx="5" tabindex="0" id="DataTables_Table_1_last">Last</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Part -->
+                                        <part-addUpdate></part-addUpdate>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- End First tab content -->
+                        <!-- Second tab content -->
+                        <div class="tab-pane fade" id="outside">
+                            <form class="form-horizontal" role="form" action="#">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <!--Warranty-->
+                                        <div class="datatable">
+                                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper no-footer">
+                                                <div class="datatable-scroll">
+                                                    <table class="table table-bordered dataTable no-footer" id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Product Code</th>
+                                                                <th>Description</th>
+                                                                <th>Qty</th>
+                                                                <th>Supplier</th>
+                                                                <th>Amount</th>
+                                                                <th>Status</th>
+                                                                <th>DTR</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group  pull-right">
+                                                    <label class="col-sm-5 control-label">Total Claim Amt</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h5>Previous Claim Part</h5>
+                                        <div class="datatable">
+                                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper no-footer">
+                                                <div class="datatable-scroll">
+                                                    <table class="table table-bordered dataTable no-footer" id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Part Code</th>
+                                                                <th>Part Description</th>
+                                                                <th>Qty</th>
+                                                                <th>Warranty Claim No</th>
+                                                                <th>Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                                <td>Row</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--End Warranty-->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- End Second tab content -->
+                        <!-- Third tab content -->
+                        <div class="tab-pane fade" id="advanced">
+                            <form class="form-horizontal" role="form" action="#">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <form class="form-horizontal" role="form" action="#">
+
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="datatable">
+                                                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper no-footer">
+                                                            <div class="datatable-header">
+                                                                <div class="dataTables_length" id="DataTables_Table_1_length">
+                                                                    <label>
+                                                                        <span>Show:</span>
+                                                                        <div class="select2-container" id="s2id_autogen3">
+                                                                            <a href="javascript:void(0)" class="select2-choice" tabindex="-1">
+                                                                                <span class="select2-chosen" id="select2-chosen-4">10</span>
+                                                                                <abbr class="select2-search-choice-close"></abbr>
+                                                                                <span class="select2-arrow" role="presentation">
+                                                                                    <b role="presentation"></b>
+                                                                                </span>
+                                                                            </a>
+                                                                            <label for="s2id_autogen4" class="select2-offscreen"></label>
+                                                                            <input class="select2-focusser select2-offscreen" type="text" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-4"
+                                                                                   id="s2id_autogen4">
+                                                                            <div class="select2-drop select2-display-none">
+                                                                                <div class="select2-search select2-search-hidden select2-offscreen">
+                                                                                    <label for="s2id_autogen4_search" class="select2-offscreen"></label>
+                                                                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox"
+                                                                                           aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-4"
+                                                                                           id="s2id_autogen4_search" placeholder="">
+                                                                                </div>
+                                                                                <ul class="select2-results" role="listbox" id="select2-results-4"></ul>
+                                                                            </div>
+                                                                        </div><select name="DataTables_Table_1_length" aria-controls="DataTables_Table_1"
+                                                                                      class="select2-offscreen" tabindex="-1" title="">
+                                                                            <option value="10">10</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="50">50</option>
+                                                                            <option value="100">100</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="datatable-scroll overflow">
+                                                                <table class="table table-bordered dataTable no-footer table-custom" id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="collumn-checkbox">No</th>
+                                                                            <th>RO No</th>
+                                                                            <th>RO date</th>
+                                                                            <th>Invoice No</th>
+                                                                            <th>Invoice date</th>
+                                                                            <th>Invoice Amount</th>
+                                                                            <th>Workshop</th>
+                                                                            <th>Job</th>
+                                                                            <th>Part</th>
+                                                                            <th>Milleage*(km):</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>1</td>
+                                                                            <td>RO00001</td>
+                                                                            <td>1/1/2017</td>
+                                                                            <td>INV00001</td>
+                                                                            <td>1/1/2017</td>
+                                                                            <td>WS00001</td>
+                                                                            <td>10000</td>
+                                                                            <td>1/1/2017</td>
+                                                                            <td>WS00001</td>
+                                                                            <td>10000</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>1</td>
+                                                                            <td>RO00001</td>
+                                                                            <td>1/1/2017</td>
+                                                                            <td>INV00001</td>
+                                                                            <td>1/1/2017</td>
+                                                                            <td>1/1/2017</td>
+                                                                            <td>WS00001</td>
+                                                                            <td>10000</td>
+                                                                            <td>WS00001</td>
+                                                                            <td>10000</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>1</td>
+                                                                            <td>RO00001</td>
+                                                                            <td>1/1/2017</td>
+                                                                            <td>INV00001</td>
+                                                                            <td>1/1/2017</td>
+                                                                            <td>1/1/2017</td>
+                                                                            <td>WS00001</td>
+                                                                            <td>10000</td>
+                                                                            <td>WS00001</td>
+                                                                            <td>10000</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="datatable-footer">
+                                                                <div class="dataTables_info" id="DataTables_Table_1_info" role="status" aria-live="polite">Showing 1 to 10 of 12 entries</div>
+                                                                <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+                                                                    <a class="paginate_button first disabled" aria-controls="DataTables_Table_1"
+                                                                       data-dt-idx="0" tabindex="0" id="DataTables_Table_1_first">First</a>
+                                                                    <a class="paginate_button previous disabled" aria-controls="DataTables_Table_1" data-dt-idx="1" tabindex="0" id="DataTables_Table_1_previous">&lt;</a><span><a class="paginate_button current" aria-controls="DataTables_Table_1" data-dt-idx="2" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_1" data-dt-idx="3" tabindex="0">2</a></span>
+                                                                    <a class="paginate_button next" aria-controls="DataTables_Table_1" data-dt-idx="4" tabindex="0" id="DataTables_Table_1_next">&gt;</a>
+                                                                    <a class="paginate_button last" aria-controls="DataTables_Table_1" data-dt-idx="5" tabindex="0" id="DataTables_Table_1_last">Last</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Summary -->
+                <h5 class="table-margin">Summary:</h5>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Total Labour Charge: </label>
+                            <div class="col-sm-4">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Labour Discount: </label>
+                            <div class="col-sm-4">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Total Part Amt: </label>
+                            <div class="col-sm-4">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Part Discount: </label>
+                            <div class="col-sm-4">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Additional Discount:</label>
+                            <div class="col-sm-4">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Total Goodwill Amt</label>
+                            <div class="col-sm-4">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Total Before Tax Amt:</label>
+                            <div class="col-sm-4">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group summary-margin-bottom">
+                            <label class="col-sm-6 control-label">Sales Tax amt </label>
+                            <div class="col-sm-4">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">Total After Tax Amt: </label>
+                            <div class="col-sm-4">
+                                <p class="form-control-static under-line">0</p>
+                            </div>
+                            <label class="control-label">MYR </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 summary-margin">
+                    </div>
+                </div>
+                <!-- End Summary -->
+                <div class="form-actions text-right panel-heading footer-margin">
+                    <button *ngIf="!repairOrder.isUpdate" type="button" class="btn btn-warning">Save as draft</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button *ngIf="repairOrder.isUpdate" type="button" class="btn btn-warning">Finalize</button>
+                    <button type="button" class="btn btn-success">Print</button>
+                    <button type="button" class="btn btn-default">Back</button>
+                    <button type="submit" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

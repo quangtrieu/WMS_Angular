@@ -1,0 +1,122 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Repair Order Search v2</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li>Repair Order</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+        </div>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe0f8;"></span> Print</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe27f;"></span> Copy</button>
+        <button type="button" class="btn btn-sm btn-info pull-right mg-button" routerLink="/repairOrder2/Add"><span data-icon="&#xe104;"></span> Add</button>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <div class="datatable-searchRO">
+
+        <table class="table table-bordered table-custom table-top">
+            <thead>
+                <tr>
+                    <th class="collumn-checkbox">
+                        <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                    </th>
+                    <th>RO Number</th>
+                    <th>RO Date</th>
+                    <th>Status</th>
+                    <th>Customer Name</th>
+                    <th>Vehicle Registration No</th>
+                    <th>Vehicle Model Desc</th>
+                    <th>Appointment No.</th>
+                    <th>Appointment Date</th>
+                    <th>Invoice No</th>
+                    <th>Invoice Date</th>
+                    <th>Aging (Days)</th>
+                    <th>Created by</th>
+                    <th>Modified By</th>
+                    <th>Modified Date time</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dummyData.repairOrderList">
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/repairOrder2/Update', item.repairOrderNo]">{{item.repairOrderNo}}</a></td>
+                    <td>{{item.dateTimeIn}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.customer.customerName}}</td>
+                    <td>{{item.vehicle.vehicleRegistrationNo}}</td>
+                    <td>{{item.vehicle.modelVariant}}</td>
+                    <td>{{item.appointmentNo}}</td>
+                    <td>{{item.appointmentDate}}</td>
+                    <td>{{item.invoiceNo}}</td>
+                    <td>{{item.invoiceDate}}</td>
+                    <td>{{item.agingDays}}</td>
+                    <td>{{item.createdBy}}</td>
+                    <td>{{item.modifiedBy}}</td>
+                    <td>{{item.modifiedDateTime}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

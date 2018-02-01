@@ -1,0 +1,547 @@
+<p-growl [(value)]="msgs"></p-growl>
+
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!repairOrder.isUpdate">Repair Order - Add</h3>
+            <h3 *ngIf="repairOrder.isUpdate">Repair Order Update </h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <form #frmRepairOrder="ngForm" (ngSubmit)="addUpdate(repairOrder)" class="form-horizontal" role="form">
+        <input type="hidden" name="id" [(ngModel)]="repairOrder.id" #id="ngModel" />
+        <!-- Breadcrumbs line -->
+        <div class="breadcrumb-line">
+            <div class="row">
+                <div class="col-md-2 title-padding-right">
+                    <ul class="breadcrumb">
+                        <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+                        <li class="active">Repair Order</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 title-padding-left">
+                    <ul id="breadcrumbs-two" style="margin-top: 4px;" *ngIf="repairOrder.isUpdate">
+                        <li><a class="progress-active">RO Created</a></li>
+                        <li><a>Resource Allocated</a></li>
+                        <li><a>Part Fulfilled</a></li>
+                        <li><a>Invoiced</a></li>
+                        <li><a>Delivered</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 pull-right">
+                    <div class="form-actions text-right panel-heading">
+                        <button type="button" *ngIf="repairOrder.isUpdate" [routerLink]="['/invoice/Add',2,1]" class="btn btn-warning">Finalize</button>
+                        <button *ngIf="repairOrder.isUpdate" type="button" class="btn btn-success">Print</button>
+                        <button type="button" routerLink="/repairOrder/Search" class="btn btn-default">Back</button>
+                        <button type="submit" class="btn btn-info" [disabled]="!frmRepairOrder.form.valid">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /breadcrumbs line -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Registration number.<span class="red">*</span>: </label>
+                        <div class="col-sm-8 has-feedback">
+                            <input type="text" id="vehicleRegistrationNo" class="form-control" name="vehicleRegistrationNo" required [(ngModel)]="repairOrder.vehicleRegistrationNo"
+                                #vehicleRegistrationNo="ngModel" (keyup.enter)="openPopupVehicle($event)" (keydown.Tab)="openPopupVehicle($event)"
+                            />
+                            <i class="icon-spinner7 spin form-control-feedback" *ngIf="isProcessing"></i>
+                            <label class="error" *ngIf="vehicleRegistrationNo.errors && vehicleRegistrationNo.errors.required && (vehicleRegistrationNo.dirty || vehicleRegistrationNo.touched || frmRepairOrder._submitted)">
+                                        Registration no is required
+                                    </label>
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Customer: </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="customerName" readonly [(ngModel)]="repairOrder.customerName" #customerName="ngModel"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Mobile No.:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="mobilePhoneNo" [(ngModel)]="repairOrder.mobilePhoneNo" #mobilePhoneNo="ngModel"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Sender: </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="customerName" required [(ngModel)]="repairOrder.customerName" #customerName="ngModel"
+                            />
+                            <label class="error" *ngIf="customerName.errors && customerName.errors.required && (customerName.dirty || customerName.touched || frmRepairOrder._submitted)">
+                                Customer name is required
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Sender Mobile No.:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="mobilePhone" [(ngModel)]="repairOrder.mobilePhone" #mobilePhone="ngModel" />
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Promised Time: </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Revised Promised Time: </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Vehicle: </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="vehicleModel" [(ngModel)]="repairOrder.vehicleModel" #vehicleModel="ngModel"
+                                readonly />
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Chassis No.:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="vinNo" [(ngModel)]="repairOrder.vinNo" #vinNo="ngModel" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Engine No.: </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="chassisNo" [(ngModel)]="repairOrder.chassisNo" #chassisNo="ngModel" readonly
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Previous Milleage (km): </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="previousMilleage" [(ngModel)]="repairOrder.previousMilleage" #previousMilleage="ngModel"
+                                readonly />
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Current Milleage (km) <span class="red">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="currentMilleage" [(ngModel)]="repairOrder.currentMilleage" #currentMilleage="ngModel"
+                                required />
+                            <label class="error" *ngIf="currentMilleage.errors && currentMilleage.errors.required && (currentMilleage.dirty || currentMilleage.touched || frmRepairOrder._submitted)">
+                                currentMilleage Milleage (km) is required
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Customer Waiting?</label>
+                        <div class="col-sm-8">
+                            <p-radioButton name="isCustomerWaiting" value="1" label="Yes" [(ngModel)]="repairOrder.isCustomerWaiting" id="isCustomerWaiting"></p-radioButton>
+                            <p-radioButton name="isCustomerWaiting" value="0" label="No" [(ngModel)]="repairOrder.isCustomerWaiting" id="isCustomerWaiting"></p-radioButton>
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Express Service?</label>
+                        <div class="col-sm-8">
+                            <p-radioButton name="isExpressService" value="1" label="Yes" [(ngModel)]="repairOrder.isExpressService" id="isExpressService"></p-radioButton>
+                            <p-radioButton name="isExpressService" value="0" label="No" [(ngModel)]="repairOrder.isExpressService" id="isExpressService"></p-radioButton>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Remarks:</label>
+                        <textarea rows="5" class="col-sm-8 form-control" name="customerRequest" [(ngModel)]="repairOrder.customerRequest" #customerRequest="ngModel"></textarea>
+                    </div>
+                </div>
+                <div class="tabbable page-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="tables_dynamic.html#inside" data-toggle="tab"><i class="icon-checkbox-partial"></i>RO Details</a></li>
+                        <li><a href="tables_dynamic.html#outside" data-toggle="tab"><i class="icon-checkbox-partial"></i>Warranty</a></li>
+                        <li><a href="tables_dynamic.html#advanced" data-toggle="tab"><i class="icon-checkbox-partial"></i>Service History</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- First tab content -->
+                        <div class="tab-pane active fade in" id="inside">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <!-- Job (Labour) -->
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label text-right">Package Type : </label>
+                                            <div class="col-sm-8">
+                                                <p-dropdown [options]="packageTypeObjects" [style]="{'width':'100%'}" #packageTypeId [(ngModel)]="repairOrder.packageTypeId"
+                                                    name="packageTypeId" (onChange)="onChangePackageType($event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label text-right">Package : </label>
+                                            <div class="col-sm-8">
+                                                <p-dropdown [options]="servicePackageObjects" [style]="{'width':'100%'}" [(ngModel)]="repairOrder.servicePackageId" name="servicePackageId"
+                                                    (onChange)="onChangeServicePackage($event.value)" #servicePackageId styleClass="ui-column-filter ui-dropdow-custom">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label text-right">Job Group : </label>
+                                            <div class="col-sm-8">
+                                                <p-dropdown [options]="jobGroupObjects" [style]="{'width':'100%'}" [(ngModel)]="repairOrder.jobGroupId" name="jobGroupId"
+                                                    (onChange)="onChangeJobGroup($event.value)" #jobGroupId styleClass="ui-column-filter ui-dropdow-custom">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label text-right">Job:</label>
+                                            <div class="col-sm-8">
+                                                <p-dropdown [options]="jobObjects" [style]="{'width':'100%'}" [(ngModel)]="repairOrder.jobId" name="jobId" (onChange)="onChangeJob($event.value)"
+                                                    #jobId styleClass="ui-column-filter ui-dropdow-custom">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label text-right">Part :</label>
+                                            <div class="col-sm-8">
+                                                <p-dropdown [options]="partObjects" [style]="{'width':'100%'}" [(ngModel)]="repairOrder.partId" name="jobId" (onChange)="onChangePart($event.value)"
+                                                    #partId styleClass="ui-column-filter ui-dropdow-custom">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label text-right">Qty :</label>
+                                            <div class="col-sm-8">
+                                                <p-spinner size="30" name="quantity" [(ngModel)]="repairOrder.quantity" [min]="0" [max]="999999"></p-spinner>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row form-group pull-right">
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-sm btn-info pull-right mg-button pull-left" (click)="onClickAdd()"><span data-icon="&#xe104;"></span> Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Job (Labour) -->
+                                    <jobLabour-addUpdate></jobLabour-addUpdate>
+                                    <div class="datatable mg-bottom-15px">
+                                        <table class="table table-bordered dataTable no-footer" id="table-servicePackage" role="grid">
+                                            <thead>
+                                                <tr>
+                                                    <th class="collumn-checkbox">
+                                                        No
+                                                    </th>
+                                                    <th>Package code</th>
+                                                    <th>Job Code</th>
+                                                    <th>Job description</th>
+                                                    <th>Job type</th>
+                                                    <th>Payment type</th>
+                                                    <th>Source</th>
+                                                    <th>labourCharge</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let item of listRowItem, let i = index">
+                                                <tr>
+                                                    <td>
+                                                        {{ i + 1 }}
+                                                    </td>
+                                                    <td><a>{{ item.packageCode }}</a></td>
+                                                    <td>{{ item.job.code }}</td>
+                                                    <td>{{ item.job.description }} </td>
+                                                    <td>
+                                                        <p-dropdown [options]="item.listJobType" [style]="{'width':'100%'}" [(ngModel)]="item.job.pdComeBackJobId" name="pdComeBackJobId_{{ i }}"
+                                                            (onChange)="onChangeJobType(item.job,$event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                        </p-dropdown>
+                                                    </td>
+                                                    <td>
+                                                        <p-dropdown [options]="item.listPaymentType" [style]="{'width':'100%'}" [(ngModel)]="item.job.pdPaymentTypeId" name="pdPaymentTypeId_{{ i }}"
+                                                            (onChange)="onChangePaymentType(item.job,$event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                        </p-dropdown>
+                                                    </td>
+                                                    <td>
+                                                        <p-dropdown [options]="item.listJobSource" [style]="{'width':'100%'}" [(ngModel)]="item.job.pdJobSourceId" name="pdJobSourceId_{{ i }}"
+                                                            (onChange)="onChangeSource(item.job,$event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                        </p-dropdown>
+                                                    </td>
+                                                    <td>{{ item.job.labourCharge }}</td>
+                                                    <td>
+                                                        <a class="font-18px" href="javascript:void(0)" (click)="removeItemPackage(item)"><span data-icon="&#xe0d7;"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- Part -->
+                                    <div class="datatable mg-bottom-15px">
+                                        <table class="table table-bordered dataTable no-footer" id="table-servicePackage" role="grid">
+                                            <thead>
+                                                <tr>
+                                                    <th class="collumn-checkbox">
+                                                        No
+                                                    </th>
+                                                    <th>Job</th>
+                                                    <th>Part</th>
+                                                    <th>Part source</th>
+                                                    <th>Payment type</th>
+                                                    <th style="width: 12%">Qty</th>
+                                                    <th>Amount</th>
+                                                    <!--<th>Discount</th>
+                                                    <th>Goodwill</th>-->
+                                                    <th>SubTotal</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let item of listJobPart, let i = index">
+                                                <tr>
+                                                    <td>
+                                                        {{ i + 1 }}
+                                                    </td>
+                                                    <td><a>{{ item.code }}</a></td>
+                                                    <td>{{ item.part.code }}</td>
+                                                    <td>
+                                                        <p-dropdown [options]="item.part.listPartType" [style]="{'width':'100%'}" [(ngModel)]="item.part.pdPartSourceId" name="part_pdPartTypeId_{{ i }}"
+                                                            (onChange)="onChangeSource(item.part,$event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                        </p-dropdown>
+                                                    </td>
+                                                    <td>
+                                                        <p-dropdown [options]="item.part.listPaymentType" [style]="{'width':'100%'}" [(ngModel)]="item.part.pdPaymentTypeId" name="pdPaymentTypeId_{{ i }}"
+                                                            (onChange)="onChangePaymentType(item.part,$event.value)" styleClass="ui-column-filter ui-dropdow-custom">
+                                                        </p-dropdown>
+                                                    </td>
+                                                    <td>
+                                                        <p-spinner size="30" name="quantity_{{ i }}" [(ngModel)]="item.part.quantity" [min]="0" [max]="999999" (ngModelChange)="onChangeQuantityPart(item.part.id, $event)"></p-spinner>
+                                                    </td>
+                                                    <td>{{ item.part.unitPrice }}</td>
+                                                    <td>{{ item.part.quantity * item.part.unitPrice }}</td>
+                                                    <td>
+                                                        <a class="font-18px" href="javascript:void(0)" (click)="removeItemJob(item)"><span data-icon="&#xe0d7;"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                    <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+                                    <!-- End Part -->
+                                    <part-addUpdate></part-addUpdate>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End First tab content -->
+                        <!-- Second tab content -->
+                        <div class="tab-pane fade" id="outside">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <!--Warranty-->
+                                    <div class="datatable-addUpdateROautowidth">
+                                        <table class="table table-bordered table-custom-no table-top">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item code (Job/Part)</th>
+                                                    <th>Description</th>
+                                                    <th>Type</th>
+                                                    <th>Qty</th>
+                                                    <th>Supplier</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>
+                                                        <select name="select" class="form-control">
+                                                            <option value="opt1">Job</option>
+                                                            <option value="opt2">Part</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>
+                                                        <select name="select" class="form-control">
+                                                            <option value="opt1">Job</option>
+                                                            <option value="opt2">Part</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>
+                                                        <select name="select" class="form-control">
+                                                            <option value="opt1">Job</option>
+                                                            <option value="opt2">Part</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group  pull-right">
+                                                <label class="col-sm-5 control-label">Total Claim Amt</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" routerLink="/trSubmission/Search" class="btn btn-info">Create DTR</button>
+                                        </div>
+                                    </div>
+                                    <h5>Previous Claim Part</h5>
+                                    <div class="datatable-addUpdateROautowidth">
+                                        <table class="table table-bordered table-custom-no table-top">
+                                            <thead>
+                                                <tr>
+                                                    <th>Part Code</th>
+                                                    <th>Part Description</th>
+                                                    <th>Qty</th>
+                                                    <th>Warranty Claim No</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                    <td>Row</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--End Warranty-->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Second tab content -->
+                        <!-- Third tab content -->
+                        <div class="tab-pane fade" id="advanced">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <service-history #serviceHistory></service-history>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 pull-right">
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Total Labour Charge: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">{{ repairOrder.totalLabourCharge }}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Labour Discount: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Total Part: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">{{ repairOrder.totalPartAmt }}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Part Discount: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Additional Discount:</label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Total Before Tax:</label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label text-right">Tax:</label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label text-right">Total After Tax: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label text-right">Rounding Adjustment: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label text-right">Total Amount Payable: </label>
+                        <div class="col-sm-3 text-right">
+                            <p class="form-control-static under-line">0</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <serviceHistory-addUpdate></serviceHistory-addUpdate>
+    <dialogNewvp-addUpdate></dialogNewvp-addUpdate>
+    <newvp-addUpdate (bindNewVehicleProfile)="bindNewVehicleProfile($event)"></newvp-addUpdate>
+    <jPCB-suggestion></jPCB-suggestion>
+</div>

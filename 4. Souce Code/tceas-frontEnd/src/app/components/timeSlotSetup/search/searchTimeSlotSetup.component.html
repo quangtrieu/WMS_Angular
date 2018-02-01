@@ -1,0 +1,113 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Time Slot - Setup</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li>Time Slot</li>
+        </ul>
+        <button type="button" class="btn btn-sm btn-info pull-right mg-button" (click)="frm.ngSubmit.emit()">SAVE</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <form class="form-horizontal scroll-data" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Time slot interval:</label>
+                            <div class="col-sm-3">
+                                <select name="select" class="form-control">
+                                    <option value="2">30 minutes</option>
+                                    <option value="1">15 minutes</option>
+                                </select>
+                            </div>
+                            <label class="col-sm-3 control-label">Available Resource:</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" value={{baysPerSlot}}>
+                            </div>
+                        </div>
+
+                        <div class="datatable">
+                            <div class="dataTables_wrapper no-footer">
+                                <div class="datatable-scroll">
+                                    <p-dataTable [value]="timeSlotMasterList" resizableColumns="true" #dt>
+                                        <p-column header="Date" field="description">
+
+                                        </p-column>
+                                        <p-column field="startTime" header="Start time">
+                                            <ng-template let-row="rowData" let-in="rowIndex" pTemplate type="body">
+                                                <input type="time" class="form-control timepicker" name="startTime-{{in}}" [(ngModel)]="row.startTime" (change)="onChangeTimeSlot(row,in)"
+                                                />
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column field="endTime" header="End time">
+                                            <ng-template let-row="rowData" let-in="rowIndex" pTemplate type="body">
+                                                <input type="time" class="form-control timepicker" name="endTime-{{in}}" [(ngModel)]="row.endTime" (change)="onChangeTimeSlot(row,in)"
+                                                />
+                                            </ng-template>
+                                        </p-column>
+                                    </p-dataTable>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Off/Special Days</h4>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Select Day:</label>
+                            <div class="col-sm-3 input-margin">
+                                <input type="date" class="form-control" name="specialDay" [(ngModel)]="timeSlotSpecialDay.specialDay">
+                            </div>
+                            <label class="col-sm-3 control-label">Description:</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="description" [(ngModel)]="timeSlotSpecialDay.description">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Type:</label>
+                            <div class="col-sm-3 input-margin">
+                                <select name="idType" class="form-control" id="idType" [(ngModel)]="timeSlotSpecialDay.pdTimeSlotSpecialDayTypeId" #idType="ngModel">
+                                    <option value="2">Off</option>
+                                    <option value="1">Special</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-sm btn-info mg-button pull-right button-margin" (click)="frmPart.ngSubmit.emit()">
+                                    <span data-icon="&#xe104;"></span>Add</button>
+                            </div>
+                        </div>
+
+                        <div class="datatable">
+                            <div class="dataTables_wrapper no-footer">
+                                <div class="datatable-scroll">
+                                    <p-dataTable [value]="timeslotList" resizableColumns="true" #dt>
+                                        <p-column header="Date" field="specialDay">
+
+                                        </p-column>
+                                        <p-column field="description" header="Description">
+
+                                        </p-column>
+                                        <p-column field="PDTimeSlotSpecialDayType.name" header="Type">
+
+                                        </p-column>
+                                    </p-dataTable>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

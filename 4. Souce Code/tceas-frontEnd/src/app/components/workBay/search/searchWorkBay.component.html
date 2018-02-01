@@ -1,0 +1,69 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>{{ 'WORK_BAY_TITLE' | translate }}</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li>WorkBay</li>
+        </ul>
+
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+        </div>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe158;"></span> Delete</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe27f;"></span> Copy</button>
+        <button data-toggle="modal" type="button" class="btn btn-sm btn-info pull-right mg-button" (click)="onClickAddUpdate()"><span data-icon="&#xe104;"></span> Add</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <workbay-addUpdate [workBay] = selectedWorkBay></workbay-addUpdate>
+    <div class="datatable">
+        <div class="dataTables_wrapper no-footer">
+
+            <div class="datatable-scroll">
+                <p-dataTable [value]="workBayList" scrollable="true" scrollHeight="420px" [lazy]="true" (onLazyLoad)="loadWBLazy($event)"
+                    [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [paginator]="true" [responsive]="true" [stacked]="stacked"
+                    resizableColumns="true" columnResizeMode="expand" [totalRecords]="pager.totalRecords" scrollable="true" #dt>
+                    <p-column header="No." [style]="{'width': '40px'}">
+                        <ng-template let-rowIndex="rowIndex" pTemplate="rowexpansion">
+                            {{rowIndex + 1}}
+                        </ng-template>
+                    </p-column>
+                    <p-column field="code" header="Employee ID" [filter]="true" filterPlaceholder="Search" [sortable]="true">
+                        <ng-template let-row="rowData" pTemplate type="body">
+                            <a data-toggle="modal" (click)="onClickAddUpdate(row)">{{row.code}}</a>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="description" header="Description" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+                    <p-column field="PDJobType.description" header="Bay Type" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+                    <p-column field="status" filterMatchMode="equals">
+                        <ng-template pTemplate="filter" let-col pTemplate="header">
+                            {{ 'LBL_ACTIVE' | translate }}
+                            <p-dropdown [options]="statusObjects" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                                styleClass="ui-column-filter"></p-dropdown>
+                        </ng-template>
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{ item.status ? 'YES': 'NO' }}</span>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+                <div style="position: relative;">
+                    <span class="paging-entries">
+                        {{ 'COMMON.PAGING.SHOWING' | translate }} {{ 1 + (pager.pageSize * (pager.currentPage - 1)) }} {{ 'COMMON.PAGING.TO' | translate
+                        }} {{ pager.pageSize * pager.currentPage }} {{ 'COMMON.PAGING.OF' | translate }} {{ pager.totalRecords
+                        }} {{ 'COMMON.PAGING.ENTRIES' | translate }}
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

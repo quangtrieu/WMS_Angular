@@ -1,0 +1,99 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Job Part - Search </h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li>Job Part</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+        </div>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe24c;"></span> Delete</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe24c;"></span> Export</button>
+        <button (click)="onClickImportBtn(1)" data-toggle="modal" href="#import-modal" type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe259;"></span> Import</button>
+        <button (click)="addUpdateJobPart(0)" data-toggle="modal" type="button" class="btn btn-sm btn-info pull-right mg-button"><span data-icon="&#xe104;"></span> Add</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <jobPart-addUpdate [jobPart]="selectedJobPart"></jobPart-addUpdate>
+    <import-common [import]="import"></import-common>
+    <div class="datatable">
+        <table class="table table-bordered table-top">
+            <thead>
+                <tr>
+                    <th class="collumn-checkbox">
+                        <div class=""><span class="checked"><input type="checkbox" class="styled" (click)="onCheckAll()" id="chkAll"></span></div>
+                    </th>
+                    <th>Job</th>
+                    <th>Part</th>
+                    <th>Quantity</th>
+                    <th>Vehicle Make</th>
+                    <th>Vehicle Model</th>
+                    <th>Model Variant</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of jobPartAdd; let i = index" >
+                    <td>
+                        <div class="">
+                                        <span class="checked">
+                                            <input type="checkbox" name="checkRow" class="styled chk" (click)="onRowChecked()" value="{{ i }}">
+                                        </span>
+                                    </div>
+                    </td>
+                    <td><a (click)="addUpdateJobPart(item)">{{item.job}}</a></td>
+                    <td>{{item.part}}</td>
+                    <td>{{item.qty}}</td>
+                    <td>{{item.vehicleMake}}</td>
+                    <td>{{item.vehicleModel}}</td>
+                    <td>{{item.modelVariant}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<modal #modalDelete>
+    <modal-header>
+        <h4 class="modal-title">Confirm delete.</h4>
+    </modal-header>
+    <modal-body style="border: none!important">
+        <input type="hidden" id="hdVehicleId" />
+        <h4 class="modal-title">Are you sure to delete.</h4>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onDismiss()">NO</button>
+        <button type="button" class="btn btn-primary" (click)="deleteVehicle()">YES</button>
+    </modal-footer>
+</modal>

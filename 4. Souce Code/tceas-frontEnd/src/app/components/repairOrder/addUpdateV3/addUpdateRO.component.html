@@ -1,0 +1,466 @@
+<!--<ng2-toasty [position]="'top-right'"></ng2-toasty>-->
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!repairOrder.isUpdate">Repair Order Add</h3>
+            <h3 *ngIf="repairOrder.isUpdate">Repair Order Update </h3>
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <form #frmRepairOrder="ngForm" (ngSubmit)="addUpdate(repairOrder)" class="form-horizontal" role="form">
+        <input type="hidden" name="id" [(ngModel)]="repairOrder.id" #id="ngModel" />
+        <!-- Breadcrumbs line -->
+        <div class="breadcrumb-line">
+            <div class="row">
+                <div class="col-md-2 title-padding-right">
+                    <ul class="breadcrumb">
+                        <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+                        <li class="active">Repair Order</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 title-padding-left">
+                    <ul id="breadcrumbs-two" style="margin-top: 4px;" *ngIf="repairOrder.isUpdate">
+                        <li><a class="progress-active">RO Created</a></li>
+                        <li><a>Resource Allocated</a></li>
+                        <li><a>Part Fulfilled</a></li>
+                        <li><a>Invoiced</a></li>
+                        <li><a>Delivered</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 pull-right">
+
+                    <div class="form-actions text-right panel-heading">
+                        <button type="submit" class="btn btn-primary" [disabled]="!frmRepairOrder.form.valid">Save</button>
+                        <button type="button" *ngIf="repairOrder.isUpdate" routerLink="/invoice/Update/1" class="btn btn-warning">Finalize</button>
+                        <button *ngIf="repairOrder.isUpdate" type="button" class="btn btn-success">Print</button>
+                        <button type="button" routerLink="/repairOrder/Search" class="btn btn-default">Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /breadcrumbs line -->
+
+        <div class="panel panel-default">
+            <div class="panel-body scroll-data">
+                <!-- Add new Repair Order Header -->
+                <div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Appointment No.:</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-btn">
+								            <button class="btn btn-default" type="button"><span data-icon="&#xe0c2;"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Registration number.<span class="red">*</span>: </label>
+                                <div class="col-sm-8 has-feedback">
+                                    <input type="text" id="vehicleRegistrationNo" class="form-control" name="vehicleRegistrationNo" required [(ngModel)]="repairOrder.vehicleRegistrationNo"
+                                        #vehicleRegistrationNo="ngModel" (keyup.enter)="openPopupVehicle($event)" (keydown.Tab)="openPopupVehicle($event)"
+                                    />
+                                    <i class="icon-spinner7 spin form-control-feedback" *ngIf="isProcessing"></i>
+                                    <label class="error" *ngIf="vehicleRegistrationNo.errors && vehicleRegistrationNo.errors.required && (vehicleRegistrationNo.dirty || vehicleRegistrationNo.touched || frmRepairOrder._submitted)">
+                                        Registration no is required
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Customer.<span class="red">*</span>: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="customerName" required [(ngModel)]="repairOrder.customerName" #customerName="ngModel"
+                                        disabled />
+                                    <label class="error" *ngIf="customerName.errors && customerName.errors.required && (customerName.dirty || customerName.touched || frmRepairOrder._submitted)">
+                                        Customer name is required
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Make: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="vehicleMake" [(ngModel)]="repairOrder.vehicleMake" #vehicleRegistrationNo="ngModel"
+                                        disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Vehicle Model: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="vehicleModel" [(ngModel)]="repairOrder.vehicleModel" #vehicleModel="ngModel"
+                                        disabled />
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Model Variant: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="modelVariant" [(ngModel)]="repairOrder.modelVariant" #modelVariant="ngModel"
+                                        disabled/>
+                                </div>
+                            </div>
+
+                            <div class="form-group summary-margin-bottom" *ngIf="repairOrder.isUpdate">
+                                <label class="col-sm-4 control-label">Date Time in </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="datetime-local" name="dateTimeIn" [(ngModel)]="repairOrder.dateTimeIn" #dateTimeIn="ngModel"
+                                        disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Expected Delivery Date Time: </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="datetime-local" name="expectedDeliveryDateTime" [(ngModel)]="repairOrder.expectedDeliveryDateTime"
+                                        #expectedDeliveryDateTime="ngModel" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Customer waiting?</label>
+                                <div class="col-sm-8">
+                                    <p-radioButton name="isCustomerWaiting" value="1" label="Yes" [(ngModel)]="repairOrder.isCustomerWaiting" id="isCustomerWaiting"></p-radioButton>
+                                    <p-radioButton name="isCustomerWaiting" value="0" label="No" [(ngModel)]="repairOrder.isCustomerWaiting" id="isCustomerWaiting"></p-radioButton>
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Mobile number:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="mobilePhoneNo" [(ngModel)]="repairOrder.mobilePhoneNo" #mobilePhoneNo="ngModel"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">VIN number</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="vinNo" [(ngModel)]="repairOrder.vinNo" #vinNo="ngModel" />
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Chassis number: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="vehicleChassisNo" [(ngModel)]="repairOrder.vehicleChassisNo" #vehicleChassisNo="ngModel"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Previous Milleage (km) : </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="previousMilleage" [(ngModel)]="repairOrder.previousMilleage" #previousMilleage="ngModel"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-4 control-label">Current Milleage (km)<span class="red">*</span> :</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="currentMilleage" [(ngModel)]="repairOrder.currentMilleage" #currentMilleage="ngModel"
+                                        required />
+                                    <label class="error" *ngIf="currentMilleage.errors && currentMilleage.errors.required && (currentMilleage.dirty || currentMilleage.touched || frmRepairOrder._submitted)">
+                                        currentMilleage Milleage (km) is required
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Add new Repair Order Header -->
+
+                <!-- End Repair Order Header -->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Customer Request/Remarks:</label>
+                    <textarea rows="5" class="col-sm-8 form-control" name="customerRequest" [(ngModel)]="repairOrder.customerRequest" #customerRequest="ngModel"></textarea>
+                </div>
+
+                <div class="tabbable page-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="javascript:void(0)#inside" data-toggle="tab"><i class="icon-checkbox-partial"></i>Repair Order Details</a></li>
+                        <li><a href="javascript:void(0)#outside" data-toggle="tab"><i class="icon-checkbox-partial"></i>Warranty</a></li>
+                        <li><a href="javascript:void(0)#advanced" data-toggle="tab"><i class="icon-checkbox-partial"></i>Service History</a></li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <!-- First tab content -->
+                        <div class="tab-pane active fade in" id="inside">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <!-- Part -->
+                                    <h5>Products & Services</h5>
+                                    <div class="datatable">
+                                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper no-footer">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">Package: </label>
+                                                        <div class="col-sm-8">
+                                                            <select name="servicePackageId" class="form-control" [(ngModel)]="repairOrder.servicePackageId" #servicePackageId="ngModel"
+                                                                (ngModelChange)="onChangeServicePackage($event)">
+                                                                <option [ngValue]="item.id" *ngFor="let item of servicePackageObjects">{{ item.code }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label width-auto">Job Type: </label>
+                                                        <div class="col-sm-8">
+                                                            <select name="pdJobTypeId" class="form-control" [(ngModel)]="repairOrder.pdJobTypeId" #pdJobTypeId="ngModel">
+                                                                 <option [ngValue]="item.id" *ngFor="let item of jobTypeObjects">{{ item.code }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label width-auto">Job Group: </label>
+                                                        <div class="col-sm-8">
+                                                            <select name="jobGroupId" class="form-control" [(ngModel)]="repairOrder.jobGroupId" #jobGroupId="ngModel" (ngModelChange)="onChangeJobGroup($event)">
+                                                                 <option [ngValue]="item.id" *ngFor="let item of jobGroupObjects">{{ item.code }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label width-auto">Job:</label>
+                                                        <div class="col-sm-8">
+                                                            <select name="jobId" class="form-control" [(ngModel)]="repairOrder.jobId" #jobId="ngModel" (ngModelChange)="onChangeJob($event)">
+                                                                <option [ngValue]="item" *ngFor="let item of jobObjects">{{ item.code }} - {{ item.description }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">Source: </label>
+                                                        <div class="col-sm-8">
+                                                            <select name="pdSourceTypeId" class="form-control" [(ngModel)]="repairOrder.pdSourceTypeId" #pdSourceTypeId="ngModel" (ngModelChange)="onChangePartSource($event)">
+                                                                 <option [ngValue]="item.id" *ngFor="let item of partSourceObjects">{{ item.code }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 mg-right-5px control-label">Part: </label>
+                                                        <div class="col-sm-8">
+                                                            <select name="partId" class="form-control" [ngModel]="repairOrder.partId" #partId="ngModel" (ngModelChange)="onChangePart($event)">
+                                                                <option [ngValue]="item" *ngFor="let item of partObjects">{{ item.code }} - {{ item.description }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label mg-right-12px">Qty: </label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="quantity" class="form-control" [(ngModel)]="repairOrder.quantity" #quantity="ngModel" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-1 mg-right-5px control-label"></label>
+                                                    <div class="col-sm-9">
+                                                        <button type="button" class="btn btn-sm btn-info pull-right mg-button pull-left" (click)="onClickAdd()"><span data-icon="&#xe104;"></span> Add</button>
+                                                        <button type="button" class="btn btn-sm btn-default pull-right mg-button pull-left"><span data-icon="&#xe158;"></span> Delete</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="datatable-scroll">
+                                                <table class="table table-bordered dataTable no-footer" id="table-servicePackage" role="grid">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="collumn-checkbox">
+                                                                <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                                            </th>
+                                                            <th>Package code</th>
+                                                            <th>Job Code</th>
+                                                            <th>Item description</th>
+                                                            <th>Job type</th>
+                                                            <th>Payment type</th>
+                                                            <th>Source</th>
+                                                            <th>Qty</th>
+                                                            <th>Unit price</th>
+                                                            <!--<th>Discount</th>
+                                                            <th>Goodwill</th>-->
+                                                            <th>SubTotal</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngFor="let item of listRowItem, let i = index">
+                                                        <tr *ngIf="item.job.id != null">
+                                                            <td>
+                                                                <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled" /></span></div>
+                                                            </td>
+                                                            <td><a>{{ item.packageCode }}</a></td>
+                                                            <td>{{ item.job.code }}</td>
+                                                            <td>{{ item.job.description }} </td>
+                                                            <td>
+                                                                <select name="pdComeBackJobId_{{ i }}" class="form-control" [(ngModel)]="item.job.pdComeBackJobId">
+                                                                     <option [ngValue]="jobItem.id" *ngFor="let jobItem of item.listJobType">{{ jobItem.code }}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <select name="pdPaymentTypeId_{{ i }}" class="form-control" [(ngModel)]="item.job.pdPaymentTypeId">
+                                                                            <option [ngValue]="paymentItem.id" *ngFor="let paymentItem of item.listPaymentType">{{ paymentItem.code }}</option>
+                                                                        </select>
+                                                            </td>
+                                                            <td>
+                                                                <select name="pdJobSourceId_{{ i }}" class="form-control" [(ngModel)]="item.job.pdJobSourceId">
+                                                                            <option [ngValue]="jobSource.id" *ngFor="let jobSource of item.listJobSource">{{ jobSource.code }}</option>
+                                                                        </select>
+                                                            </td>
+                                                            <td></td>
+                                                            <td>{{ item.job.labourCharge }}</td>
+                                                            <!--<td>
+                                                                <div class="input-group">
+                                                                    <input type="text" name="discount_{{ i }}" class="form-control" (ngModelChange)="onChangeCalculateTotalPrice($event)" [(ngModel)]="item.job.discount" />
+                                                                    <span class="input-group-addon">%</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                 <div class="input-group">
+                                                                    <input type="text" name="goodwill_{{ i }}" class="form-control" (ngModelChange)="onChangeCalculateTotalPrice($event)" [(ngModel)]="item.job.goodwill" />
+                                                                    <span class="input-group-addon">%</span>
+                                                                </div>
+                                                            </td>-->
+                                                            <td>{{ item.job.labourCharge }}</td>
+                                                        </tr>
+                                                        <tr *ngIf="item.job.parts.length != 0">
+                                                            <td colspan="3" [attr.rowspan]="item.job.parts.length + 1"></td>
+                                                            <td class="bg-tr">Part Code</td>
+                                                            <td class="bg-tr">Part Description</td>
+                                                            <td class="bg-tr" colspan="5"></td>
+                                                        </tr>
+                                                        <tr *ngFor="let part of item.job.parts, let partIndex = index">
+                                                            <td>{{ part.code }}</td>
+                                                            <td>{{ part.description }}</td>
+                                                            <td>
+                                                                <select name="part_pdPaymentTypeId_{{ i }}_{{ partIndex }}" class="form-control" [(ngModel)]="part.pdPaymentTypeId">
+                                                                    <option [ngValue]="paymentItem.id" *ngFor="let paymentItem of part.listPaymentType">{{ paymentItem.code }}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <select name="part_pdPartTypeId_{{ i }}_{{ partIndex }}" class="form-control" [(ngModel)]="part.pdPartTypeId">
+                                                                     <option [ngValue]="partItem.id" *ngFor="let partItem of part.listPartType">{{ partItem.code }}</option>
+                                                                 </select>
+                                                            </td>
+                                                            <td> <input type="text" name="quantity_{{ i }}_{{ partIndex }}" class="form-control"
+                                                                    (ngModelChange)="onChangeQuantityPart(part.id, $event)" [(ngModel)]="part.quantity"
+                                                                /></td>
+                                                            <td>{{ part.unitPrice }}</td>
+                                                            <!--<td>
+                                                                <div class="input-group">
+                                                                   <input type="text" name="discount_job_{{ i }}_part_{{ partIndex }}" (ngModelChange)="onChangeCalculateTotalPrice($event)"
+                                                                    class="form-control" data-mask="99%" [(ngModel)]="part.discount" />
+                                                                    <span class="input-group-addon">%</span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                   <input type="text" name="goodwill_job_{{ i }}_part_{{ partIndex }}" (ngModelChange)="onChangeCalculateTotalPrice($event)"
+                                                                    class="form-control" [(ngModel)]="part.goodwill" />
+                                                                    <span class="input-group-addon">%</span>
+                                                                </div>
+                                                            </td>-->
+                                                            <td> {{ part.quantity * part.unitPrice }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Part -->
+                                    <newvp-addUpdate (bindNewVehicleProfile)="bindNewVehicleProfile($event)"></newvp-addUpdate>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End First tab content -->
+                    </div>
+                    <!-- Summary -->
+                    <h5>Summary:</h5>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-6 control-label">Total Labour Charge: </label>
+                                <div class="col-sm-5">
+                                    <p class="form-control-static under-line">{{ repairOrder.totalLabourCharge }}</p>
+                                </div>
+                                <label class="control-label">MYR </label>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-6 control-label">Labour Discount: </label>
+                                <div class="col-sm-5">
+                                    <p class="form-control-static under-line">0</p>
+                                </div>
+                                <label class="control-label">MYR </label>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-6 control-label">Total Part Amt: </label>
+                                <div class="col-sm-5">
+                                    <p class="form-control-static under-line">{{ repairOrder.totalPartAmt }}</p>
+                                </div>
+                                <label class="control-label">MYR </label>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-6 control-label">Part Discount: </label>
+                                <div class="col-sm-5">
+                                    <p class="form-control-static under-line">0</p>
+                                </div>
+                                <label class="control-label">MYR </label>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-6 control-label">Additional Discount:</label>
+                                <div class="col-sm-5">
+                                    <p class="form-control-static under-line">0</p>
+                                </div>
+                                <label class="control-label">MYR </label>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-6 control-label">Total Goodwill Amt</label>
+                                <div class="col-sm-5">
+                                    <p class="form-control-static under-line">0</p>
+                                </div>
+                                <label class="control-label">MYR </label>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-6 control-label">Total Before Tax Amt:</label>
+                                <div class="col-sm-5">
+                                    <p class="form-control-static under-line">0</p>
+                                </div>
+                                <label class="control-label">MYR </label>
+                            </div>
+                            <div class="form-group summary-margin-bottom">
+                                <label class="col-sm-6 control-label">Sales Tax amt </label>
+                                <div class="col-sm-5">
+                                    <p class="form-control-static under-line">0</p>
+                                </div>
+                                <label class="control-label">MYR </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">Total After Tax Amt: </label>
+                                <div class="col-sm-5">
+                                    <p class="form-control-static under-line">0</p>
+                                </div>
+                                <label class="control-label">MYR </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 summary-margin">
+                        </div>
+                    </div>
+                    <!-- End Summary -->
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <jPCB-suggestion [repairOrderBay]="repairOrderBay"></jPCB-suggestion>
+</div>

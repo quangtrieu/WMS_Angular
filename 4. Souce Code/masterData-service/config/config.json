@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "root",
+    "password": "123@123",
+    "database": "tceas_dev",
+    "host": "localhost",
+    "port" : "3306",
+    "dialect": "mysql",
+    "logging": true
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": ":memory:",
+    "logging": false
+  },
+  "production": {
+    "username": "tceas_dev",
+    "password": "q10Fz#DggdT#UN$d3",
+    "database": "tceas_dev",
+    "host": "35.188.75.202",
+    "port" : "3306",
+    "dialect": "mysql",
+    "logging": true
+  }
+}

@@ -1,0 +1,27 @@
+.overflow{
+    overflow-x:auto;
+}
+
+.table-custom{
+    
+}
+
+.collumn-checkbox {
+    width: 10px;
+}
+
+.header-margin{
+    margin:5px 5px 5px 5px;
+}
+
+.footer-margin{
+    margin:15px 5px 5px 5px;
+}
+
+.summary-margin-bottom {
+    margin-bottom: 10px;
+}
+
+.panel .table-bordered > thead > tr:first-child > th, .panel .table-bordered > tbody > tr:first-child > td {
+    border-bottom: 1px solid #ddd;
+}

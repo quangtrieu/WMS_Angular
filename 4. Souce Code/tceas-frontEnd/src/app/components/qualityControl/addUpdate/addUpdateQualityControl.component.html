@@ -1,0 +1,174 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Quality Control - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active"><a routerLink="/qualityControl/Search" routerLinkActive="active">Quality Control</a></li>
+        </ul>
+        <button type="button" class="btn btn-sm btn-info pull-right mg-button" (click)="formJobPart.ngSubmit.emit()">Save</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">Back</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <div class="panel panel-default">
+        <div class="panel-body scroll-data">
+            <form class="form-horizontal" role="form" action="#" #formJobPart="ngForm" (ngSubmit)="addUpdate(group, qcList)">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">RO No.:</label>
+                        <div class="col-sm-6 control-label">
+                            {{jobFFItem.RONo}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Registration No.:</label>
+                        <div class="col-sm-6 control-label">
+                            {{jobFFItem.regis}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Customer:</label>
+                        <div class="col-sm-6 control-label">
+                            {{jobFFItem.customer}}
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-custom table-top">
+                    <thead>
+                        <tr>
+                            <th>Job Code</th>
+                            <th>Job Description</th>
+                            <th>Pass/Fail</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of qcList; let i = index">
+                            <td>{{item.jobCode}}</td>
+                            <td>{{item.jobDes}}</td>
+                            <td>
+                                <select class="form-control" name="status{{i}}" [(ngModel)]="item.status" (change)="changeData(qcList)">
+                                   <option [ngValue]="1">PASS</option>        
+                                   <option [ngValue]="2">FAIL</option>                      
+                                </select>
+                            </td>
+                            <td><input type="text" class="col-sm-12" name="remark{{i}}" [(ngModel)]="item.remarks"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-custom table-top" [hidden]="check">
+                    <tr>
+                        <td class="column-width">
+                            <div class="title-bg">
+                                <h4 class="title-margin"> {{group.brakeDiscList.description}}</h4>
+                            </div>
+                            <div class="form-group item-margin-top" *ngFor="let item of group.brakeDiscList.InspectionCheckListItems;let i = index">
+                                <label class="col-sm-8 control-label">{{item.description}}</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="brakeDiscListOption_{{i}}" [(ngModel)]="item.pdInspectionValueId">
+                                    <option *ngFor="let subItem of option" [ngValue]="subItem.id">{{subItem.description}}</option>                     
+                                </select>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td class="column-width" rowspan="3">
+                            <div class="title-bg">
+                                <h4 class="title-margin">{{group.serviceMaintenance.description}}</h4>
+                            </div>
+                            <div class="form-group item-margin-top" *ngFor="let item of group.serviceMaintenance.InspectionCheckListItems;let i = index">
+                                <label class="col-sm-8 control-label">{{item.description}}</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="serviceMaintenanceOption_{{i}}" [(ngModel)]="item.pdInspectionValueId">
+                                    <option *ngFor="let item of option" [ngValue]="item.id">{{item.description}}</option>                      
+                                </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="column-width" rowspan="2">
+                            <div class="title-bg">
+                                <h4 class="title-margin">{{group.interior.description}}</h4>
+                            </div>
+                            <div class="form-group item-margin-top" *ngFor="let item of group.interior.InspectionCheckListItems;let i = index">
+                                <label class="col-sm-8 control-label">{{item.description}}</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="interiorOption_{{i}}" [(ngModel)]="item.pdInspectionValueId">
+                                    <option *ngFor="let item of option" [ngValue]="item.id">{{item.description}}</option>                       
+                                </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="column-width" rowspan="2">
+                            <div class="title-bg">
+                                <h4 class="title-margin">{{group.engComp.description}}</h4>
+                            </div>
+                            <div class="form-group item-margin-top" *ngFor="let item of group.engComp.InspectionCheckListItems;let i = index">
+                                <label class="col-sm-8 control-label">{{item.description}}</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="engCompOption_{{i}}" [(ngModel)]="item.pdInspectionValueId">
+                                    <option *ngFor="let item of option" [ngValue]="item.id">{{item.description}}</option>                   
+                                </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-padding">
+                            <div class="title-bg">
+                                <h4 class="title-margin">{{group.tyre.description}}</h4>
+                            </div>
+                            <div class="form-group item-margin-top" *ngFor="let item of group.tyre.InspectionCheckListItems;let i = index">
+                                <label class="col-sm-8 control-label">{{item.description}}</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="tyreOption_{{i}}" [(ngModel)]="item.pdInspectionValueId">
+                                    <option *ngFor="let item of option" [ngValue]="item.id">{{item.description}}</option>                      
+                                </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-padding">
+                            <div class="title-bg">
+                                <h4 class="title-margin">{{group.brakelining.description}}</h4>
+                            </div>
+                            <div class="form-group item-margin-top" *ngFor="let item of group.brakelining.InspectionCheckListItems;let i = index">
+                                <label class="col-sm-8 control-label">{{item.description}}</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="brakeliningOption_{{i}}" [(ngModel)]="item.pdInspectionValueId">
+                                    <option *ngFor="let item of option" [ngValue]="item.id">{{item.description}}</option>                       
+                                </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="td-padding">
+                            <div class="title-bg">
+                                <h4 class="title-margin">{{group.battery.description}}</h4>
+                            </div>
+                            <div class="form-group item-margin-top" *ngFor="let item of group.battery.InspectionCheckListItems;let i = index" [attr.data-index]="i">
+                                <label class="col-sm-8 control-label">{{item.description}}</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="batteryOption_{{i}}" [(ngModel)]="item.pdInspectionValueId">
+                                    <option *ngFor="let subItem of option" [ngValue]="subItem.id">{{subItem.description}}</option>                       
+                                </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            explain
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

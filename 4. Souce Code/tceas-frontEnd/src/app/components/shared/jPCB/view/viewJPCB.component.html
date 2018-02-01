@@ -1,0 +1,73 @@
+<div>
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-sm-3">
+            <table>
+                <tr>
+                    <td style="border-style: solid; border-width:thin; width:80px; height:30px; background-color:#eeece1;"></td>
+                    <td style="padding: 10px">Completed</td>
+                </tr>
+                <tr>
+                    <td style="border-style: solid; border-width:thin; width:80px; height:30px; background-color:#c3d69b;"></td>
+                    <td style="padding: 10px">In Progress</td>
+                </tr>
+                <tr>
+                    <td style="border-style: solid; border-width:thin; width:80px; height:30px; background-color:#ffff99;"></td>
+                    <td style="padding: 10px">Planned</td>
+                </tr>
+                <tr>
+                    <td style="border-style: solid; border-width:thin; width:80px; height:30px; background-color:#fac090;"></td>
+                    <td style="padding: 10px">Delayed</td>
+                </tr>
+                <tr>
+                    <td>[ ]</td>
+                    <td style="padding: 10px">Invoiced</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-6">
+             <table>
+                <tr>
+                    <td><div style="border-style: solid; width:80px; height:30px; border-color:red"></div></td>
+                    <td style="padding: 10px">Waiting</td>
+                </tr>
+                <tr>
+                    <td><div style="border-style: solid; width:80px; height:30px; border-color:#ffff00"></div></td>
+                    <td style="padding: 10px">Non-waiting</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="scroll-data" (window:resize)="onWindowResize($event)" (scroll)="onWindowResize(null)">
+    <div id="divTableJPCB" class="overflow" (window:resize)="onWindowResize($event)" (scroll)="onWindowResize(null)">
+        <table id="tableJPCB" class="table table-bordered table-top text-center">
+            <thead class="text-center">
+                <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center">Bay Type</th>
+                    <th [attr.colspan]='workingTime.length' class="text-center">{{currentDate | date: appConfig.config.formatDate}}</th>
+                </tr>
+            </thead>
+            <thead class="text-center">
+                <tr>
+                    <td style="width: 100px">Bay</td>
+                    <td>
+                        Hoist
+                    </td>
+                    <td *ngFor="let itemWorkingTime of workingTime" class="timeline-col">
+                        {{itemWorkingTime}}
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of bays" [attr.data-bayid]='item.id'>
+                    <td>{{item.code}}</td>
+                    <td>{{item.PDHoistType.code}}</td>
+                    <td *ngFor="let itemWorkingTime of workingTime"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class='timeline'>
+        </div>
+    </div>
+</div>

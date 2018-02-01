@@ -1,0 +1,53 @@
+.overflow{
+    overflow-x:auto;
+}
+
+.table-custom{
+    table-layout: fixed;
+    width: 2500px;
+}
+
+.table-custom-no{
+    table-layout: fixed;
+}
+
+.collumn-checkbox {
+    width: 10px;
+}
+
+.header-margin{
+    margin:5px 5px 5px 5px;
+}
+
+.footer-margin{
+    margin:15px 5px 5px 5px;
+}
+
+.text-box-margin {
+    margin:0px 15px 0px 15px;
+    width: 1200px;
+}
+
+.table-margin {
+    margin-top: 40px;
+}
+
+.summary-margin {
+    margin-left: 40px;
+}
+
+.summary-margin-bottom {
+    margin-bottom: 10px;
+}
+
+.panel .table-bordered > thead > tr:first-child > td {
+    border-bottom: 1px solid #ddd;
+}
+
+.panel .table-bordered > tbody > tr:first-child > td {
+    border-bottom: 1px solid #ddd;
+}
+
+.panel .table-bordered > thead > tr:first-child > th {
+    border-bottom: 1px solid #ddd;
+}

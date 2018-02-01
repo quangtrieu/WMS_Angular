@@ -1,0 +1,71 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Quality Control - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active"><a routerLink="/qualityControl/Search" routerLinkActive="active">Quality Control</a></li>
+        </ul>
+        <button type="button" class="btn btn-sm btn-info pull-right mg-button" (click)="formJobPart.ngSubmit.emit()">Save</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">Back</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <div class="panel panel-default">
+        <div class="panel-body scroll-data">
+            <form class="form-horizontal" role="form" action="#" #formJobPart="ngForm" (ngSubmit)="addUpdate(qcList)">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">RO No.:</label>
+                        <div class="col-sm-6 control-label">
+                            {{jobFFItem.RONo}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Registration No.:</label>
+                        <div class="col-sm-6 control-label">
+                            {{jobFFItem.regis}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Customer:</label>
+                        <div class="col-sm-6 control-label">
+                            {{jobFFItem.customer}}
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-custom table-top">
+                    <thead>
+                        <tr>
+                            <th>Job Code</th>
+                            <th>Job Description</th>
+                            <th>Pass/Fail</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of qcList; let i = index">
+                            <td>{{item.jobCode}}</td>
+                            <td>{{item.jobDes}}</td>
+                            <td>
+                                <select class="form-control" name="status{{i}}" [(ngModel)]="item.status">
+                                   <option [ngValue]="1">PASS</option>        
+                                   <option [ngValue]="2">FAIL</option>                      
+                                </select>
+                            </td>
+                            <td><input type="text" class="col-sm-12"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

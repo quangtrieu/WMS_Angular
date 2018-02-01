@@ -1,0 +1,30 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!customer.id">Stock Addjustment - Add</h3>
+            <h3 *ngIf="customer.id">Stock Addjustment - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active">Stock Addjustment</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-info pull-right mg-button" [disabled]="!frmCustomer.form.valid" (click)="frmCustomer.ngSubmit.emit()">Save</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button" routerLink="/customer/Search">Back</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form #frmCustomer="ngForm" (ngSubmit)="addUpdate(customer)" class="form-horizontal" role="form">
+        <input type="hidden" name="id" [(ngModel)]="customer.id" #id="ngModel" />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                
+            </div>
+        </div>
+    </form>
+</div>

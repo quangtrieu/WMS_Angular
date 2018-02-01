@@ -1,0 +1,35 @@
+.overflow{
+    overflow-x:auto;
+}
+.timeline {
+    position: absolute;
+    top: 0px;
+    height: 0px;
+    left: 0px;
+    border: 1px dotted red;
+    z-index: 100000
+}
+.timeline-col {
+    width: 120px;
+    max-width: 120px;
+    min-width: 120px;
+}
+
+.jpcb-description:after { 
+    content: ""; 
+    display: table; 
+    clear: both; 
+}
+
+.jpcb-description {
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+}
+
+.jpcb-description {
+    margin: 0 0 35px 0;
+    background-color: #fcfcfc;
+    border: 1px solid #e5e5e5;
+    position: relative;
+  }

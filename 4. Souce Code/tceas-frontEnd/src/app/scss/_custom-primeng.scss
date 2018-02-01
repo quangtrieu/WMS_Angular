@@ -1,0 +1,154 @@
+
+/*** p-autoComplete ***/
+.ui-autocomplete ui-widget ui-autocomplete-dd {
+  width: 100% !important;
+  height: 48px!important;
+}
+
+.col-sm-4 .ui-autocomplete-input {
+  height: 33px !important;
+  width: 88% !important;
+}
+
+.col-sm-8 .ui-autocomplete-input {
+  height: 33px !important;
+  //width: 88% !important;
+}
+
+.col-sm-7 .ui-autocomplete-input {
+  height: 33px !important;
+  width: 93% !important;
+}
+
+p-autocomplete span {
+  height: 33px !important;
+  width: 100% !important;
+}
+
+.ui-autocomplete-panel ui-widget-content ui-corner-all ui-shadow {
+  top: 39px !important;
+}
+
+.ui-button-icon-only .fa {
+  left: 34% !important;
+}
+
+.ui-autocomplete .ui-autocomplete-dropdown {
+  width: 3em !important;
+}
+
+.col-sm-4 .ui-autocomplete-dd .ui-autocomplete-loader {
+  right: 3em !important;
+}
+
+.col-sm-7 .ui-autocomplete-dd .ui-autocomplete-loader {
+  right: 3em !important;
+}
+
+p-autocomplete.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext {
+  border-bottom-color: none !important;
+}
+/*** p-autoComplete - end ***/
+
+
+.ui-growl-message p {
+  font-size: 15px;
+}
+
+.ui-growl-title {
+  font-size: 15px;
+  margin-top: 3px;
+}
+
+.ui-growl {
+  width: auto !important;
+  z-index: 1988 !important;
+}
+
+.ui-growl-message {
+  margin-right: 15px;
+}
+
+.ui-radiobutton-icon {
+  margin-left: -2px;
+}
+
+.ui-chkbox-box.ui-state-active,
+.ui-radiobutton-box.ui-state-active {
+  border: 1px solid #156090 !important;
+  background: #186ba0 !important;
+  color: #FFFFFF !important;
+}
+
+.ui-radiobutton-box {
+  width: 1.35em !important;
+  height: 1.35em !important;
+  line-height: 1.35em !important;
+  padding-left: 2px !important;
+}
+
+p-radiobutton label {
+  padding: 5px 10px 0px 0px !important;
+}
+.ui-datatable{
+  font-size: 14px;
+}
+.ui-widget-content a{
+  color: #428bca !important;
+}
+
+//Fix dropdowlist display in grid conflict with resizableColumns="true"
+.ui-datatable.ui-datatable-resizable .ui-datatable-thead>tr>th{
+  overflow: unset !important;
+}
+.ui-datatable-resizable{
+  overflow: unset !important;
+}
+
+.ui-datatable-scrollable-header{
+  overflow: unset !important;
+}
+//end fix dropdowlist
+
+
+.ui-confirmdialog .ui-dialog-content .ui-confirmdialog-message{
+   font-size: 14px;
+}
+.ui-button-text{
+  font-size: 14px;
+}
+.ui-confirmdialog.ui-dialog .ui-dialog-content{
+  margin: 5px 0px 15px 0px; 
+}
+.ui-dropdow-custom{
+   width: 100%;
+   height: 35px;
+   padding: 5px;
+}
+.ui-dropdown:not(.ui-state-disabled):hover{
+  background: white !important;
+}
+.ui-dropdown .ui-dropdown-trigger{
+  width: 2.5em !important;
+}
+.ui-dropdown .ui-dropdown-trigger .fa{
+  margin-top: 0.8em !important;
+  margin-left: 0em !important;
+}
+.ui-state-focus{
+  background: white !important;
+  border: white !important;
+}
+.ng-tns-c2-0{
+  font-size: 13px;
+}
+.ui-spinner .ui-inputtext{
+  padding: 0.62em !important;
+  width: 100%;
+}
+.full-select .ui-autocomplete-input{
+  width: 91% !important;
+}
+.ui-dropdown .ui-dropdown-label{
+  padding-right: 0px !important;
+}

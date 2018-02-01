@@ -1,0 +1,53 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>{{ 'GRN_TITLE' | translate }} - {{ 'LBL_SEARCH' | translate }}</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li>{{ 'GRN_TITLE' | translate }}</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons">
+                <i class="icon-menu2"></i>
+            </a>
+        </div>
+        <button type="button" class="btn btn-sm btn-info pull-right mg-button" routerLink="/goodsReceiving/Add">
+            <span data-icon="&#xe104;"></span> Add</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <p-dataTable [value]="grnList" scrollHeight="420px" [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [paginator]="true"
+        [responsive]="true" [stacked]="stacked" resizableColumns="true" columnResizeMode="expand" [totalRecords]="pager.totalRecords"
+        (onLazyLoad)="loadGRNLazy($event)" scrollable="true" #dt>
+        <p-column header="{{ 'TBL_HEADER_NO' | translate }}" [style]="{'width': '40px'}">
+            <ng-template let-rowIndex="rowIndex" pTemplate="rowexpansion">
+                {{rowIndex + 1}}
+            </ng-template>
+        </p-column>
+        <p-column field="grnNo" header="{{ 'GRN_NO' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true">
+            <ng-template let-row="rowData" pTemplate type="body">
+                <a (click)="onClickAddUpdate(row.id)">{{row.lPONO}}</a>
+            </ng-template>
+        </p-column>
+        <p-column field="grnDate" header="{{ 'GRN_DATE' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="status" header="{{ 'LBL_STATUS' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="poNo" header="{{ 'PO_NO' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="poDate" header="{{ 'PO_DATE' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="qty" header="{{ 'LBL_QTY' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+    </p-dataTable>
+    <div style="position: relative;">
+        <span class="paging-entries">
+            {{ 'PAGING_SHOWING' | translate }} {{ 1 + (pager.pageSize * (pager.currentPage - 1)) }} {{ 'PAGING_TO' | translate }} {{
+            pager.pageSize * pager.currentPage }} {{ 'PAGING_OF' | translate }} {{ pager.totalRecords }} {{ 'PAGING_ENTRIES'
+            | translate }}
+        </span>
+    </div>
+</div>

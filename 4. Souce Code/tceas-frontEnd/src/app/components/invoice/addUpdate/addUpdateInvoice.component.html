@@ -1,0 +1,391 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!invoice.isUpdate">{{ 'INVOICE_TITLE' | translate }} - {{ 'LBL_ADD' | translate }}</h3>
+            <h3 *ngIf="invoice.isUpdate">{{ 'INVOICE_TITLE' | translate }} - {{ 'LBL_UPDATE' | translate }}</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li class="active">{{ 'INVOICE_TITLE' | translate }}</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-info pull-right mg-button" *ngIf="!invoice.isUpdate" (click)="frm.ngSubmit.emit()">{{ 'BUTTON_FINALIZE' | translate }}</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button" *ngIf="invoice.isUpdate">{{ 'BUTTON_PRINT' | translate }}</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">{{ 'BUTTON_BACK' | translate }}</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <form class="form-horizontal" role="form" action="#" (ngSubmit)="addUpdate()" #frm="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-body scroll-data">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Invoice No:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="code" [(ngModel)]="invoiceList.code">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">RO No.:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="roNoId" name="roNo" [(ngModel)]="invoiceList.roNo" (keyup.enter)="filterRO($event)"
+                                (keydown.Tab)="filterRO($event)">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Service Advisor name:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="serviceAdvisor" [(ngModel)]="invoiceList.serviceAdvisor">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Customer: </label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="customerName" [(ngModel)]="invoiceList.customerName">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Sender:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="sender" [(ngModel)]="invoiceList.sender">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">{{ 'LBL_REG_NO' | translate }}:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="reg" [(ngModel)]="invoiceList.reg">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">{{ 'LBL_CHASSIS_NO' | translate }}:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="chas" [(ngModel)]="invoiceList.chas">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Purchased Date:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="purchased" [(ngModel)]="invoiceList.purchased">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">{{ 'INV_DATE_TIME' | translate }}:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="invoiceDateTime" [(ngModel)]="invoiceList.invoiceDateTime">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">{{ 'RO_DATE_TIME' | translate }}:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="roDateTime" [(ngModel)]="invoiceList.roDateTime">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Mobile No.:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="mobileNo" [(ngModel)]="invoiceList.mobileNo">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Sender Mobile No.:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="senderMobileNo" [(ngModel)]="invoiceList.senderMobileNo">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Vehicle: </label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="vehicle" [(ngModel)]="invoiceList.vehicle">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Engine No.:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" readonly name="engineNo" [(ngModel)]="invoiceList.engineNo">
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Bill to Third Party:</label>
+                        <div class="col-sm-7">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" class="styled" id="chkbox" (click)="checkBox()">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-4 control-label">Third Party approval name:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" name="saName" id="thirdPT" disabled name="thirdPT" [(ngModel)]="invoiceList.thirdPT">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Remarks:</label>
+                        <div class="col-sm-10">
+                            <textarea rows="5" cols="5" class="form-control" name="remarks" [(ngModel)]="invoiceList.remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <searchRONo-addUpdate></searchRONo-addUpdate>
+                <div class="tabbable page-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="tables_dynamic.html#inside" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i>Invoice Details</a>
+                        </li>
+                        <li>
+                            <a href="tables_dynamic.html#outside" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i>Warranty</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- First tab content -->
+                        <div class="tab-pane active fade in" id="inside">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="datatable mg-bottom-15px">
+                                        <table class="table table-bordered dataTable no-footer">
+                                            <thead>
+                                                <tr>
+                                                    <th>Package</th>
+                                                    <th>Job</th>
+                                                    <th>Job Type</th>
+                                                    <th>Labor Charge</th>
+                                                    <th>Discount</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of jobList">
+                                                    <td>{{item.package}}</td>
+                                                    <td>{{item.job}}</td>
+                                                    <td>{{item.jobType}}</td>
+                                                    <td>{{item.labor}}</td>
+                                                    <td>{{item.discout}}</td>
+                                                    <td>{{item.subTotal}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- End Job (Labour) -->
+                                    <jobLabour-addUpdate></jobLabour-addUpdate>
+                                    <!-- Part -->
+                                    <div class="datatable mg-bottom-15px">
+                                        <table class="table table-bordered dataTable no-footer">
+                                            <thead>
+                                                <tr>
+                                                    <th>Job</th>
+                                                    <th>Part</th>
+                                                    <th>Part Source</th>
+                                                    <th>Qty</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Discount</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of partList">
+                                                    <td>{{item.job}}</td>
+                                                    <td>{{item.part}}</td>
+                                                    <td>{{item.partSource}}</td>
+                                                    <td>{{item.requestQty}}</td>
+                                                    <td>{{item.unitPrice}}</td>
+                                                    <td>{{item.discountAmt}}</td>
+                                                    <td>{{item.subTotal}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- End Part -->
+                                    <part-addUpdate></part-addUpdate>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End First tab content -->
+                        <!-- Second tab content -->
+                        <div class="tab-pane fade" id="outside">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <!--Warranty-->
+                                    <div class="datatable">
+                                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper no-footer">
+                                            <div class="datatable-scroll">
+                                                <table class="table table-bordered dataTable no-footer" id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item (Job/Part)</th>
+                                                            <th>Description</th>
+                                                            <th>Type</th>
+                                                            <th>Qty</th>
+                                                            <th>Supplier</th>
+                                                            <th>Amount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                            <td>
+                                                                <select name="select" class="form-control">
+                                                                    <option value="opt1">Job</option>
+                                                                    <option value="opt2">Part</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                            <td>
+                                                                <select name="select" class="form-control">
+                                                                    <option value="opt1">Job</option>
+                                                                    <option value="opt2">Part</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                            <td>
+                                                                <select name="select" class="form-control">
+                                                                    <option value="opt1">Job</option>
+                                                                    <option value="opt2">Part</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group pull-right">
+                                                <label class="col-sm-5 control-label">Total Claim Amt</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End Warranty-->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Second tab content -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group summary-margin-bottom">
+                        &nbsp;
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        &nbsp;
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label">Payment Mode </label>
+                        <label class="col-sm-4 control-label text-right">Amount (RM) </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-8 control-label">Credit Card (HONG LELONG VISA) </label>
+                        <div class="col-sm-4 text-right">
+                            <p class="form-control-static under-line">5,300.00</p>
+                        </div>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-12 control-label">Advance (OR No.: XXXXXXXX dated DD/MM/YYYY) </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-6 control-label text-right">Total Labour Charge: </label>
+                        <div class="col-sm-5 text-right">
+                            <p class="form-control-static under-line">{{summaryList.totalLaburCharge}}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-6 control-label text-right">Labour Discount: </label>
+                        <div class="col-sm-5 text-right">
+                            <p class="form-control-static under-line">{{summaryList.laburDiscount}}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-6 control-label text-right">Total Part: </label>
+                        <div class="col-sm-5 text-right">
+                            <p class="form-control-static under-line">{{summaryList.totalPartAmt}}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-6 control-label text-right">Part Discount: </label>
+                        <div class="col-sm-5 text-right">
+                            <p class="form-control-static under-line">{{summaryList.partDiscount}}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-6 control-label text-right">Additional Discount:</label>
+                        <div class="col-sm-5 text-right">
+                            <p class="form-control-static under-line">{{summaryList.additionalDiscount}}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-6 control-label text-right">Total Before Tax:</label>
+                        <div class="col-sm-5 text-right">
+                            <p class="form-control-static under-line">{{summaryList.totalBeforeTax}}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group summary-margin-bottom">
+                        <label class="col-sm-6 control-label text-right">Tax:</label>
+                        <div class="col-sm-5 text-right">
+                            <p class="form-control-static under-line">{{summaryList.taxAmt}}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label text-right">Total After Tax: </label>
+                        <div class="col-sm-5 text-right">
+                            <p class="form-control-static under-line">{{summaryList.totalAfterTaxAmt}}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label text-right">Rounding Adjustment: </label>
+                        <div class="col-sm-5 text-right">
+                            <p class="form-control-static under-line">{{summaryList.roundingAdjustment}}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label text-right">Total Amount Payable: </label>
+                        <div class="col-sm-5 text-right">
+                            <p class="form-control-static under-line">{{summaryList.totalAmountPayable}}</p>
+                        </div>
+                        <label class="control-label">MYR </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,33 @@
+.panel .table-bordered > tbody > tr:first-child > td,
+.panel .table-bordered > thead > tr:first-child > th {
+    border-bottom: 1px solid #ddd;
+}
+
+.ridge {
+    border: 1px solid;
+    }
+
+.title-bg {
+    background: #b3b3cc;
+}
+
+.title-margin {
+    margin-left: 15px;
+}
+
+.column-width {
+    width: 25%;
+    padding: 0px;
+    vertical-align: top;
+}
+
+.item-margin-top {
+    margin-left: 0px;
+    margin-right: 0px; 
+    margin-bottom: 5px;
+}
+
+.td-padding {
+    padding: 0px !important;
+    vertical-align: top;
+}

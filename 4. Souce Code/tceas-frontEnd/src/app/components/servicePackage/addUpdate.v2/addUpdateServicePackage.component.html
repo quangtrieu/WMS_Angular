@@ -1,0 +1,196 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Service Package - Add</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li class="active">Service Package</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-info pull-right mg-button">Save</button>
+        <button type="submit" class="btn btn-sm btn-default pull-right mg-button">Back</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form class="form-horizontal" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-body scroll-data">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Type*: </label>
+                        <div class="col-sm-8">
+                            <select name="select" class="form-control">
+                                <option value="opt1">PMS - Periodic Mantenance Service</option>
+                                <option value="opt2">FMS- Free Mantenance Service</option>
+                                <option value="opt1">CAM -Campaign</option>
+                                <option value="opt2">NPMP -NPMP</option>
+                                <option value="opt1">REC-Recall</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Code*:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="register">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Description*:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="description">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Active : </label>
+                        <div class="col-sm-8">
+                            <label class="radio-inline">
+                                <input type="radio" name="inline-radio" class="styled" checked> Yes
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="inline-radio" class="styled"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Version:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="version" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Effective from *: </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="date" name="date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Effective to: </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="date" name="date">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right">Model:</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">SUNNY</option>
+                                    <option value="opt2">SUNNY</option>
+                                    <option value="opt1">SUNNY</option>
+                                    <option value="opt2">SUNNY</option>
+                                    <option value="opt1">SUNNY</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right">Model Variant:</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">SUNNY 1.5 M</option>
+                                    <option value="opt2">SUNNY 1.5 M</option>
+                                    <option value="opt1">SUNNY 1.5 M</option>
+                                    <option value="opt2">SUNNY 1.5 M</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right">Job Group:</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">AA</option>
+                                    <option value="opt2">BB</option>
+                                    <option value="opt1">CC</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right">Job:</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">AA01</option>
+                                    <option value="opt2">AA02</option>
+                                    <option value="opt1">AA03</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right">Part:</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">E123456</option>
+                                    <option value="opt2">E123456</option>
+                                    <option value="opt1">E123456</option>
+                                    <option value="opt2">E123456</option>
+                                    <option value="opt1">E123456</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right">Qty:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" value="1" style="text-align: right" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row form-group pull-right">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-info pull-right">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="datatable mg-bottom-15px">
+                    <table class="table table-bordered dataTable no-footer">
+                        <thead>
+                            <tr>
+                                <th>Model Variant</th>
+                                <th>Job</th>
+                                <th>Part</th>
+                                <th>Qty</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>New X-trail 2.5L 4WD</td>
+                                <td>AA01</td>
+                                <td>E001</td>
+                                <td>1</td>
+                                <td>
+                                    <span data-icon="&#xe0d7;"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>New X-trail 2.5L 4WD</td>
+                                <td>AA01</td>
+                                <td>E001</td>
+                                <td>1</td>
+                                <td>
+                                    <span data-icon="&#xe0d7;"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

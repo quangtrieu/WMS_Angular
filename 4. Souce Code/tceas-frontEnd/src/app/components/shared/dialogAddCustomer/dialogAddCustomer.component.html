@@ -1,0 +1,90 @@
+<div id="dialogCustomerAdd-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="onCloseDialog()" aria-hidden="true" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Customer - Add</h4>
+            </div>
+            <form #frmCustomer="ngForm" (ngSubmit)="frmCustomer.form.valid && onAddCustomer(customer)" class="form-horizontal" role="form">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- <div class="form-group" *ngIf="">
+                                    <label class="col-sm-4 control-label">Customer Code<span class="red">*</span>: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="code" [(ngModel)]="customer.code" required #code="ngModel">
+                                        <label class="error" *ngIf="code.errors && code.errors.required && (code.dirty || code.touched || frmCustomer._submitted)">
+                                            Customer code is required
+                                        </label>
+                                    </div>
+                                </div> -->
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Customer Name<span class="red">*</span>: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="name" [(ngModel)]="customer.name" required #name="ngModel">
+                                        <label class="error" *ngIf="name.errors && name.errors.required && (name.dirty || name.touched || frmCustomer._submitted)">
+                                            Customer name is required
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Customer Type<span class="red">*</span>:</label>
+                                    <div class="col-sm-8">
+                                        <!-- <select name="customerType" class="form-control" required [(ngModel)]="customer.customerType" #customerType="ngModel">
+                                            <option value="0">Individual</option>
+                                            <option value="1">Corporate</option>
+                                        </select> -->
+                                        <p-dropdown [options]="customerTypeObjects" [style]="{'width': '100%'}" #customerType [(ngModel)]="customer.customerType"
+                                            name="customerType" styleClass="ui-column-filter ui-dropdow-custom" placeholder="----- SELECT -----" required>
+                                        </p-dropdown>
+                                        <label class="error" *ngIf="customerType.errors && customerType.errors.required && (customerType.dirty || customerType.touched || frmCustomer._submitted)">
+                                            Customer type is required
+                                        </label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Mobile No.:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">ID Type<span class="red">*</span>: </label>
+                                    <div class="col-sm-8">
+                                        <!-- <select name="select" class="form-control" name="idType" [(ngModel)]="customer.idType" #idType="ngModel">
+                                            <option value="1">NIC-INDIVIDUAL IDENTIFICATION</option>
+                                            <option value="2">CRN-COMPANY REGISTRATION</option>
+                                            <option value="3">PP-PASSPORT</option>
+                                        </select> -->
+                                        <p-dropdown [options]="pdIdType" [style]="{'width': '100%'}" #pdIdTypeId [(ngModel)]="customer.pdIdTypeId" name="pdIdTypeId"
+                                                styleClass="ui-column-filter ui-dropdow-custom" placeholder="----- SELECT -----" required >
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">ID No.<span class="red">*</span>:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="idNumber" [(ngModel)]="customer.idNumber" required #idNumber="ngModel">
+                                        <label class="error" *ngIf="idNumber.errors && idNumber.errors.required && (idNumber.dirty || idNumber.touched || frmCustomer._submitted)">
+                                            Id number is required
+                                        </label>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="form-actions text-right panel-heading">
+                            <button type="submit" class="btn btn-primary" [disabled]="!frmCustomer.form.valid">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

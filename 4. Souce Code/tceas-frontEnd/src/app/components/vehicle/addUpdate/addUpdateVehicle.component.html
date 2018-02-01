@@ -1,0 +1,302 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!vehicle.id">Vehicle - Add</h3>
+            <h3 *ngIf="vehicle.id">Vehicle - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active">Vehicle</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-info pull-right mg-button" (click)="frmVehicle.ngSubmit.emit()" [disabled]="!isValidRegistration">Save</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button" routerLink="/vehicle/Search">Back</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form #frmVehicle="ngForm" id="frmVehicle" (ngSubmit)="addUpdate(frmVehicle.form)" class="form-horizontal" role="form">
+        <input type="hidden" name="id" id="hdId" [(ngModel)]="vehicle.id" #id="ngModel" />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Registration No.<span class="red">*</span>:</label>
+                            <div class="col-sm-8 has-feedback" [ngClass]="{'has-error': !isValidRegistration}" [ngClass]="{'has-success': isValidRegistration}">
+                                <input type="text" class="form-control" id="registrationNo" name="txtRegistrationNo" required [(ngModel)]="vehicle.registrationNo"
+                                    #registrationNo="ngModel" (blur)="checkExistRegistrationNo($event)" (keyup.enter)="checkExistRegistrationNo($event)" (keydown.Tab)="checkExistRegistrationNo($event)" [disabled]="vehicle.id ? true : false">
+                                <i *ngIf="isProcessing" class="icon-spinner7 spin form-control-feedback"></i>
+                                <i *ngIf="!isValidRegistration" class="icon icon-warning form-control-feedback"></i>
+                                <i *ngIf="isValidRegistration && vehicle.registrationNo" class="icon icon-checkmark3 form-control-feedback"></i>
+                                <label class="error" *ngIf="!isValidRegistration">
+                                    Record already exists
+                                </label>
+                                <label class="error" *ngIf="registrationNo.errors && registrationNo.errors.required && (registrationNo.dirty || registrationNo.touched || frmVehicle._submitted)">
+                                    RegistrationNo is required
+                                </label>
+                                <!-- <label class="error" *ngIf="isExistRegistrationNo">
+                                    RegistrationNo is existed
+                                </label> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Make<span class="red">*</span>:</label>
+                            <div class="col-sm-8">
+                                <!-- <select id="slcVehicleMake" name="vehicleMakeId" class="form-control" required [(ngModel)]="vehicle.vehicleMakeId" #vehicleMakeId="ngModel"
+                                    (change)="onChangeVehicleMake()">
+                                    <option *ngFor="let item of vehicleMakeList" [ngValue]="item.id">{{item.code}} - {{item.description}}</option>
+                                </select> -->
+                                <p-autoComplete #autoCompleteVehicleMake name="vehicleMake" [suggestions]="vehicleMakeList" [(ngModel)]="vehicle.vehicleMake" field="display" (completeMethod)="filterVehicleMake(false)"
+                                    [forceSelection]="true" [autoHighlight]="true" [dropdown]="true" emptyMessage="No results found" [style]="{'width': '100%'}"
+                                    required #vehicleMake="ngModel" (onSelect)="filterVehicleModel(false)" [disabled]="!isValidRegistration">
+                                </p-autoComplete>
+                                <!-- <p-dropdown [options]="vehicleMakeList" [style]="{'width': '100%'}" #vehicleMakeId [(ngModel)]="vehicle.vehicleMakeId"
+                                                        name="vehicleMakeId" styleClass="ui-column-filter ui-dropdow-custom" placeholder="----- SELECT -----">
+                                </p-dropdown> -->
+                                <label class="error" *ngIf="vehicleMake.errors && vehicleMake.errors.required && (vehicleMake.dirty || vehicleMake.touched || frmVehicle._submitted)">
+                                    Vehicle Make is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Model<span class="red">*</span>:</label>
+                            <div class="col-sm-8">
+                                <!-- <select name="vehicleModelId" id="slcVehicleModel" class="form-control" required [(ngModel)]="vehicle.vehicleModelId" #vehicleModelId="ngModel"
+                                    (change)="onChangeVehicleModel()">
+                                    <option *ngFor="let item of vehicleModelList" [ngValue]="item.id">{{item.code}} - {{item.description}}</option>
+                                </select> -->
+                                <p-autoComplete #autoCompleteVehicleModel name="vehicleModel" [suggestions]="vehicleModelList" [(ngModel)]="vehicle.vehicleModel" field="display"
+                                    (completeMethod)="filterVehicleModel(false)" (onSelect)="filterVehicleVariant(false)" [forceSelection]="true" [autoHighlight]="true"
+                                    [dropdown]="true" emptyMessage="No results found" required #vehicleModel="ngModel" [disabled]="!isValidRegistration">
+                                </p-autoComplete>
+                                <label class="error" *ngIf="vehicleModel.errors && vehicleModel.errors.required && (vehicleModel.dirty || vehicleModel.touched || frmVehicle._submitted)">
+                                    Vehicle Model is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Variant<span class="red">*</span>:</label>
+                            <div class="col-sm-8">
+                                <!-- <select name="vehicleVariantId" id="slcVehicleVariant" class="form-control" required [(ngModel)]="vehicle.vehicleVariantId"
+                                    #vehicleVariantId="ngModel">
+                                    <option *ngFor="let item of modelVariantList" [ngValue]="item.id">{{item.code}} - {{item.description}}</option>
+                                </select> -->
+                                <p-autoComplete #autoCompleteVehicleVariant name="vehicleVariant" [suggestions]="modelVariantList" [(ngModel)]="vehicle.vehicleVariant" field="display"
+                                    (completeMethod)="filterVehicleVariant(false)" (onSelect)="onVehicleVariantSelect()" [forceSelection]="true" [autoHighlight]="true"
+                                    [dropdown]="true" emptyMessage="No results found" required #vehicleVariant="ngModel" [disabled]="!isValidRegistration">
+                                </p-autoComplete>
+                                <label class="error" *ngIf="vehicleVariant.errors && vehicleVariant.errors.required && (vehicleVariant.dirty || vehicleVariant.touched || frmVehicle._submitted)">
+                                    Model Variant is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Chassis No<span class="red">*</span>:</label>
+                            <div class="col-sm-8 has-feedback" >
+                                <input type="text" class="form-control" id="txtChassisNo" name="chassisNo" required [(ngModel)]="vehicle.chassisNo" #chassisNo="ngModel" 
+                                    (blur)="checkChassisNo($event)" (keyup.enter)="checkChassisNo($event)" (keydown.Tab)="checkChassisNo($event)" [disabled]="!isValidRegistration">
+                                <i *ngIf="isProcessingCheck" class="icon-spinner7 spin form-control-feedback"></i>
+                                <i *ngIf="isValidChassisNo && vehicle.chassisNo" class="icon icon-checkmark3 form-control-feedback"></i>
+                                <label class="error" *ngIf="chassisNo.errors && chassisNo.errors.required && (chassisNo.dirty || chassisNo.touched || frmVehicle._submitted)">
+                                    Model Variant is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Engine No:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="txtEngineNo" name="engineNo" required [(ngModel)]="vehicle.engineNo" #engineNo="ngModel" [disabled]="!isValidRegistration">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Owner:</label>
+                            <div class="col-sm-8">
+                                <!-- <input type="text" class="form-control" name="customerName" [disabled]="vehicle.id ? true : false" 
+                                    [(ngModel)]="customer.name" id="txtCustomerName" #customerName="ngModel" disabled> -->
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="customerName" id="customerName" id="customerName" readonly required [(ngModel)]="customer.name"
+                                        #customerName="ngModel">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" (click)="onShowAddCustomerDialog()" [disabled]="vehicle.id ? true : false"><span data-icon="&#xe0c2;"></span></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">ID No.:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="customerIdNumber" [(ngModel)]="customer.idNumber" #customerIdNumber="ngModel"
+                                    id="txtCustomerIdNumber" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Mobile No.:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="customerContact" [(ngModel)]="customer.contact" #customerContact="ngModel"
+                                    id="txtCustomerContact" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Registration Date: </label>
+                            <div class="col-sm-8 pull-right">
+                                <input class="form-control" type="date" name="registrationDate" id="txtRegistrationDate" [(ngModel)]="vehicle.registrationDate"
+                                    #registrationDate="ngModel">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Purchase Date: </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="date" name="purchaseDate" id="txtPurchaseDate" required [(ngModel)]="vehicle.purchaseDate"
+                                    #purchaseDate="ngModel">
+                                <label class="error" *ngIf="purchaseDate.errors && purchaseDate.errors.required && (purchaseDate.dirty || purchaseDate.touched || frmVehicle._submitted)">
+                                    Purchase Date is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Niscare/RenCare:</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="care" id="rdoNiscare" class="styled" 
+                                        [(ngModel)]="vehicle.niscareOrRenCare" [value]="1">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="care" id="rdoRencare" class="styled" 
+                                        [(ngModel)]="vehicle.niscareOrRenCare" [value]="0">
+									No
+								</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">NPMP: </label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+                                    <input type="radio" name="npmp" id="rdoNpmpYes" class="styled" 
+                                        [(ngModel)]="vehicle.npmp" [value]="1">
+                                    Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="npmp" id="rdoNpmpNo" class="styled" 
+                                        [(ngModel)]="vehicle.npmp" [value]="0">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="vehicle.id">
+                            <label class="col-sm-4 control-label">Active : </label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+                                    <input type="radio" name="inline-radio" id="rdoActive" class="styled"
+                                        [(ngModel)]="vehicle.status" [value]="true">
+                                    Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="inline-radio" id="rdoInactive" class="styled" 
+                                        [(ngModel)]="vehicle.status" [value]="false">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>Warranty Information</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Standard Warranty Milleage:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="txtStandardWarrantyMilleage" name="warrantyMilleage" [(ngModel)]="vehicle.warrantyMilleage"
+                                    #warrantyMilleage="ngModel">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Expiry Date:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="date" id="txtWarrantyExpiryDate" name="warrantyExpiryDate" [(ngModel)]="vehicle.warrantyExpiryDate"
+                                    #warrantyExpiryDate="ngModel">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Extended Warranty Milleage:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="txtExtendedWarrantyMilleage" name="extendedWarrantyMilleage" [(ngModel)]="vehicle.extendedWarrantyMilleage"
+                                    #extendedWarrantyMilleage="ngModel">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Extended Expiry Date:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="date" name="extendedExpiryDate" [(ngModel)]="vehicle.extendedExpiryDate" #extendedExpiryDate="ngModel"
+                                    id="txtExtendedExpiryDate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-heading" [hidden]="!vehicle.id">
+                    <h6 class="panel-title"><i class="icon-checkbox-partial"></i> Ownership History:</h6>
+                </div>
+                <div class="datatable-addUpdateVehicleProfile" [hidden]="!vehicle.id">
+                    <table class="table table-bordered table-top">
+                        <thead>
+                            <tr>
+                                <th class="collumn-checkbox">
+                                    <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                </th>
+                                <th>No.</th>
+                                <th>Registration No.</th>
+                                <th>Owner</th>
+                                <th>Stard Date</th>
+                                <th>End Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                </td>
+                                <td>1</td>
+                                <td>NAE8153</td>
+                                <td>TRẦN VĂN TUẤN</td>
+                                <td>5/5/2012</td>
+                                <td>5/5/2015</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                </td>
+                                <td>2</td>
+                                <td>NAE8153</td>
+                                <td>TRẦN VĂN TRUNG</td>
+                                <td>5/5/2012</td>
+                                <td>5/5/2015</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                </td>
+                                <td>3</td>
+                                <td>NAE8153</td>
+                                <td>TRỊNH HOÀNG THẮNG</td>
+                                <td>5/5/2012</td>
+                                <td>5/5/2015</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+<dialogCustomer-list (bindCustomer)="bindCustomer($event)" [isAddCustomer]="false"></dialogCustomer-list>

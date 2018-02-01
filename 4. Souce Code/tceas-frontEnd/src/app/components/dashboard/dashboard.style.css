@@ -1,0 +1,27 @@
+.vehicle-registration-result{
+  padding-top: 30px;
+}
+.vehicle-registration-result-close{
+    padding-top:20px;padding-right:15px
+}
+
+.dashboard-table-bordered>thead>tr>th, 
+.dashboard-table-bordered>tbody>tr>th, 
+.dashboard-table-bordered>tfoot>tr>th, 
+.dashboard-table-bordered>thead>tr>td, 
+.dashboard-table-bordered>tbody>tr>td, 
+.dashboard-table-bordered>tfoot>tr>td{
+    border: 1px solid #ddd;
+}
+
+.collumn-checkbox {
+    width: 10px;
+}
+
+.dashboard-service-history table{
+    width: 1500px;
+}
+
+.overflow{
+    overflow-x:auto;
+}

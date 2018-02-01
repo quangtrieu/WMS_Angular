@@ -1,0 +1,28 @@
+# development
+	npm run server - npm start
+# production
+	npm run build:prod
+	npm run server:prod
+	
+
+baseApiUrl: 'http://104.197.236.159:5555', // This will remove later
+baseApiMasterDataUrl: 'http://104.197.236.159:5555',
+baseCQRSApiUrl: 'http://104.197.236.159:5000',
+baseJobApiUrl: 'http://104.197.236.159:5100',
+basePartApiUrl: 'http://104.197.236.159:5200',
+baseRepairOrderApiUrl: 'http://104.197.236.159:5300',
+baseAppoinmentApiUrl: 'http://104.197.236.159:5400',
+baseApiServicePackageUrl: 'http://104.197.236.159:5500', 
+
+# Setup VM (Umbutu 14.04)
+- Install Node 
+- Install Mongo
+- Install Redis
+- Install Git
+- Install PM2
+- Install ngix
+- Development:
+  0. Use git to clone and update the source code
+  1. Register api services with PM2
+  2. Start all api services on PM2
+  3. Deploy frontend to 'dist' folder and point ngix to that folder  

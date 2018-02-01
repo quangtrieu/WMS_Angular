@@ -1,0 +1,210 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Warranty Claim Validation Search</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li>Warranty Claim Validation</li>
+        </ul>
+
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+        </div>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe158;"></span> Delete</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe27f;"></span> Copy</button>
+        <button data-toggle="modal" type="button" class="btn btn-sm btn-info pull-right mg-button" href="#default-modal" routerLink="/wcValidation/Add"><span data-icon="&#xe104;"></span> Add</button>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <div class="datatable-searchWCValidation">
+        <table class="table table-bordered table-custom table-top">
+            <thead>
+                <tr>
+                    <th class="collumn-checkbox">
+                        <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                    </th>
+                    <th>Validation Matrix code</th>
+                    <th>Description</th>
+                    <th>Active</th>
+                    <th>Version</th>
+                    <th>Effective From</th>
+                    <th>Effective to</th>
+                    <th>Created by</th>
+                    <th>Modified by</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>
+                        <!--<div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>-->
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <!--<input type="text" class="form-control" placeholder="Filter">-->
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/wcValidation/Update', 1]">VM00001</a></td>
+                    <td>Validation Matrix code no 1</td>
+                    <td>YES</td>
+                    <td>1</td>
+                    <td>6/6/2015</td>
+                    <td>6/6/2017</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/wcValidation/Update', 1]">VM00002</a></td>
+                    <td>Validation Matrix code no 2</td>
+                    <td>YES</td>
+                    <td>1</td>
+                    <td>6/6/2015</td>
+                    <td>6/6/2017</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/wcValidation/Update', 1]">VM00003</a></td>
+                    <td>Validation Matrix code no 3</td>
+                    <td>YES</td>
+                    <td>1</td>
+                    <td>6/6/2015</td>
+                    <td>6/6/2017</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/wcValidation/Update', 1]">VM00004</a></td>
+                    <td>Validation Matrix code no 4</td>
+                    <td>YES</td>
+                    <td>1</td>
+                    <td>6/6/2015</td>
+                    <td>6/6/2017</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/wcValidation/Update', 1]">VM00005</a></td>
+                    <td>Validation Matrix code no 5</td>
+                    <td>YES</td>
+                    <td>1</td>
+                    <td>6/6/2015</td>
+                    <td>6/6/2017</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/wcValidation/Update', 1]">VM00006</a></td>
+                    <td>Validation Matrix code no 6</td>
+                    <td>YES</td>
+                    <td>1</td>
+                    <td>6/6/2015</td>
+                    <td>6/6/2017</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/wcValidation/Update', 1]">VM00008</a></td>
+                    <td>Validation Matrix code no 8</td>
+                    <td>YES</td>
+                    <td>1</td>
+                    <td>6/6/2015</td>
+                    <td>6/6/2017</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/wcValidation/Update', 1]">VM00009</a></td>
+                    <td>Validation Matrix code no 9</td>
+                    <td>YES</td>
+                    <td>1</td>
+                    <td>6/6/2015</td>
+                    <td>6/6/2017</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/wcValidation/Update', 1]">VM00010</a></td>
+                    <td>Validation Matrix code no 10</td>
+                    <td>YES</td>
+                    <td>1</td>
+                    <td>6/6/2015</td>
+                    <td>6/6/2017</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                    </td>
+                    <td><a [routerLink]="['/wcValidation/Update', 1]">VM00011</a></td>
+                    <td>Validation Matrix code no 11</td>
+                    <td>YES</td>
+                    <td>1</td>
+                    <td>6/6/2015</td>
+                    <td>6/6/2017</td>
+                    <td>Admin</td>
+                    <td>Admin</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

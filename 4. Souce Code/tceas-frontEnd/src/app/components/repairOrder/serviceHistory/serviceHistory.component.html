@@ -1,0 +1,26 @@
+<div class="datatable-service-history">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>RO No</th>
+                <th>RO date</th>
+                <th>Invoice No</th>
+                <th>Invoice date</th>
+                <th>Invoice Amount</th>
+                <th>Workshop</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of serviceHistories let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.roNo}}</td>
+                <td>{{item.roDate | date: appConfig.config.formatDateTime}}</td>
+                <td>{{item.invoiceNo}}</td>
+                <td>{{item.invoiceDate | date: appConfig.config.formatDateTime}}</td>
+                <td>{{item.invoiceAmount}}</td>
+                <td>{{item.workShop}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

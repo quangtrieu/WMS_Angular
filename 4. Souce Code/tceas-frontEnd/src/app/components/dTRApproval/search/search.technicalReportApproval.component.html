@@ -1,0 +1,450 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>{{'TR_TITLE_APP'|translate}} - {{'LBL_SEARCH'|translate}}</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">{{'LBL_HOME'|translate}}</a>
+            </li>
+            <li>{{'TR_TITLE_APP'|translate}}</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons">
+                <i class="icon-menu2"></i>
+            </a>
+        </div>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+            <span data-icon="&#xe24c;"></span> Export</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+            <span data-icon="&#xe158;"></span> Print</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button" (click)="modalReject.open()">
+            <span data-icon="&#xe0d3;"></span> Reject</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button" (click)="modalReject.open()">
+            <span data-icon="&#xe0cd;" (click)="modal.open()"></span> Return</button>
+        <button data-toggle="modal" type="button" class="btn btn-sm btn-info pull-right mg-button" href="#default-modal" (click)="modal.open()">
+            <span data-icon="&#xe2aa;"></span> {{BUTTON_APPROVE|translate}}</button>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <modal #modal>
+        <modal-header>
+            <h4 class="modal-title">Approval technical report</h4>
+        </modal-header>
+        <modal-body style="border: none!important">
+            <div class="modal-body with-padding">
+                <p> Are you sure to update the record? Please confirm before procced</p>
+            </div>
+        </modal-body>
+        <modal-footer>
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modal.dismiss()">NO</button>
+            <button type="button" class="btn btn-primary" (click)="modal.close()">YES</button>
+        </modal-footer>
+    </modal>
+
+    <modal #modalReject>
+        <modal-header>
+            <h4 class="modal-title">Are you sure to update the record? Please select Reason code and confirm to procced.</h4>
+        </modal-header>
+        <modal-body style="border: none!important">
+            <div class="modal-body with-padding" style="text-align: center">
+                <label>Reason code: </label>
+                <select></select>
+            </div>
+        </modal-body>
+        <modal-footer>
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modal.dismiss()">NO</button>
+            <button type="button" class="btn btn-primary" (click)="modal.close()">YES</button>
+        </modal-footer>
+    </modal>
+
+    <table class="table table-bordered table-custom table-top" role="grid">
+        <thead>
+            <tr>
+                <th class="collumn-checkbox">
+                    <div class="">
+                        <span class="checked">
+                            <input type="checkbox" class="styled">
+                        </span>
+                    </div>
+                </th>
+                <th>No.</th>
+                <th>Technical Report No.</th>
+                <th>Technical Report Date</th>
+                <th>Status</th>
+                <th>Purpose</th>
+                <th>Branch</th>
+                <th>Warranty Claim</th>
+                <th>Customer Name</th>
+                <th>Vehicle Registration No</th>
+                <th>Repair Order No.</th>
+                <th>Created by</th>
+                <th>Modified By</th>
+                <th>Modified Date time</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Filter" />
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>1</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060015</a>
+                </td>
+                <td>19/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>WARRANTY CLAIM</td>
+                <td>NISSAN THANH HOA</td>
+                <td>WARRANTY</td>
+                <td>ĐẶNG THẾ CƯỜNG</td>
+                <td>30A14641</td>
+                <td>NHDROW17060019</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>2</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060016</a>
+                </td>
+                <td>20/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>WARRANTY CLAIM</td>
+                <td>NISSAN THANG LONG</td>
+                <td>WARRANTY</td>
+                <td>NGUYỄN MẠNH NAM</td>
+                <td>RN3BABN17DDV00157</td>
+                <td>NHDROW17060029</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>3</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060017</a>
+                </td>
+                <td>20/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>WARRANTY CLAIM</td>
+                <td>NISSAN THANH HOA</td>
+                <td>WARRANTY</td>
+                <td>ĐÀO HẢI NAM</td>
+                <td>30A14641</td>
+                <td>NHDTR17060029</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>4</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060018</a>
+                </td>
+                <td>13/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>TECHNICAL SUPPORT</td>
+                <td>NISSAN THANH HOA</td>
+                <td>WARRANTY</td>
+                <td>LÊ THỊ BÀI</td>
+                <td>30A14544</td>
+                <td>NHDROW17060034</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>5</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060030</a>
+                </td>
+                <td>09/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>WARRANTY CLAIM</td>
+                <td>NISSAN THANH HOA</td>
+                <td>WARRANTY</td>
+                <td>TRỊNH VĂN PHƯƠNG</td>
+                <td>RN3BABN17FDV04023</td>
+                <td>NHDROW17060035</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>6</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060019</a>
+                </td>
+                <td>12/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>TECHNICAL SUPPORT</td>
+                <td>NISSAN HA DONG</td>
+                <td>WARRANTY</td>
+                <td>CHU HỒNG THẮNG</td>
+                <td>RN3BABN17DDV00157</td>
+                <td>NHDROW17060038</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>7</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060020</a>
+                </td>
+                <td>27/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>WARRANTY CLAIM</td>
+                <td>NISSAN THANH HOA</td>
+                <td>WARRANTY</td>
+                <td>ĐỖ KỲ PHƯƠNG</td>
+                <td>RN3BABN17EDV02100</td>
+                <td>NHDROW17060040</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>8</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060021</a>
+                </td>
+                <td>21/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>WARRANTY CLAIM</td>
+                <td>NISSAN THANH HOA</td>
+                <td>WARRANTY</td>
+                <td>ĐỖ VĂN HIỆU</td>
+                <td>30A14544</td>
+                <td>NHDROW17060041</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>9</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060022</a>
+                </td>
+                <td>14/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>TECHNICAL SUPPORT</td>
+                <td>NISSAN THANH HOA</td>
+                <td>WARRANTY</td>
+                <td>HOÀNG VĂN HẠNH</td>
+                <td>RN3BABN17EDV02219</td>
+                <td>NHDROW17060044</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>10</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060023</a>
+                </td>
+                <td>Row</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>TECHNICAL SUPPORT</td>
+                <td>NISSAN THANH HOA</td>
+                <td>WARRANTY</td>
+                <td>NGUYỄN HỮU VINH</td>
+                <td>MNTCC2D23Z0016574</td>
+                <td>NHDROW17060051</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>11</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060024</a>
+                </td>
+                <td>13/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>WARRANTY CLAIM</td>
+                <td>NISSAN THANH HOA</td>
+                <td>WARRANTY</td>
+                <td>NGUYỄN ANH TUẤN</td>
+                <td>30A90519</td>
+                <td>NHDROW17060045</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span class="checked">
+                            <input type="checkbox" name="checkRow" class="styled">
+                        </span>
+                    </div>
+                </td>
+                <td>12</td>
+                <td>
+                    <a routerLink="/trApproval/Update/1">NHDTR17060025</a>
+                </td>
+                <td>09/06/2017</td>
+                <td>
+                    SUBMITTED
+                </td>
+                <td>WARRANTY CLAIM</td>
+                <td>NISSAN THANH HOA</td>
+                <td>WARRANTY</td>
+                <td>ĐỖ VĂN HIỆU</td>
+                <td>RN3BABN17DDV00157</td>
+                <td>NHDROW17060057</td>
+                <td>Admin</td>
+                <td>Admin</td>
+                <td>21/06/2017</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

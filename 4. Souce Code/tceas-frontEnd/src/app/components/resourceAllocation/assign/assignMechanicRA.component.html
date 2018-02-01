@@ -1,0 +1,141 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Update Job Fulfilment</h3>
+       </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="breadcrumb">
+                    <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+                    <li>Job Fulfilment</li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <button type="submit" class="btn btn-sm btn-primary pull-right mg-button">Save</button>
+                <a type="button" routerLink="/resourceAllocation/Search" class="btn btn-sm btn-default pull-right mg-button">Back</a>
+            </div>
+        </div>
+    </div>
+    <!-- /breadcrumbs line -->
+    <div class="scroll-data">
+        <!-- Resource Allocation - Assign Mechanic -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 class="panel-title">Resource Allocation - Assign Mechanic</h5>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Vehicle Registration No.*:</label>
+                            <div class="col-sm-7">
+                                <label>NEW</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Repair Order No.:</label>
+                            <div class="col-sm-7">
+                                <label>RO0001</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Vehicle Registration No.:</label>
+                            <div class="col-sm-7">
+                                <label>VR001</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Service Advisor:</label>
+                            <div class="col-sm-7">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Repair Order Date:</label>
+                            <div class="col-sm-7">
+                                <label>06/29/2017</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Customer:</label>
+                            <div class="col-sm-7">
+                                <label>Nguyen Van A</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Estimated Delivery Time:</label>
+                            <div class="col-sm-7">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/Resource Allocation - Assign Mechanic -->
+
+        <!-- Job Details-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 class="panel-title">Job Details</h5>
+            </div>
+            <div class="panel-body">
+                <div class="job-details-ra">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>Job Code</th>
+                                <th>Job Description</th>
+                                <th>Standard time (hour)</th>
+                                <th>Job Status</th>
+                                <th>Assign to</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>J001</td>
+                                <td>Job 01</td>
+                                <td>0.5</td>
+                                <td>NEW</td>
+                                <td>
+                                    <input type="text" class="tags" value="Mechanic Name A$###$Mechanic Name B">
+                                </td>
+                                <td class="text-center"><button type="button" class="btn btn-default" (click)="assignMechanics()">Assign Mechanics</button></td>
+                            </tr>
+                            <tr>
+                                <td>J001</td>
+                                <td>Job 01</td>
+                                <td>0.5</td>
+                                <td>NEW</td>
+                                <td>
+                                    <input type="text" class="tags" value="Mechanic Name A$###$Mechanic Name B">
+                                </td>
+                                <td class="text-center"><button type="button" class="btn btn-default" (click)="assignMechanics()">Assign Mechanics</button></td>
+                            </tr>
+                            <tr>
+                                <td>J001</td>
+                                <td>Job 01</td>
+                                <td>0.5</td>
+                                <td>NEW</td>
+                                <td></td>
+                                <td class="text-center"><button type="button" class="btn btn-default" (click)="assignMechanics()">Assign Mechanics</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--/Job Details -->
+        <resouceAllocation-assign-dialog></resouceAllocation-assign-dialog>
+        <resouceAllocation-task-detail-dialog></resouceAllocation-task-detail-dialog>
+    </div>
+</div>

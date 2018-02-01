@@ -1,0 +1,67 @@
+<div id="addTimeSlotV2Appointment-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Time Slot</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" action="#">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Workshop: </label>
+                                <div class="col-sm-5">
+                                    <select name="workShop" class="form-control" [(ngModel)]="selectedTimeSlotDetail.workShopId" (change)="changeWorkShop();">
+                                        <option *ngFor="let item of workShops" [ngValue]="item.id">{{item.code}} - {{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="fullcalendar"></div>
+                            <div class="datatable-addTimeSlotV2Appoinmet overflow hide">
+                                <table class="table table-bordered table-custom">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Time</th>
+                                            <th class="text-center">Availability</th>
+                                            <th class="text-center">Time</th>
+                                            <th class="text-center">Availability</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of timeSlotDetailsInCols">
+                                            <td>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="radio-addTimeSlotAppoinmet" [value]="item.id" [(ngModel)]="selectedTimeSlotDetail.id" [attr.disabled]="item.numberOfSlots <= 0?'':null"> {{ item.startTime }}
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                {{ item.numberOfSlots }}
+                                            </td>
+                                            <td>
+                                                <div *ngIf="item.startTime2" class="radio">
+                                                    <label>
+                                                        <input type="radio" name="radio-addTimeSlotAppoinmet" [value]="item.id2" [(ngModel)]="selectedTimeSlotDetail.id" [attr.disabled]="item.numberOfSlots2 <= 0?'':null"> {{ item.startTime2 }}
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                {{ item.startTime2? item.numberOfSlots2:"" }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal" (click)="confirmAppointment()">{{'BTN_CONFIRM' | translate}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{'BUTTON_BACK' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

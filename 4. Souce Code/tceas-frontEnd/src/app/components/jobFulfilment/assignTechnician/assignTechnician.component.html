@@ -1,0 +1,45 @@
+<div id="assignTechnician-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Assign Technicians</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="datatable-assign-mechanic-ra">
+                            <table class="table table-bordered table-custom">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Select</th>
+                                        <th class="text-center">Technician name</th>
+                                        <th class="text-center">Existing tasks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of assignTechnicianSearchResult.rows">
+                                        <td class="collumn-checkbox">
+                                            <input type="checkbox" [(ngModel)]="item.selected">
+                                        </td>
+                                        <td>{{item.technicianName}}</td>
+                                        <td>
+                                            <span *ngFor="let task of item.existingTasks" style="padding-left:10px;">
+                                                <a [routerLink]="['/repairOrder/AddV3', task.repairOrderId]">{{task.repairOrderCode}}</a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" (click)="assignTechnicians(false);">APPLY</button>
+                <button type="button" class="btn btn-info" (click)="assignTechnicians(true);">APPLY ALL</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">BACK</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,370 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <!-- {{ 'LOCALPO.TITLE' | translate }} -->
+            <h3 *ngIf="!lPO.isUpdate">Local Purchase Order - Add</h3>
+            <h3 *ngIf="lPO.isUpdate">Local Purchase Order - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li class="active">Local Purchase Order</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-primary pull-right mg-button" (click)="submitLPO()">Save</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button" routerLink="/lpo/Search">Back</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">Cancel</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">Print</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form #frmLPO="ngForm" class="form-horizontal scroll-data" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">LPO No.: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled name="lPOCode" id="lPOCode" [(ngModel)]="lPO.code">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">RO No.*:</label>
+                            <div class="col-sm-8">
+                                <p-autoComplete name="code" id="code" [suggestions]="ROs" [(ngModel)]="ROSugesstion"
+                                    field="code" (completeMethod)="filterROByCode(false)" [forceSelection]="true" [autoHighlight]="true"
+                                    [dropdown]="true" emptyMessage="No results found" required #code="ngModel" (onSelect)="onLoadROInformation()">
+                                </p-autoComplete>
+
+                                <!-- <input type="text" class="form-control" name="code" id="code" [(ngModel)]="RO.code" required #code="ngModel" (keyup.enter)="onLoadROInformation()"> -->
+                                <label class="error" *ngIf="code.errors && code.errors.required && (code.dirty || code.touched || frmLPO._submitted)">
+                                    RO code is required
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">LPO Date: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled name="lPODate" id="lPODate" [(ngModel)]="lPO.date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">RO Date:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled name="roDate" id="roDate" [(ngModel)]="RO.roDate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">LPO Status: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Customer: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled name="cusName" id="cusName" [(ngModel)]="RO.VehicleCustomer.Customer.name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Sent to (Sublet name)*:</label>
+                            <div class="col-sm-8">
+                                <select id="sltSublet" name="sltSublet" class="form-control" [(ngModel)]="subletId" (change)="bindSubletInfomation()">
+                                    <option value="0">--- Select sublet ---</option>
+                                    <option *ngFor="let itemSublet of subletList" [ngValue]="itemSublet.id">{{ itemSublet.subletName }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Registration No.:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled name="registrationNo" id="registrationNo" [(ngModel)]="RO.VehicleCustomer.registrationNo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Address: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled name="address" id="address" [(ngModel)]="sublet.address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Chassis No.:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled name="chassisNo" id="chassisNo" [(ngModel)]="RO.VehicleCustomer.Vehicle.chassisNo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Payment term*:</label>
+                            <div class="col-sm-8">
+                                <select id="sltPaymentTerm" name="sltPaymentTerm" class="form-control" [(ngModel)]="lPO.pdPaymentTermId">
+                                    <option *ngFor="let item of pdData.pdPaymentTerm" [ngValue]="item.id">{{ item.description }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Engine No.:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled name="engineNo" id="engineNo" [(ngModel)]="RO.VehicleCustomer.Vehicle.engineNo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Sublet GST Posting Group*:</label>
+                            <div class="col-sm-8">
+                                <select id="sltSubletGST" name="sltSubletGST" class="form-control" [(ngModel)]="lPO.pdGSTId">
+                                    <option *ngFor="let item of pdData.pdGST" [ngValue]="item.id">{{ item.description }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Deliver to*:</label>
+                            <div class="col-sm-8">
+                                <select id="sltDeliveryTo" name="sltDeliveryTo" class="form-control" [(ngModel)]="lPO.pdDeliveryToId">
+                                    <option *ngFor="let item of pdData.pdDeliveryTo" [ngValue]="item.id">{{ item.description }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Bill to: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled name="billTo" id="billTo" [(ngModel)]="lPO.billTo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Name:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="lPOName" id="lPOName" [(ngModel)]="lPO.name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Address:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="lPOAddress" id="lPOAddress" [(ngModel)]="lPO.address">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Remarks:</label>
+                        <div class="col-sm-10">
+                            <textarea rows="5" cols="5" class="form-control" name="lPORemarks" id="lPORemarks" [(ngModel)]="lPO.remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="sublet.SubletJobs.length > 0 || sublet.SubletParts.length > 0">
+                    <h3>LPO Details</h3>
+                    <div class="row" *ngIf="filterPurchaseItem(sublet.SubletJobs, false).length > 0 || filterPurchaseItem(sublet.SubletParts, false).length > 0">
+                        <div class="col-md-4" *ngIf="filterPurchaseItem(sublet.SubletJobs, false).length > 0">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Job:</label>
+                                <div class="col-sm-8">
+                                    <select id="sltSubletJob" name="sltSubletJob" class="form-control" [(ngModel)]="itemPurchase.jobId">
+                                        <option *ngFor="let item of filterPurchaseItem(sublet.SubletJobs, false)" [ngValue]="item.jobId">{{ item.JobMaster.description }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" *ngIf="filterPurchaseItem(sublet.SubletParts, false).length > 0">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Part:</label>
+                                <div class="col-sm-8">
+                                    <select id="sltSubletPart" name="sltSubletPart" class="form-control" [(ngModel)]="itemPurchase.partId">
+                                        <option *ngFor="let item of filterPurchaseItem(sublet.SubletParts, false)" [ngValue]="item.partId">{{ item.PartMaster.description }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-sm btn-default mg-button" (click)="addItem()">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="datatable-modelUsage">
+                    <table class="table table-bordered table-top" *ngIf="filterPurchaseItem(sublet.SubletJobs, true).length > 0">
+                        <thead>
+                            <tr>
+                                <th>Job</th>
+                                <th>Unit cost</th>
+                                <th>Tax rate</th>
+                                <th>Tax Amt</th>
+                                <th>Retail Price</th>
+                                <th>Sublet Invoice No.</th>
+                                <th>Sublet Invoice Date</th>
+                                <th>DO No.</th>
+                                <th>Remark</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of filterPurchaseItem(sublet.SubletJobs, true); let i = index">
+                                <td>{{ item.JobMaster?.code }}</td>
+                                <td>
+                                    <input type="text" name="unitCost_{{i}}" id="unitCost_{{i}}" [(ngModel)]="item.unitPrice" style="width:70px; text-align:right">
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <input type="text" name="retailPrice_{{i}}" id="retailPrice_{{i}}" [(ngModel)]="item.retailPrice" style="width:70px; text-align:right">
+                                </td>
+                                <td>
+                                    <input type="text" style="width:100px;">
+                                </td>
+                                <td>
+                                    <input type="text" style="width:100px;">
+                                </td>
+                                <td>
+                                    <input type="text" style="width:70px;">
+                                </td>
+                                <td>
+                                    <input type="text" style="width:70px;">
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-right-icon btn-danger" (click)="deleteItem(item.jobId, true)">
+                                        <span data-icon="&#xe0d7;"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="datatable-modelUsage">
+                    <table class="table table-bordered table-margin" *ngIf="filterPurchaseItem(sublet.SubletParts, true).length > 0">
+                        <thead>
+                            <tr>
+                                <th>Part</th>
+                                <th>UOM</th>
+                                <th>Qty</th>
+                                <th>Unit Cost</th>
+                                <th>Tax rate</th>
+                                <th>Tax Amt</th>
+                                <th>Retail Price</th>
+                                <th>Sublet Invoice No</th>
+                                <th>Sublet Invoice Date</th>
+                                <th>DO No.</th>
+                                <th>Remark</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of filterPurchaseItem(sublet.SubletParts, true); let i = index">
+                                <td>{{ item.PartMaster?.code }}</td>
+                                <td>{{ item.PartMaster?.PDUnitOfMeasure.code }}</td>
+                                <td>{{ item.requestQty }}</td>
+                                <td>
+                                    <input type="text" name="unitCost_{{i}}" id="unitCost_{{i}}" [(ngModel)]="item.unitPrice" style="width:70px; text-align:right">
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <input type="text" name="retailPrice_{{i}}" id="retailPrice_{{i}}" [(ngModel)]="item.retailPrice" style="width:70px; text-align:right">
+                                </td>
+                                <td>
+                                    <input type="text" name="invoiceNo_{{i}}" id="invoiceNo_{{i}}" [(ngModel)]="item.subletInvoiceNo" style="width:70px; text-align:right">
+                                </td>
+                                <td>
+                                    <input type="text" name="invoiceDate_{{i}}" id="invoiceDate_{{i}}" [(ngModel)]="item.subletInvoiceDate" style="width:70px; text-align:right">
+                                </td>
+                                <td>
+                                    <input type="text" name="doNo_{{i}}" id="doNo_{{i}}" [(ngModel)]="item.dONo" style="width:70px; text-align:right">
+                                </td>
+                                <td>
+                                    <input type="text" name="remark_{{i}}" id="remark_{{i}}" [(ngModel)]="item.remark" style="width:70px; text-align:right">
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-right-icon btn-danger" (click)="deleteItem(item.partId, false)">
+                                        <span data-icon="&#xe0d7;"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="col-md-6 pull-right" *ngIf="filterPurchaseItem(sublet.SubletJobs, true).length > 0 || filterPurchaseItem(sublet.SubletParts, true).length > 0">
+                <div class="form-group summary-margin-bottom">
+                    <label class="col-sm-8 control-label text-right">Total before tax Amt:</label>
+                    <div class="col-sm-3 text-right">
+                        <p class="form-control-static under-line">0</p>
+                    </div>
+                    <label class="control-label">MYR </label>
+                </div>
+                <div class="form-group summary-margin-bottom">
+                    <label class="col-sm-8 control-label text-right">Total tax Amt:</label>
+                    <div class="col-sm-3 text-right">
+                        <p class="form-control-static under-line">0</p>
+                    </div>
+                    <label class="control-label">MYR </label>
+                </div>
+                <div class="form-group summary-margin-bottom">
+                    <label class="col-sm-8 control-label text-right">Total LPO Amt:</label>
+                    <div class="col-sm-3 text-right">
+                        <p class="form-control-static under-line">0</p>
+                    </div>
+                    <label class="control-label">MYR </label>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <!--end form-->
+
+</div>

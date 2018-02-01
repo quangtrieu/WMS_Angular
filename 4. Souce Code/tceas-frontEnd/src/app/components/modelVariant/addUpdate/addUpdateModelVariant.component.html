@@ -1,0 +1,88 @@
+<div id="add-update-model-variant-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 *ngIf="modelVariant.id==null" class="modal-title">{{'VARIANT_TITLE' | translate }} - {{'LBL_ADD' | translate }}</h4>
+                <h4 *ngIf="modelVariant.id>0" class="modal-title">{{'VARIANT_TITLE' | translate }} - {{'LBL_UPDATE' | translate }}</h4>
+            </div>
+
+            <form #formModelVariant="ngForm" novalidate class="form-horizontal" role="form" action="#" (ngSubmit)="formModelVariant.form.valid && addUpdate(modelVariant)">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{'VEHICLE_MAKE_TITLE' | translate }}
+                                <span class="red">*</span>: </label>
+                            <div class="col-sm-4">
+                                <p-autoComplete #autoCompleteVariantVehicleMake name="vehicleMake" [suggestions]="vehicleMakes" [(ngModel)]="modelVariant.vehicleMake"
+                                    field="display" (completeMethod)="filterVehicleMake(false)" [forceSelection]="true" [autoHighlight]="true"
+                                    [dropdown]="true" emptyMessage="No results found" required #vehicleMake="ngModel" (onSelect)="filterVehicleModel(false)">
+                                </p-autoComplete>
+                                <label class="error" *ngIf="vehicleMake.errors && vehicleMake.errors.required && (vehicleMake.dirty || vehicleMake.touched || formModelVariant._submitted)">
+                                    {{ 'MSG_REQUIRED_FIELD' | translate }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{'VEHICLE_MODEL_TITLE' | translate }}
+                                <span class="red">*</span>: </label>
+                            <div class="col-sm-4">
+                                <p-autoComplete #autoCompleteVariantVehicleModel name="vehicleModel" [suggestions]="vehicleModels" [(ngModel)]="modelVariant.vehicleModel"
+                                    field="display" (completeMethod)="filterVehicleModel(false)" (onSelect)="onVehicleModelSelect()"
+                                    [forceSelection]="true" [autoHighlight]="true" [dropdown]="true" emptyMessage="No results found"
+                                    required #vehicleModel="ngModel">
+                                </p-autoComplete>
+                                <label class="error" *ngIf="vehicleModel.errors && vehicleModel.errors.required && (vehicleModel.dirty || vehicleModel.touched || formModelVariant._submitted)">
+                                    {{ 'MSG_REQUIRED_FIELD' | translate }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{'LBL_CODE' | translate }}
+                                <span class="red">*</span>: </label>
+                            <div class="col-sm-4 has-feedback" [ngClass]="{'has-error': !isValidCode}" [ngClass]="{'has-success': isValidCode}">
+                                <input type="text" class="form-control" name="code" maxlength="25" [disabled]="modelVariant.isUpdate" id="code" [(ngModel)]="modelVariant.code"
+                                    required #code="ngModel" (keyup)="onKeyPressCode()" />
+                                <i *ngIf="isProcessing" class="icon-spinner7 spin form-control-feedback"></i>
+                                <i *ngIf="!isValidCode" class="icon icon-warning form-control-feedback"></i>
+                                <i *ngIf="isValidCode && modelVariant.code" class="icon icon-checkmark3 form-control-feedback"></i>
+                                <label class="error" *ngIf="code.errors && code.errors.required && (code.dirty || code.touched || formModelVariant._submitted)">
+                                    {{ 'MSG_REQUIRED_FIELD' | translate }}
+                                </label>
+                                <label class="error" *ngIf="!isValidCode">
+                                    {{ 'MSG_RECORD_EXISTS' | translate }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{'LBL_DESCRIPTION' | translate }}
+                                <span class="red">*</span>: </label>
+                            <div class="col-sm-10">
+                                <textarea rows="1" cols="5" class="form-control" placeholder="Description" name="description" [(ngModel)]="modelVariant.description"
+                                    required #description="ngModel"></textarea>
+                                <label class="error" *ngIf="description.errors && description.errors.required && (description.dirty || description.touched || formModelVariant._submitted)">
+                                    {{ 'MSG_REQUIRED_FIELD' | translate }}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" [hidden]="!(modelVariant.id > 0)">
+                            <label class="col-sm-2 control-label">{{'LBL_ACTIVE' | translate }} : </label>
+                            <div class="col-sm-10">
+                                <p-radioButton name="status" value="1" label="Yes" [(ngModel)]="modelVariant.status" id="statusYes"></p-radioButton>
+                                <p-radioButton name="status" value="0" label="No" [(ngModel)]="modelVariant.status" id="statusNo"></p-radioButton>
+                            </div>
+                        </div>
+                        <p class="text-center" *ngIf="modelVariant.errorMessage!=null">
+                            <label class="error">{{modelVariant.errorMessage}}</label>
+                        </p>
+                        <div class="form-actions text-right">
+                            <button type="button" class="btn btn-primary" [disabled]="!formModelVariant.form.valid" (click)="formModelVariant.ngSubmit.emit()">{{ 'BUTTON_SAVE' | translate }}</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'BUTTON_BACK' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

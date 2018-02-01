@@ -1,0 +1,107 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Job Fulfilment Search </h3>
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li>Job Fulfilment</li>
+        </ul>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <div class="search-resouce-allocation">
+        <table class="table table-bordered table-custom">
+            <thead>
+                <tr>
+                    <th>RO Number</th>
+                    <th>RO Date</th>
+                    <th>Allocation Status</th>
+                    <th>Vehicle Registration No.</th>
+                    <th>Vehicle Model Variant</th>
+                    <th>Jobs</th>
+                    <th>Modified By</th>
+                    <th>Modified Date time</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a [routerLink]="['/resourceAllocation/Assgin', 1]">RO1</a></td>
+                    <td>15/5/2017</td>
+                    <td>NEW</td>
+                    <td>VR00001</td>
+                    <td>NX410</td>
+                    <td>J001</td>
+                    <td>Admin</td>
+                    <td>15/5/2017</td>
+                </tr>
+                <tr>
+                    <td><a [routerLink]="['/resourceAllocation/Assgin', 1]">RO2</a></td>
+                    <td>15/5/2015</td>
+                    <td>DONE</td>
+                    <td>VR00001</td>
+                    <td>NX410</td>
+                    <td>J002</td>
+                    <td>Admin</td>
+                    <td>15/5/2015</td>
+                </tr>
+                <tr>
+                    <td><a [routerLink]="['/resourceAllocation/Assgin', 1]">RO2</a></td>
+                    <td>15/5/2015</td>
+                    <td>DONE</td>
+                    <td>VR00001</td>
+                    <td>NX410</td>
+                    <td>J003</td>
+                    <td>Admin</td>
+                    <td>15/5/2015</td>
+                </tr>
+                <tr>
+                    <td><a [routerLink]="['/resourceAllocation/Assgin', 1]">RO2</a></td>
+                    <td>15/5/2015</td>
+                    <td>DONE</td>
+                    <td>VR00001</td>
+                    <td>NX410</td>
+                    <td>J004</td>
+                    <td>Admin</td>
+                    <td>15/5/2015</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

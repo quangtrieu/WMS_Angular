@@ -1,0 +1,118 @@
+<p-growl [(value)]="msgs"></p-growl>
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Repair Order - Search</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li>Repair Order</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+        </div>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe0f8;"></span> Print</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe27f;"></span> Copy</button>
+        <button type="button" class="btn btn-sm btn-info pull-right mg-button" routerLink="/repairOrder/Add">Add_1</button>
+        <button type="button" class="btn btn-sm btn-info pull-right mg-button" routerLink="/repairOrder2/Add">Add_2</button>
+        <button type="button" class="btn btn-sm btn-info pull-right mg-button" routerLink="/repairOrder/AddV3">Add_3</button>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <div class="datatable scroll-data">
+        <div class="dataTables_wrapper no-footer">
+            <div class="datatable-header">
+                <div class="dataTables_length">
+                    <label>
+                        <span>Show:</span>
+                        <!--<select2 [data]="pageSizeObjects" (valueChanged)="onChangePageSize($event)" [width]="100"></select2>-->
+                    </label>
+                </div>
+            </div>
+            <div class="datatable-scroll">
+                <form class="form-horizontal" role="form" action="#" (keydown)="keydownSearch($event)">
+                    <table class="table table-bordered table-top">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                </th>
+                                <th>RO No.</th>
+                                <th>RO Date</th>
+                                <th>Registration No.</th>
+                                <th>Customer</th>
+                                <th>Vehicle</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="Filter">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="Filter">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="Filter">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="Filter">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="Filter">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="Filter">
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of repairOrderList">
+                                <td>
+                                    <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                                </td>
+                                <td><a [routerLink]="['/repairOrder/Update', item.id]">{{item.roNo}}</a></td>
+                                <td>{{item.roDate}}</td>
+                                <td>{{item.registrationNo}}</td>
+                                <td>{{item.customerName}}</td>
+                                <td>{{item.vehivleModelDesc}}</td>
+                                <td>{{item.status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="datatable-footer">
+                <div class="dataTables_info" role="status" aria-live="polite">Showing {{ pager.currentPage }} to {{ pager.pageSize }} of {{ pager.totalPages }} entries</div>
+                <div class="dataTables_paginate paging_full_numbers">
+                    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                        <li [ngClass]="{disabled:pager.currentPage === 1}">
+                            <a (click)="setPage(1)">First</a>
+                        </li>
+                        <li [ngClass]="{disabled:pager.currentPage === 1}">
+                            <a (click)="setPage(pager.currentPage - 1)">
+                            </a>
+                        </li>
+                        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                            <a (click)="setPage(page)">{{page}}</a>
+                        </li>
+                        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                            <a (click)="setPage(pager.currentPage + 1)">></a>
+                        </li>
+                        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                            <a (click)="setPage(pager.totalPages)">Last</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

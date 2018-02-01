@@ -1,0 +1,191 @@
+<div class="panel panel-default panel-dtr-status-dashboard">
+	<div class="panel-heading"><h5 class="panel-title">DTR Status Dashboard</h5></div>
+	<div class="panel-body">
+		<div class="dtr-status-dashboard">
+			<table class="table dashboard-table-bordered table-custom">
+				<thead>
+					<tr>
+						<th>Service Advisor</th>
+						<th>New</th>
+						<th>Submitted</th>
+						<th>Approved</th>
+						<th>Returned</th>
+						<th>Rejected</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a>Nguyen Canh Vinh</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>1</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>7</a></td>
+					</tr>
+					<tr>
+						<td><a>Nguyen Bich Dan</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>1</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>7</a></td>
+					</tr>
+					<tr>
+						<td><a>Bui Bang Anh</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>1</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>7</a></td>
+					</tr>
+					<tr>
+						<td><a>Nguyen Hoang Tung</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>1</a></td>
+						<td><a>1</a></td>
+						<td><a>2</a></td>
+						<td><a>7</a></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>Total</td>
+						<td><a>4</a></td>
+						<td><a>4</a></td>
+						<td><a>4</a></td>
+						<td><a>4</a></td>
+						<td><a>4</a></td>
+						<td><a>20</a></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<div class="dtr-status-dashboard-detail hide">
+			<table class="table dashboard-table-bordered table-custom">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Status</th>
+						<th>DTR No.</th>
+						<th>Purpose</th>
+						<th>Submitted Date/Time</th>
+						<th>Updated Date/Time</th>
+						<th>Repair Order No</th>
+						<th>Registration No.</th>
+						<th>Customer Name</th>
+						<th>Service Advisor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>New</td>
+						<td><a [routerLink]="['/trSubmission/Update', 1]">DTR001</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><a [routerLink]="['/repairOrder/Update', 1]">RO0001</a></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Canh Vinh</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Submitted</td>
+						<td><a [routerLink]="['/trSubmission/Update', 1]">DTR001</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><a [routerLink]="['/repairOrder/Update', 1]">RO0001</a></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Canh Vinh</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Approved</td>
+						<td><a [routerLink]="['/trSubmission/Update', 1]">DTR001</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><a [routerLink]="['/repairOrder/Update', 1]">RO0001</a></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Canh Vinh</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="form-group pull-right">
+				<button type="button" class="btn btn-default" (click)="closeDTRStatusDashboardDetail()">
+					<span>Close</span>                  
+				</button>
+			</div>
+		</div>
+		<div class="dtr-status-dashboard-detail02 hide">
+			<table class="table dashboard-table-bordered table-custom">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Status</th>
+						<th>DTR No.</th>
+						<th>Purpose</th>
+						<th>Submitted Date/Time</th>
+						<th>Updated Date/Time</th>
+						<th>Repair Order No</th>
+						<th>Registration No.</th>
+						<th>Customer Name</th>
+						<th>Service Advisor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>New</td>
+						<td><a [routerLink]="['/trSubmission/Update', 1]">DTR001</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><a [routerLink]="['/repairOrder/Update', 1]">RO0001</a></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Canh Vinh</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>New</td>
+						<td><a [routerLink]="['/trSubmission/Update', 1]">DTR001</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><a [routerLink]="['/repairOrder/Update', 1]">RO0001</a></td>
+						<td></td>
+						<td></td>
+						<td>Nguyen Bich Dan</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>New</td>
+						<td><a [routerLink]="['/trSubmission/Update', 1]">DTR001</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><a [routerLink]="['/repairOrder/Update', 1]">RO0001</a></td>
+						<td></td>
+						<td></td>
+						<td>Bui Bang Anh</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="form-group pull-right">
+				<button type="button" class="btn btn-default" (click)="closeDTRStatusDashboardDetail()">
+					<span>Close</span>                  
+				</button>
+			</div>
+		</div>
+    </div>
+</div>

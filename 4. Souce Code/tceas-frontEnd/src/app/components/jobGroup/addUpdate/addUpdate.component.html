@@ -1,0 +1,54 @@
+<div id="add-update-job-group-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 *ngIf="jobGroup.id==null" class="modal-title">Job Group - Add</h4>
+                <h4 *ngIf="jobGroup.id>0" class="modal-title">Job Group - Update</h4>
+            </div>
+            <form #formJobGroup="ngForm" class="form-horizontal" role="form" action="#" (ngSubmit)="addUpdate(formJobGroup)">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Code*: </label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="code" [(ngModel)]="jobGroup.code" [disabled]="jobGroup.id > 0" required #code="ngModel"
+                                />
+                                <label class="error" *ngIf="code.errors && code.errors.required && (code.dirty || code.touched || formJobGroup._submitted)">
+                                    Job Group is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Description*: </label>
+                            <div class="col-sm-10">
+                                <textarea rows="1" cols="5" class="form-control" placeholder="Description" name="name" [(ngModel)]="jobGroup.description"
+                                    required #description="ngModel"></textarea>
+                                <label class="error" *ngIf="description.errors && description.errors.required && (description.dirty || description.touched || formJobGroup._submitted)">
+                                    Description is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" [hidden]="!(jobGroup.id > 0)">
+                            <label class="col-sm-2 control-label">Active : </label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" name="inline-radio" class="styled" [(ngModel)]="jobGroup.status" [value]="true">Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="inline-radio" class="styled" [(ngModel)]="jobGroup.status" [value]="false">No
+                                </label>
+                            </div>
+                        </div>
+                        <p class="text-center" *ngIf="jobGroup.errorMessage!=null">
+                            <label class="error">{{jobGroup.errorMessage}}</label>
+                        </p>
+                        <div class="form-actions text-right">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+.panel .table-bordered > thead > tr:first-child > td {
+    border-bottom: 1px solid #ddd;
+}
+
+.panel .table-bordered > tbody > tr:first-child > td {
+    border-bottom: 1px solid #ddd;
+}
+
+.panel .table-bordered > thead > tr:first-child > th {
+    border-bottom: 1px solid #ddd;
+}
+
+.collumn-checkbox {
+    width: 10px;
+}

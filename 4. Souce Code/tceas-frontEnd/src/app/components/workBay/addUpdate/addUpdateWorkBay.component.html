@@ -1,0 +1,103 @@
+<div id="workbay-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Bay - Add</h4>
+            </div>
+            <form #formWorkBay="ngForm" class="form-horizontal" role="form" action="#" (ngSubmit)="addUpdate(workBay)">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Bay ID*:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="code" [(ngModel)]="workBay.code">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Description*:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="description" [(ngModel)]="workBay.description">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Bay type*:</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" name="PDJobType.id" [(ngModel)]="workBay.PDJobType.id">
+                                                        <option *ngFor="let item of bayTypeList" [ngValue]="item.id">{{item.code}}</option>
+                                                        
+                                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Hoist Type*:</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" name="PDHoistType.id" [(ngModel)]="workBay.PDHoistType.id">
+                                                        <option *ngFor="let item of hoistList" [ngValue]="item.id">{{item.code}}</option>
+                                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Active : </label>
+                                    <div class="col-sm-8">
+                                        <label class="radio-inline">
+									<input type="radio" name="inline-radio" [(ngModel)]="workBay.status" [value]="true"/>
+                                    Yes
+								</label>
+                                        <label class="radio-inline">
+								<input type="radio" name="inline-radio" [(ngModel)]="workBay.status" [value]="false"/>
+                                	No
+								</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">PIC 1*:</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" name="name1" [(ngModel)]="workBay.bayEmployee1">
+                                                        <option *ngFor="let item of employeeList" [ngValue]="item.id">{{item.name}}</option>
+                                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">PIC 2:</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" name="name2" [(ngModel)]="workBay.bayEmployee2">
+                                                        <option *ngFor="let item of employeeList" [ngValue]="item.id">{{item.name}}</option>
+                                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions text-right">
+                            <button type="button" class="btn btn-primary" (click)="formWorkBay.ngSubmit.emit()">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

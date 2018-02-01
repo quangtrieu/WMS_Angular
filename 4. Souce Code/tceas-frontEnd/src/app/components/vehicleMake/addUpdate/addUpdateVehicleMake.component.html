@@ -1,0 +1,57 @@
+<div id="addUpdate-VehicleMake-modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 *ngIf="!vehicleMake.isUpdate" class="modal-title">{{ 'VEHICLE_MAKE_TITLE' | translate }} - {{ 'LBL_ADD' | translate }}</h4>
+                <h4 *ngIf="vehicleMake.isUpdate" class="modal-title">{{ 'VEHICLE_MAKE_TITLE' | translate }} - {{ 'LBL_UPDATE' | translate }}</h4>
+            </div>
+            <form #frmVehicleMake="ngForm" novalidate class="form-horizontal" role="form" action="#" (ngSubmit)="frmVehicleMake.form.valid && addUpdate(vehicleMake)">
+                <input type="hidden" name="id" [(ngModel)]="vehicleMake.id" #id="ngModel" />
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'LBL_CODE' | translate }}
+                                <span class="red">*</span>: </label>
+                            <div class="col-sm-4 has-feedback" [ngClass]="{'has-error': !isValidCode}" [ngClass]="{'has-success': isValidCode}">
+                                <input type="text" class="form-control" name="code" maxlength="25" [disabled]="vehicleMake.isUpdate" id="code" [(ngModel)]="vehicleMake.code"
+                                    required #code="ngModel" (keyup)="onKeyPressCode()" />
+                                <i *ngIf="isProcessing" class="icon-spinner7 spin form-control-feedback"></i>
+                                <i *ngIf="!isValidCode" class="icon icon-warning form-control-feedback"></i>
+                                <i *ngIf="isValidCode && vehicleMake.code" class="icon icon-checkmark3 form-control-feedback"></i>
+                                <label class="error" *ngIf="code.errors && code.errors.required && (code.dirty || code.touched || frmVehicleMake._submitted)">
+                                    {{ 'MSG_REQUIRED_FIELD' | translate }}
+                                </label>
+                                <label class="error" *ngIf="!isValidCode">
+                                    {{ 'MSG_RECORD_EXISTS' | translate }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'LBL_DESCRIPTION' | translate }}
+                                <span class="red">*</span>: </label>
+                            <div class="col-sm-10" [ngClass]="{ 'has-error': frmVehicleMake.submitted && !description.valid }">
+                                <textarea rows="1" cols="5" class="form-control" id="description" name="description" maxlength="150" placeholder="Description"
+                                    required #description="ngModel" [(ngModel)]="vehicleMake.description"></textarea>
+                                <label class="error" *ngIf="description.errors && description.errors.required && (description.dirty || description.touched || frmVehicleMake._submitted)">
+                                    {{ 'MSG_REQUIRED_FIELD' | translate }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" [hidden]="!vehicleMake.isUpdate">
+                            <label class="col-sm-2 control-label">{{ 'LBL_ACTIVE' | translate }} </label>
+                            <div class="col-sm-10">
+                                <p-radioButton name="status" value="1" label="{{'LBL_YES'|translate}}" [(ngModel)]="vehicleMake.status" id="statusYes"></p-radioButton>
+                                <p-radioButton name="status" value="0" label="{{'LBL_NO'|translate}}" [(ngModel)]="vehicleMake.status" id="statusNo"></p-radioButton>
+                            </div>
+                        </div>
+                        <div class="form-actions text-right">
+                            <button type="button" class="btn btn-primary" [disabled]="!frmVehicleMake.form.valid" (click)="frmVehicleMake.ngSubmit.emit()">{{ 'BUTTON_SAVE' | translate }}</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'BUTTON_CANCEL' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

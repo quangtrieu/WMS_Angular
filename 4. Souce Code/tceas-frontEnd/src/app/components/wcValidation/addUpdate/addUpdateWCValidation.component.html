@@ -1,0 +1,145 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="wCValidation.isUpdate">Add New Validation Rule</h3>
+            <h3 *ngIf="!wCValidation.isUpdate">Update Validation Rule</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active">Warranty Claim Validation</li>
+        </ul>
+
+        <button type="submit" class="btn btn-sm btn-primary pull-right mg-button">Save</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">Back</button>
+
+    </div>
+    <!-- /breadcrumbs line -->
+    <div class="scroll-data">
+        <!--form-->
+        <form class="form-horizontal" role="form" action="#">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Matrix code *: </label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="mcode" [(ngModel)]="wCValidation.validationMatrixcode">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Revision: </label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="revision" [(ngModel)]="wCValidation.revision">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Description *: </label>
+                        <div class="col-sm-10">
+                            <textarea rows="1" cols="5" class="form-control" placeholder="Description" name="description" [(ngModel)]="wCValidation.description"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Effective from *: </label>
+                                <div class="col-sm-8  pull-right">
+                                    <input class="form-control" type="date" name="date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Effective to *: </label>
+                                <div class="col-sm-8  pull-right">
+                                    <input class="form-control" type="date" name="date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Active : </label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                            <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+        <!--end form-->
+
+        <div class="panel-heading">
+            <h6 class="panel-title"><i class="icon-checkbox-partial"></i> Validation Rule Details*</h6>
+        </div>
+        <div class="datatable-addUpdateWCValidation">
+            <table class="table table-bordered table-custom table-top">
+                <thead>
+                    <tr>
+                        <th class="collumn-checkbox">
+                            <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                        </th>
+                        <th>Order</th>
+                        <th>Attribute</th>
+                        <th>Operator</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                        </td>
+                        <td>1</td>
+                        <td>Vehicle Make</td>
+                        <td>= Equals</td>
+                        <td>NISSAN</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                        </td>
+                        <td>2</td>
+                        <td>Vehicle Model</td>
+                        <td>≠ Does Not Equal</td>
+                        <td>NISSAN</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                        </td>
+                        <td>3</td>
+                        <td>Part</td>
+                        <td>≥ Greater than or equals</td>
+                        <td>NISSAN</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class=""><span class="checked"><input type="checkbox" name="checkRow" class="styled"></span></div>
+                        </td>
+                        <td>4</td>
+                        <td>Period</td>
+                        <td>> Greater than</td>
+                        <td>NISSAN</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

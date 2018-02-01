@@ -1,0 +1,143 @@
+{
+  "HOME": {
+    "TITLE": "Chào Angular 2 với ngx-translate!",
+    "SELECT": "Thay đổi ngôn ngữ"
+  },
+  "LAZY": "tôi là lười tải!",
+  "WORK_BAY_TITLE": "Work bay - Tìm kiếm",
+  "WORK_SHOP_PERSONNAL_TITLE": "Work shop personnel - Tìm kiếm",
+  "VEHICLE_MAKE": {
+    "TITLE": "Vehicle Make - Tìm kiếm",
+    "NAVIGATION": {
+      "HOME": "Trang chủ",
+      "TITLE": "Vehicle Make"
+    },
+    "BUTTON": {
+      "ADD": "Thêm",
+      "DELETE": "Xóa",
+      "IMPORT": "Nhập",
+      "EXPORT": "Xuất"
+    },
+    "TABLE": {
+      "TITLE": "Danh sách vehicleMake",
+      "NO": "STT",
+      "CODE": "Mã code",
+      "DESCRIPTION": "Mô tả",
+      "STATUS": "Tình trạng",
+      "CREATEBY": "Tạo bởi",
+      "UPDATEBY": "Cập nhật bởi"
+    },
+    "ADD_UPDATE": {
+      "TITLE_ADD": "Vehicle Make - Thêm",
+      "TITLE_UPDATE": "Vehicle Make - Cập nhật",
+      "CODE": "Mã code: ",
+      "ERR_CODE": "Yêu cầu nhập mã code.!",
+      "UNIQUE_CODE": "Mã code bị trùng !",
+      "DESCRIPTION": "Mô tả: ",
+      "ERR_DESCRIPTION": "Yêu cầu nhập mô tả !",
+      "ACTIVE": "Hoạt động: ",
+      "BTN_SAVE": "Lưu",
+      "BTN_CANCEL": "Hủy"
+    }
+  },
+  "LOCALPO": {
+    "TITLE": "Local Purchase Order - Search",
+    "NAVIGATION": {
+      "HOME": "Home",
+      "TITLE": "Local Purchase Order"
+    },
+    "BUTTON": {
+      "ADD": "Add",
+      "DELETE": "Delete",
+      "IMPORT": "Import",
+      "EXPORT": "Export"
+    },
+    "TABLE": {
+      "TITLE": "List of Local Purchase Order",
+      "NO": "No.",
+      "LPONO": "LPO No.",
+      "RONO": "RO No.",
+      "REGISTRATIONNO": "Registration No.",
+      "LPOCREATEDDATE": "LOP Date",
+      "PAYMENTTERM": "Payment Term",
+      "SUBLETNAME": "Sublet name",
+      "RODATE": "RO Date",
+      "SUBLETINVOICENO": "Sublet Invoice No."
+    }
+  },
+  "GRN": {
+    "TITLE": "Goods Receiving - Search",
+    "NAVIGATION": {
+      "HOME": "Home",
+      "TITLE": "Goods Receiving"
+    },
+    "BUTTON": {
+      "ADD": "Add",
+      "DELETE": "Delete",
+      "IMPORT": "Import",
+      "EXPORT": "Export"
+    },
+    "TABLE": {
+      "TITLE": "List of Goods Receiving",
+      "NO": "No.",
+      "GRNNO": "GRN No.",
+      "GRNDATE": "GRN Date",
+      "PONO": "PO No.",
+      "PODATE": "PO Date",
+      "QTY": "Qty",
+      "STATUS": "Status"
+    }
+  },
+  "INVOICE": {
+    "TITLE": "Invoice - Search",
+    "NAVIGATION": {
+      "HOME": "Home",
+      "TITLE": "Invoice"
+    },
+    "BUTTON": {
+      "ADD": "Add",
+      "DELETE": "Delete",
+      "IMPORT": "Import",
+      "EXPORT": "Export"
+    },
+    "TABLE": {
+      "TITLE": "List of Invoice",
+      "NO": "No.",
+      "INVNO": "Invoice No.",
+      "INVDATE": "Invoice Date",
+      "RONO": "RO No.",
+      "RODATE": "RO Date",
+      "REGISTRATIONNO": "Registration No.",
+      "CUSTOMER": "Customer",
+      "STATUS": "Status"
+    }
+  },
+  "VEHICLE_MODEL": {
+    "ADD_UPDATE": {
+      "TITLE_ADD": "Vehicle Model - Add",
+      "TITLE_UPDATE": "Vehicle Model - UPDATE",
+      "CODE": "Code: ",
+      "ERR_CODE": "Code must be required!",
+      "UNIQUE_CODE": "Code must be unique!",
+      "ERR_VEHICLE_MAKE": "Vehicle Make is required!",
+      "DESCRIPTION": "Description: ",
+      "ERR_DESCRIPTION": "Description must be required.!",
+      "ACTIVE": "Active: ",
+      "BTN_SAVE": "Save",
+      "BTN_CANCEL": "Cancel"
+    },
+    "MSG": {
+      "VEHICLE_MODEL-VEHICLE_MAKE_CODE-MSG-CODE_REQUIRED": "Yêu cầu chọn vehicleMake code",
+      "VEHICLE_MODEL-MSG-CODE_REQUIRED": "Yêu cầu nhập mã vehicleModel",
+      "VEHICLE_MODEL-MSG-CODE_MAXLENGTH": "Nhập code không quá 25 ký tự !",
+      "VEHICLE_MODEL-DESCRIPTION_REQUIRED": "Yêu cầu nhập mô tả!",
+      "VEHICLE_MODEL-MSG-DES_MAXLENGTH": "Nhập mô tả không quá 250 ký tự !",
+      "VEHICLE_MODEL-MSG-PARAM_REQUIRED": "Yêu cầu nhập param !",
+      "VEHICLE_MODEL-MSG-CREATE_SUCCESS": "Tạo vehicleModel thành công!",
+      "VEHICLE_MODEL-MSG-CREATE_FAIL": "Tạo vehicleModel thất bại!",
+      "VEHICLE_MODEL-MSG-UPDATE_SUCCESS": "Cập nhật vehicleModel thành công!",
+      "VEHICLE_MODEL-MSG-UPDATE_FAIL": "Cập nhật vehicleModel thất bại!",
+      "VEHICLE_MODEL-MSG-NOT_FOUND": "Không tìm thấy vehicleModel"
+    }
+  },
+}

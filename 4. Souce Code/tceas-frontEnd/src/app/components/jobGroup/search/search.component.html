@@ -1,0 +1,73 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Job Group - Search </h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li>Job Group</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+        </div>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe24c;"></span> Export</button>
+        <button (click)="onClickImportBtn(1)" data-toggle="modal" href="#import-modal" type="button" class="btn btn-sm btn-default pull-right mg-button"><span data-icon="&#xe259;"></span> Import</button>
+        <button (click)="addUpdateJobGroup(0)" data-toggle="modal" type="button" class="btn btn-sm btn-info pull-right mg-button"><span data-icon="&#xe104;"></span> Add</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <jobGroup-addUpdate [jobGroup]="selectedJobGroup"></jobGroup-addUpdate>
+    <import-common [import]="import"></import-common>
+    <div class="datatable-searchJobGroup">
+        <table class="table table-bordered table-top">
+            <thead>
+                <tr>
+                    <th class="collumn-checkbox">
+                    </th>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Active</th>
+                    <th>Created by</th>
+                    <th>Modified by</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Filter">
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of jobGroups">
+                    <td>
+                        <input type="checkbox" name="ckbJobGroup" class="styled" value="{{item.id}}">
+                    </td>
+                    <td><a (click)="addUpdateJobGroup(item.id)">{{item.code}}</a></td>
+                    <td>{{item.description}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.createdBy}}</td>
+                    <td>{{item.updatedBy}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,457 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="isUpdate">Part - Add</h3>
+            <h3 *ngIf="!isUpdate">Part - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li>Part</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-primary pull-right mg-button" (click)="frmPart.ngSubmit.emit()">Save</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button" routerLink="/partMaster/Search">Back</button>
+    </div>
+    <form class="form-horizontal scroll-data" role="form" action="#" (ngSubmit)="addUpdate(part)" #frmPart="ngForm">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="tabbable page-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="tables_dynamic.html#general" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i>Main Info</a>
+                        </li>
+                        <li>
+                            <a href="tables_dynamic.html#other" data-toggle="tab">
+                                <i class="icon-checkbox-partial"></i>Pricing History</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active fade in" id="general">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Source*: </label>
+                                                <div class="col-sm-8">
+                                                    <select name="select" class="form-control">
+                                                        <option value="opt1">SPC</option>
+                                                        <option value="opt2">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Code*: </label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="code" [(ngModel)]="part.code">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Description:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="description" [(ngModel)]="part.description">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Purchasing UOM:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="select" class="form-control">
+                                                        <option value="opt1">BOTTLE</option>
+                                                        <option value="opt2">BOX</option>
+                                                        <option value="opt1">KG</option>
+                                                        <option value="opt2">LITTER</option>
+                                                        <option value="opt1">METER</option>
+                                                        <option value="opt2">PIECE</option>
+                                                        <option value="opt2">ROLL</option>
+                                                        <option value="opt1">SET</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Selling UOM:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="select" class="form-control">
+                                                        <option value="opt1">BOTTLE</option>
+                                                        <option value="opt2">BOX</option>
+                                                        <option value="opt1">KG</option>
+                                                        <option value="opt2">LITTER</option>
+                                                        <option value="opt1">METER</option>
+                                                        <option value="opt2">PIECE</option>
+                                                        <option value="opt2">ROLL</option>
+                                                        <option value="opt1">SET</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Active : </label>
+                                                <div class="col-sm-8">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="inline-radio" class="styled" checked="checked" [(ngModel)]="part.status" [value]="true"> Yes
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="inline-radio" class="styled" [(ngModel)]="part.status" [value]="false"> No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Version:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="version" [(ngModel)]="part.version" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Effective From:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="select" class="form-control">
+                                                        <option value="opt1">P00333</option>
+                                                        <option value="opt2">P00555</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Effective To:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="select" class="form-control">
+                                                        <option value="opt1">P00333</option>
+                                                        <option value="opt2">P00555</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Retail Price:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="version" [(ngModel)]="part.version">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Warranty Price:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="version" [(ngModel)]="part.version">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row table-margin">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Model:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="select" class="form-control">
+                                                        <option value="opt1">SUNNY</option>
+                                                        <option value="opt2">TEANA</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Variant:</label>
+                                                <div class="col-sm-8">
+                                                    <select name="select" class="form-control">
+                                                        <option value="opt1">SUNNY 1.5</option>
+                                                        <option value="opt2">TEANA 2.0</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+                                                <span data-icon="&#xe158;"></span> Delete</button>
+                                            <button type="button" class="btn btn-sm btn-info pull-right mg-button">
+                                                <span data-icon="&#xe104;"></span> Add</button>
+                                        </div>
+                                    </div>
+                                    <div class="row table-margin">
+                                        <div class="datatable-modelUsage">
+                                            <table class="table table-bordered table-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="collumn-checkbox">
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </th>
+                                                        <th>Make</th>
+                                                        <th>Model</th>
+                                                        <th>Variant</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="">
+                                                                <span class="checked">
+                                                                    <input type="checkbox" name="checkRow" class="styled">
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                        <td>Row</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row table-margin">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label">Part Sub:</label>
+                                                        <div class="col-sm-8">
+                                                            <select name="select" class="form-control">
+                                                                <option value="opt1">P00333</option>
+                                                                <option value="opt2">P00555</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+                                                        <span data-icon="&#xe158;"></span> Delete</button>
+                                                    <button type="button" class="btn btn-sm btn-info pull-right mg-button">
+                                                        <span data-icon="&#xe104;"></span> Add</button>
+                                                </div>
+                                            </div>
+                                            <div class="datatable-modelUsage">
+                                                <table class="table table-bordered table-top">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="collumn-checkbox">
+                                                                <div class="">
+                                                                    <span class="checked">
+                                                                        <input type="checkbox" class="styled">
+                                                                    </span>
+                                                                </div>
+                                                            </th>
+                                                            <th>Part Code</th>
+                                                            <th>Part Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="">
+                                                                    <span class="checked">
+                                                                        <input type="checkbox" name="checkRow" class="styled">
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="">
+                                                                    <span class="checked">
+                                                                        <input type="checkbox" name="checkRow" class="styled">
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label">Supplier:</label>
+                                                        <div class="col-sm-8">
+                                                            <select name="select" class="form-control">
+                                                                <option value="opt1">P00333</option>
+                                                                <option value="opt2">P00555</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+                                                        <span data-icon="&#xe158;"></span> Delete</button>
+                                                    <button type="button" class="btn btn-sm btn-info pull-right mg-button">
+                                                        <span data-icon="&#xe104;"></span> Add</button>
+                                                </div>
+                                            </div>
+                                            <div class="datatable-modelUsage">
+                                                <table class="table table-bordered table-top">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="collumn-checkbox">
+                                                                <div class="">
+                                                                    <span class="checked">
+                                                                        <input type="checkbox" class="styled">
+                                                                    </span>
+                                                                </div>
+                                                            </th>
+                                                            <th>Supplier Code</th>
+                                                            <th>Supplier Name</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="">
+                                                                    <span class="checked">
+                                                                        <input type="checkbox" name="checkRow" class="styled">
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="">
+                                                                    <span class="checked">
+                                                                        <input type="checkbox" name="checkRow" class="styled">
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td>Row</td>
+                                                            <td>Row</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label">Reorder Point: </label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label">Max Inventory: </label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label">Safety Stock: </label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label">Order Lead Time: </label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="other">
+                            <form class="form-horizontal" role="form" action="#">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="datatable">
+                                            <table class="table table-bordered datatable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Version</th>
+                                                        <th>Effective From</th>
+                                                        <th>Effective To</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>1</td>
+                                                        <td>01/01/2017</td>
+                                                        <td>01/06/2017</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>2</td>
+                                                        <td>01/01/2017</td>
+                                                        <td>01/06/2017</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="datatable table-margin">
+                                            <table class="table table-bordered datatable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Make</th>
+                                                        <th>Model</th>
+                                                        <th>Variant</th>
+                                                        <th>Opp Code</th>
+                                                        <th>FRS (Hours)</th>
+                                                        <th>Labor Charge (Retail)</th>
+                                                        <th>Labor Charge Warranty</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>NIS</td>
+                                                        <td>XTR</td>
+                                                        <td>2.0L SL</td>
+                                                        <td>A311560</td>
+                                                        <td>4</td>
+                                                        <td>5000</td>
+                                                        <td>5000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NIS</td>
+                                                        <td>Xterra</td>
+                                                        <td>2.0L SL</td>
+                                                        <td>A3634110</td>
+                                                        <td>4</td>
+                                                        <td>1000</td>
+                                                        <td>1000</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

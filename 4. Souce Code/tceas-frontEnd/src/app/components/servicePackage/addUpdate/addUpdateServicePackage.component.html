@@ -1,0 +1,248 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Service Package - Add</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active">Service Package</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-default pull-right mg-button">Save</button>
+        <button type="submit" class="btn btn-sm btn-primary pull-right mg-button">Back</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form class="form-horizontal scroll-data" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4>General Inforomation</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Package code*:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="register">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Package type*: </label>
+                            <div class="col-sm-7">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">PMS - Periodic Mantenance Service</option>
+                                    <option value="opt2">FMS- Free Mantenance Service</option>
+                                    <option value="opt1">CAM -Campaign</option>
+                                    <option value="opt2">NPMP -NPMP</option>
+                                    <option value="opt1">REC-Recall</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Effective from *: </label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="date" name="date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Active : </label>
+                            <div class="col-sm-7">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Package Description*:</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="date" name="date">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Milleage:</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="date" name="date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Effective to: </label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="date" name="date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Version:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="vmodel">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <h4>Package Details*</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Vehicle Make </label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">PMS - Periodic Mantenance Service</option>
+                                    <option value="opt2">FMS- Free Mantenance Service</option>
+                                    <option value="opt1">CAM -Campaign</option>
+                                    <option value="opt2">NPMP -NPMP</option>
+                                    <option value="opt1">REC-Recall</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Vehicle Mode </label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">PMS - Periodic Mantenance Service</option>
+                                    <option value="opt2">FMS- Free Mantenance Service</option>
+                                    <option value="opt1">CAM -Campaign</option>
+                                    <option value="opt2">NPMP -NPMP</option>
+                                    <option value="opt1">REC-Recall</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Model Variant</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">PMS - Periodic Mantenance Service</option>
+                                    <option value="opt2">FMS- Free Mantenance Service</option>
+                                    <option value="opt1">CAM -Campaign</option>
+                                    <option value="opt2">NPMP -NPMP</option>
+                                    <option value="opt1">REC-Recall</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-default pull-right">Add</button>
+                        <button type="submit" class="btn btn-primary pull-right">Delete</button>
+                    </div>
+                </div>
+                <div class="datatable-addUpdateVehicleProfile overflow">
+                    <table class="table table-bordered table-custom table-top">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">
+                                    <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                </th>
+                                <th>Vehicle Model</th>
+                                <th>Model Variant</th>
+                                <th style="width: 300px;">Job (Code -Description)
+                                    <button type="button" class="btn btn-right-icon btn-info"><span data-icon="&#xe104;"></span></button>
+                                    <button type="button" class="btn btn-right-icon btn-danger"><span data-icon="&#xe158;"></span></button>
+                                </th>
+                                <th>Labour Charge</th>
+                                <th style="width: 300px;">Part (Code -Description)
+                                    <button type="button" class="btn btn-right-icon btn-info"><span data-icon="&#xe104;"></span></button>
+                                    <button type="button" class="btn btn-right-icon btn-danger"><span data-icon="&#xe158;"></span></button>
+                                </th>
+                                <th>Part Qty
+
+                                </th>
+                                <th>Part Price</th>
+                                <th>Total Amount</th>
+                                <th>GST</th>
+                                <th>Total Package price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th rowspan="3">
+                                    <div class=""><span class="checked"><input type="checkbox" class="styled"></span></div>
+                                </th>
+                                <td rowspan="3">New X-trail</td>
+                                <td rowspan="3">2.5L 4WD</td>
+                                <td>
+                                    <label class="checkbox-inline">
+										                    <input type="checkbox" class="styled">
+										                        J001-Job001
+									                    </label>
+                                </td>
+                                <td>100</td>
+                                <td>
+                                    <label class="checkbox-inline">
+										                    <input type="checkbox" class="styled">
+										                        P001-Part 1
+									                    </label>
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>10</td>
+                                <td rowspan="3">300</td>
+                                <td rowspan="3">180</td>
+                                <td rowspan="3">480</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="checkbox-inline">
+										                    <input type="checkbox" class="styled">
+										                        J001-Job002
+									                    </label>
+                                </td>
+                                <td>100</td>
+                                <td>
+                                    <label class="checkbox-inline">
+										                    <input type="checkbox" class="styled">
+										                        P001-Part 1
+									                    </label>
+                                </td>
+                                <td>
+                                    2
+                                </td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="checkbox-inline">
+										                    <input type="checkbox" class="styled">
+										                        J001-Job003
+									                    </label>
+                                </td>
+                                <td>50</td>
+                                <td>
+                                    <label class="checkbox-inline">
+										                    <input type="checkbox" class="styled">
+										                        P001-Part 1
+									                    </label>
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+    <!--end form-->
+</div>

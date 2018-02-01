@@ -1,0 +1,405 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3 *ngIf="!workshop.isUpdate">Workshop - Add</h3>
+            <h3 *ngIf="workshop.isUpdate">Workshop - Update</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active">Workshop</li>
+        </ul>
+        <button type="submit" class="btn btn-sm btn-primary pull-right mg-button">Save</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">Back</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <!--form-->
+    <form class="form-horizontal scroll-data" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Workshop ID:* </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Workshop Name*:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Workshop Type*:</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">Branch</option>
+                                    <option value="opt2">Dealer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Company Registration No.:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Total Workbay number*:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Telephone No.*:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Fax Number:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Email address:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Active : </label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Region*:</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">Dropdown</option>
+                                    <option value="opt2">Dropdown</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Country</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">Dropdown</option>
+                                    <option value="opt2">Dropdown</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">State/Province:</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">Dropdown</option>
+                                    <option value="opt2">Dropdown</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">City/Town/District:</label>
+                            <div class="col-sm-8">
+                                <select name="select" class="form-control">
+                                    <option value="opt1">Dropdown</option>
+                                    <option value="opt2">Dropdown</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Address*:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Postal Code:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">GPS Latitude :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">GPS Longitude :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">PSX Workshop</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="PSX-Workshop" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="PSX-Workshop" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">SPC Integration</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Running Productivity</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Combine Renault Workshop</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Standalone Renault Workshop</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Send Vehicle Collection SMS</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Send SvC Reminder SMS</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">LCSI Survey Workshop</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Small Workshop</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Free SvC Tax Workshop</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled">
+									Yes
+								</label>
+                                <label class="radio-inline">
+									<input type="radio" name="inline-radio" class="styled" checked="checked">
+									No
+								</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">PO Notification Email (from)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">PO Notification Email (to)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">PO Notification Email (cc)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">LCSI SMS Short name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">LCSI Workshop contact</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Interbranch Transfer Email(from)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Interbranch Transfer Email(to)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Interbranch Transfer Email(cc)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">LCSI SMS HOW Contact</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">LCSI SMS Acting HOW Contact</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">GST Service Location *</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">BP Code*</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">BP Code 1*</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Adress Code*</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Adress Code 1*</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="revision">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+    <!--end form-->
+
+</div>

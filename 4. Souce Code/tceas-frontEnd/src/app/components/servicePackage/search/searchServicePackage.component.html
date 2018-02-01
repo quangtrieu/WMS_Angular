@@ -1,0 +1,59 @@
+<p-growl [(value)]="msgs"></p-growl>
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Service Package - Search</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li>Service Package</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons">
+                <i class="icon-menu2"></i>
+            </a>
+        </div>
+        <button (click)="onClickImportBtn(1)" data-toggle="modal" href="#import-modal" type="button" class="btn btn-sm btn-default pull-right mg-button">
+            <span data-icon="&#xe259;"></span> Import</button>
+        <!-- <button data-toggle="modal" type="button" class="btn btn-sm btn-info pull-right mg-button" routerLink="/servicePackage/Add">
+            <span data-icon="&#xe104;"></span> Add</button> -->
+        <button data-toggle="modal" type="button" class="btn btn-sm btn-info pull-right mg-button" routerLink="/servicePackage/Addv2">
+            <span data-icon="&#xe104;"></span> Add</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <servicePackage-upload></servicePackage-upload>
+    <p-dataTable [value]="servicePackageList" scrollHeight="420px" [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]"
+        [paginator]="true" [responsive]="true" [stacked]="stacked" resizableColumns="true" columnResizeMode="expand" [totalRecords]="pager.totalRecords"
+        (onLazyLoad)="loadServicePackageLazy($event)" scrollable="true" #dt>
+        <p-column header="{{ 'TBL_HEADER_NO' | translate }}" [style]="{'width': '40px'}">
+            <ng-template let-rowIndex="rowIndex" pTemplate="rowexpansion">
+                {{rowIndex + 1}}
+            </ng-template>
+        </p-column>
+        <p-column field="code" header="{{ 'LBL_CODE' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true">
+            <ng-template let-row="rowData" pTemplate type="body">
+                <a (click)="onClickAddUpdate(row.id)">{{row.code}}</a>
+            </ng-template>
+        </p-column>
+        <p-column field="description" header="{{ 'LBL_DESCRIPTION' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="type" header="{{ 'LBL_TYPE' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="status" header="{{ 'LBL_ACTIVE' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="createdBy" header="{{ 'EFFECTIVE_FROM' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="updatedBy" header="{{ 'EFFECTIVE_TO' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+    </p-dataTable>
+    <div style="position: relative;">
+        <span class="paging-entries">
+            {{ 'PAGING_SHOWING' | translate }} {{ 1 + (pager.pageSize * (pager.currentPage - 1)) }} {{ 'PAGING_TO' | translate }} {{
+            pager.pageSize * pager.currentPage }} {{ 'PAGING_OF' | translate }} {{ pager.totalRecords }} {{ 'PAGING_ENTRIES'
+            | translate }}
+        </span>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.panel .table-bordered > thead > tr:first-child > th, .panel .table-bordered > tbody > tr:first-child > td {
+        border-bottom: 1px solid #ddd;
+}
+
+.overflow{
+    overflow-x:auto;
+    overflow-y:hidden;
+}
+
+.table-custom{
+    table-layout: fixed;
+    width: 1800px;
+}

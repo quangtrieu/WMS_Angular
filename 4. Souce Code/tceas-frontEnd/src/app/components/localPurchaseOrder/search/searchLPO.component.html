@@ -1,0 +1,60 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>{{ 'LPO_TITLE' | translate }} - {{ 'LBL_SEARCH' | translate }}</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li>{{ 'LPO_TITLE' | translate }}</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons">
+                <i class="icon-menu2"></i>
+            </a>
+        </div>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+            <span data-icon="&#xe259;"></span> Print</button>
+        <button type="button" class="btn btn-sm btn-default pull-right mg-button">
+            <span data-icon="&#xe158;"></span> Copy</button>
+        <button type="button" class="btn btn-sm btn-info pull-right mg-button" routerLink="/lpo/Add">
+            <span data-icon="&#xe104;"></span> Add</button>
+    </div>
+    <!-- /breadcrumbs line -->
+    <p-dataTable [value]="localPOList" scrollHeight="420px" [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [paginator]="true"
+        [responsive]="true" [stacked]="stacked" resizableColumns="true" columnResizeMode="expand" [totalRecords]="pager.totalRecords"
+        (onLazyLoad)="loadLocalPOLazy($event)" scrollable="true" #dt>
+        <p-column header="{{ 'TBL_HEADER_NO' | translate }}" [style]="{'width': '40px'}">
+            <ng-template let-rowIndex="rowIndex" pTemplate="rowexpansion">
+                {{rowIndex + 1}}
+            </ng-template>
+        </p-column>
+        <p-column field="lPONO" header="{{ 'LPO_NO' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true">
+            <ng-template let-row="rowData" pTemplate type="body">
+                <a routerLink="/lpo/Update/{{row.id}}">{{row.lPONO}}</a>
+            </ng-template>
+        </p-column>
+        <p-column field="roNo" header="{{ 'LBL_RO_NO' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="registrationNo" header="{{ 'LBL_REG_NO' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="lPODate" header="{{ 'LPO_DATE' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="paymentTerm" header="{{ 'PAYMENT_TERM' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="subletName" header="{{ 'SUBLET_NAME' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="roDate" header="{{ 'RO_DATE' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true"></p-column>
+        <p-column field="subletInvoiceNo" header="{{ 'SUBLET_INVOICE_NO' | translate }}" [filter]="true" filterPlaceholder="Search"
+            [sortable]="true"></p-column>
+    </p-dataTable>
+    <div style="position: relative;">
+        <span class="paging-entries">
+            {{ 'PAGING_SHOWING' | translate }} {{ 1 + (pager.pageSize * (pager.currentPage - 1)) }} {{ 'PAGING_TO' | translate }} {{
+            pager.pageSize * pager.currentPage }} {{ 'PAGING_OF' | translate }} {{ pager.totalRecords }} {{ 'PAGING_ENTRIES'
+            | translate }}
+        </span>
+    </div>
+</div>

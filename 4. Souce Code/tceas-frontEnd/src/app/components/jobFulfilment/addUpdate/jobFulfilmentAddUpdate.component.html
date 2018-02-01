@@ -1,0 +1,141 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>Job - Fulfilment</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a routerLink="/dashboard/main" routerLinkActive="active">Home</a></li>
+            <li class="active"><a routerLink="/jobFulfilment/Search" routerLinkActive="active">Job - Fulfilment</a></li>
+        </ul>
+    </div>
+    <!-- /breadcrumbs line -->
+
+    <form #formJobFulfilment="ngForm" (ngSubmit)="addUpdate(formJobFulfilment)" class="form-horizontal" role="form" action="#">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 class="panel-title">Job Fulfillment</h5>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">RO No.:</label>
+                            <div class="col-sm-8 control-label">
+                                {{jobFulfilment.roNumber}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Registration No.:</label>
+                            <div class="col-sm-8 control-label">
+                                {{jobFulfilment.registrationNo}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">RO Date:</label>
+                            <div class="col-sm-8 control-label">
+                                {{jobFulfilment.roDate | date: appConfig.config.formatDateTime}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-bordered table-custom">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Job</th>
+                            <th class="text-center">Assign to</th>
+                            <th class="text-center" style="width: 30%">Workbay</th>
+                            <th class="text-center">Time spent details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of jobFulfilment.jobFulfilmentItems">
+                            <td>
+                                {{item.jobCode}}
+                            </td>
+                            <td style="vertical-align:top">
+                                <div *ngFor="let jobAssignedTechnician of item.jobAssignedTechnicians" class="tagsinput" style="min-height: auto; height: auto; border: none;">
+                                    <span *ngIf="!jobAssignedTechnician.isDeleted" class="tag" style="margin:0px;">
+                                        <span>{{jobAssignedTechnician.employeeName}}</span>
+                                    <a title="Removing tag" (click)="removeJobAssignedTechnician(jobAssignedTechnician);">x</a>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button type="button" class="btn btn-default" (click)="showAssignTechnicianModal(item)">Assign Technicians</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="vertical-align:top">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <select name="bay-{{item.id}}" class="form-control" [(ngModel)]="item.bayId">
+                                            <option [ngValue]="0"></option>
+                                            <option *ngFor="let bay of bays" [ngValue]="bay.id">{{bay.code}}</option>
+                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-6 control-label">Estimated Start time:</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="datetime-local" name="estimatedStartTime-{{item.id}}" [(ngModel)]="item.estimatedStartTime"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-6 control-label">Estimated End time:</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="datetime-local" name="estimatedEndTime-{{item.id}}" [(ngModel)]="item.estimatedEndTime"
+                                        />
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <table class="table table-bordered table-custom">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 20%">Status</th>
+                                            <th style="width: 40%">Start time</th>
+                                            <th style="width: 40%">End time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let jobTracking of item.jobTrackings">
+                                            <td>{{jobTracking.jobTrackingStatusName}}</td>
+                                            <td>{{jobTracking.startTime | date: appConfig.config.formatDateTime}}</td>
+                                            <td>{{jobTracking.endTime | date: appConfig.config.formatDateTime}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-group" style="padding-left: 15px">
+                                    <button type="button" class="btn btn-default" [disabled]="item.jobTrackingLastStatusId == this.constants.Enums.JobTrackingStatus.COMPLETE || item.jobTrackingLastStatusId==this.constants.Enums.JobTrackingStatus.START"
+                                        (click)="startJob(item);">Start</button>
+                                    <button type="button" class="btn btn-default" [disabled]="item.jobTrackingLastStatusId == this.constants.Enums.JobTrackingStatus.COMPLETE || item.jobTrackingLastStatusId==this.constants.Enums.JobTrackingStatus.PAUSE"
+                                        (click)="pauseJob(item);">Pause</button>
+                                    <button type="button" class="btn btn-default" [disabled]="item.jobTrackingLastStatusId == this.constants.Enums.JobTrackingStatus.COMPLETE || item.jobTrackingLastStatusId==this.constants.Enums.JobTrackingStatus.COMPLETE"
+                                        (click)="completeJob(item);">Complete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-group panel-body">
+            <button type="submit" class="btn btn-sm btn-primary pull-right mg-button">Save</button>
+            <a type="button" class="btn btn-sm btn-default pull-right mg-button" routerLink="/jobFulfilment/Search">Back</a>
+        </div>
+    </form>
+</div>
+<assignTechnician-dialog (assignTechnicianEvent)="assignTechnicianEvent($event)" [selectedJobFulfilmentItemId]="selectedJobFulfilmentItemId">></assignTechnician-dialog>

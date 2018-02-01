@@ -1,0 +1,50 @@
+<!-- /breadcrumbs line -->
+<div class="page-content-inner">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-title">
+            <h3>{{ 'PART_FF_TITLE' | translate }} - {{ 'LBL_SEARCH' | translate }}</h3>
+        </div>
+    </div>
+    <!-- /page header -->
+    <!-- Breadcrumbs line -->
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a routerLink="/dashboard/main" routerLinkActive="active">Home</a>
+            </li>
+            <li>{{ 'PART_FF_TITLE' | translate }}</li>
+        </ul>
+        <div class="visible-xs breadcrumb-toggle">
+            <a class="btn btn-link btn-lg btn-icon" data-toggle="collapse" data-target=".breadcrumb-buttons">
+                <i class="icon-menu2"></i>
+            </a>
+        </div>
+    </div>
+    <!-- /breadcrumbs line -->
+    <p-dataTable [value]="partFFList" scrollHeight="420px" [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [paginator]="true"
+        [responsive]="true" [stacked]="stacked" resizableColumns="true" columnResizeMode="expand" [totalRecords]="pager.totalRecords"
+        (onLazyLoad)="loadPartFulfillLazy($event)" scrollable="true" #dt>
+        <p-column header="{{ 'TBL_HEADER_NO' | translate }}" [style]="{'width': '40px'}">
+            <ng-template let-rowIndex="rowIndex" pTemplate="rowexpansion">
+                {{rowIndex + 1}}
+            </ng-template>
+        </p-column>
+        <p-column field="registrationNo" header="{{ 'LBL_REG_NO' | translate }}" [filter]="true" filterPlaceholder="Search" [sortable]="true">
+            <ng-template let-row="rowData" pTemplate type="body">
+                <a routerLink="/partFulfilment/Update/{{row.repairOrderId}}">{{row.registrationNo}}</a>
+            </ng-template>
+        </p-column>
+        <p-column field="totalRequest" header="{{ 'LBL_REQUESTED_QTY' | translate }}" [filter]="true" filterPlaceholder="Search"
+            [sortable]="true"></p-column>
+        <p-column field="totalFulfill" header="{{ 'LBL_FULFILLED_QTY' | translate }}" [filter]="true" filterPlaceholder="Search"
+            [sortable]="true"></p-column>
+    </p-dataTable>
+    <div style="position: relative;">
+        <span class="paging-entries">
+            {{ 'PAGING_SHOWING' | translate }} {{ 1 + (pager.pageSize * (pager.currentPage - 1)) }} {{ 'PAGING_TO' | translate }} {{
+            pager.pageSize * pager.currentPage }} {{ 'PAGING_OF' | translate }} {{ pager.totalRecords }} {{ 'PAGING_ENTRIES'
+            | translate }}
+        </span>
+    </div>
+</div>
